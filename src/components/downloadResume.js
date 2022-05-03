@@ -6,7 +6,7 @@ import { TokenContext } from "./context/context";
 import { useContext } from "react";
 
 const DownloadResume = () => {
-
+  window.location.reload();
   const {token} = useContext(TokenContext);
   console.log("token = ", token);
   const handleChange = () => {
