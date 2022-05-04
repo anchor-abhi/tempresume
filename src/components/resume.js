@@ -7,6 +7,7 @@ const Resume = () => {
   const userId = JSON.parse(localStorage.getItem("loggedinUser"));
   console.log(userId);
   useEffect(() => {
+    window.location.reload();
     axios
       .get(`https://masairesumebuilder.herokuapp.com/resume/${userId}`)
       .then((res) => {
