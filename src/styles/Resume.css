@@ -293,7 +293,7 @@ table th {
   border-top-style: solid;
   border-left-style: solid;
   border-bottom-width: 0pt;
-  width: 179.2pt;
+  /* width: 179.2pt; */
   border-top-color: #ffffff;
   border-bottom-style: solid;
 }
@@ -735,6 +735,7 @@ table {
 #userDet {
   /* border: 1px solid green; */
   margin: 15px 10px;
+  width: 180px;
 }
 
 #outerDiv {
@@ -763,6 +764,6 @@ li{
 
 .c23{
   border:1px solid red;
-  width:200px !important;
+  /* width:0px !important; */
 }
 
