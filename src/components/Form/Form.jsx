@@ -20,6 +20,8 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import "./Form.css"
 
+import data from "./admindata"
+
 var isGithubUrl = require('is-github-url');
 
 const profileMaxSize = 4098; // IN kb
@@ -408,7 +410,7 @@ const Form = () => {
 
           // console.log("processing");
     };
-  
+    
 
     const ProfileImg = await postDetails();
     // console.log("profileImg", ProfileImg)
@@ -491,6 +493,18 @@ const Form = () => {
 
   }
 
+  const adminCall =()=>{
+    let userId = JSON.parse(localStorage.getItem("loggedinUser"));
+    data.user=userId;
+    axios.post("https://masairesumebuilder.herokuapp.com/resume", data)
+    .then((response) => {
+      console.log(response);
+    }, (error) => {
+      console.log(error);
+    });
+
+    navigate("/downloadresume");
+  }
 
   const [studentTechStacks, setStudentTechStacks] = useState([]);
   const [studentSoftSkills, setStudentSoftSkills] = useState([]);
@@ -871,6 +885,7 @@ const Form = () => {
           Genrate Resume
         </Button>
       </div>
+      <button onClick={adminCall}>Developer Mode</button>
     </div>
   )
 }

@@ -8,7 +8,6 @@ import { useContext, useState } from "react";
 
 
 const DownloadResume = () => {
-  const [refresh, setRefresh] = useState(true);
 
   const {token} = useContext(TokenContext);
   console.log("token = ", token);
@@ -24,6 +23,7 @@ const DownloadResume = () => {
       },
     });
   };
+  // window.location.reload()
   return (
     <>
       <Button click={handleChange} />
