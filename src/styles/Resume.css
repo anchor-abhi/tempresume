@@ -735,7 +735,7 @@ table {
 #userDet {
   /* border: 1px solid green; */
   margin: 15px 10px;
-  width: 180px;
+  /* width: 180px; */
 }
 
 #outerDiv {
@@ -749,6 +749,7 @@ table {
 #h59kk2i3ikr6k {
   margin-top: 10px;
 }
+
 li{
   line-height: 0.7 !important;
 }
