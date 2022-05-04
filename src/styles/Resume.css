@@ -727,6 +727,7 @@ table {
 }
 .c45{
   /* border: 1px solid green; */
+  width: 250px;
 }
 .c41>div{
   margin-left:2%;
@@ -760,7 +761,8 @@ li{
   color: #000000;
 }
 
-.c23>div{
-  /* border:1px solid red */
+.c23{
+  /* border:1px solid red; */
+  width:200px;
 }
 
