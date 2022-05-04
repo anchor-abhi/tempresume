@@ -4,9 +4,16 @@ import axios from "axios";
 
 const Resume = () => {
   const [details, adddetails] = useState([]);
-  
-  
+
+  let load = JSON.parse(localStorage.getItem("load"));
+
+  // if(load){
+  //   localStorage.setItem("load", JSON.stringify(false));
+  //   window.location.reload();
+  // }
+
   useEffect(() => {
+
     const userId = JSON.parse(localStorage.getItem("loggedinUser"));
     axios
       .get(`https://masairesumebuilder.herokuapp.com/resume/${userId}`)
@@ -15,10 +22,14 @@ const Resume = () => {
         adddetails(res.data[res.data.length - 1]);
       })
       .catch((e) => console.log(e.message));
-      
+    
   }, []);
 
+
+
   console.log("details = ", details);
+
+
   return (
     <div id="outerDiv">
       <div id="mainDiv">

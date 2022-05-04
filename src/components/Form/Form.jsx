@@ -23,7 +23,7 @@ import "./Form.css"
 import data from "./admindata"
 
 var isGithubUrl = require('is-github-url');
-
+// localStorage.setItem("load", JSON.stringify(true));
 const profileMaxSize = 4098; // IN kb
 const profileMinSize = 100; // IN kb
 
@@ -475,22 +475,11 @@ const Form = () => {
     axios.post("https://masairesumebuilder.herokuapp.com/resume", sendingPacket)
     .then((response) => {
       console.log(response);
+      navigate("/downloadresume");
     }, (error) => {
       console.log(error);
     });
-    // fetch("http://localhost:4567/resume",{
-    //   headers:{
-    //     "content-type":"application/json"
-    //   },
-    //   data:JSON.stringify(sendingPacket)
-    // })
-    // .then((res)=>res.json()).then((res)=>console.log(res))
-    // .catch((e)=>console.log(e.message));
-    
-    // alert("Data sent, check console once")
-    
-    navigate("/downloadresume");
-
+  
   }
 
   const adminCall =()=>{
@@ -499,11 +488,10 @@ const Form = () => {
     axios.post("https://masairesumebuilder.herokuapp.com/resume", data)
     .then((response) => {
       console.log(response);
+      navigate("/downloadresume");
     }, (error) => {
       console.log(error);
-    });
-
-    navigate("/downloadresume");
+    });    
   }
 
   const [studentTechStacks, setStudentTechStacks] = useState([]);
