@@ -723,7 +723,7 @@ table {
 .c41 {
   /* border: 1px solid red; */
   margin-left:10%;
-  width: 80%;
+  width: 500px;
 }
 .c45{
   /* border: 1px solid green; */
@@ -750,9 +750,7 @@ table {
 li{
   line-height: 0.7 !important;
 }
-*{
-  /* font-family:sans-serif !important */
-}
+
 .c43>div{
   width: 90%;
   /* border:1px solid black; */

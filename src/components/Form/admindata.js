@@ -1,7 +1,7 @@
 let data = {
     "user":null,
    "personal": {
-      "profilePic": "https://icons-for-free.com/download-icon-business+costume+male+man+office+user+icon-1320196264882354682_512.png",
+      "profilePic": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
       "name": "Abhishek Maurya",
       "tagLine":"Full Stack Developer",
       "email": "theabhishek1802@gmail.com",
