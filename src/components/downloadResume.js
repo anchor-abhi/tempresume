@@ -3,9 +3,13 @@ import Button from "./Button";
 import jspdf from "jspdf";
 // import "../font/Proxima Nova Font.otf"
 import { TokenContext } from "./context/context";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+
+
 
 const DownloadResume = () => {
+  const [refresh, setRefresh] = useState(true);
+
   const {token} = useContext(TokenContext);
   console.log("token = ", token);
   const handleChange = () => {

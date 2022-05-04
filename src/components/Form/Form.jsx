@@ -49,6 +49,7 @@ const softSkills = ["Time management", "Communication", "Adaptability", "Problem
 
 
 const Form = () => {
+  
   const navigate = useNavigate();
 
   const [maxTechStacksRendering, setMaxTechStacksRendering] = useState(false); // maxTechStacksRendering for conditional
@@ -485,6 +486,7 @@ const Form = () => {
     // .catch((e)=>console.log(e.message));
     
     // alert("Data sent, check console once")
+    
     navigate("/downloadresume");
 
   }
