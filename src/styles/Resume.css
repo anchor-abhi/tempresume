@@ -734,7 +734,8 @@ table {
 }
 #userDet {
   /* border: 1px solid green; */
-  margin: 15px 10px;
+  padding: 15px 10px;
+  /* margin: 15px 10px; */
   /* width: 180px; */
 }
 
