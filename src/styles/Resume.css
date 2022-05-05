@@ -369,7 +369,7 @@ table th {
   padding-bottom: 0pt;
   line-height: 1.15;
   text-align: left;
-  margin-right: 15pt;
+  /* margin-right: 15pt; */
 }
 .c38 {
   padding-top: 4pt;
@@ -722,12 +722,12 @@ table {
 }
 .c41 {
   /* border: 1px solid red; */
-  margin-left:10%;
+  /* margin-left:10%; */
   width: 500px;
 }
 .c45{
   /* border: 1px solid green; */
-  width: 95px !important ;
+  /* width: 95px !important ; */
 }
 .c41>div{
   margin-left:2%;
@@ -766,6 +766,9 @@ li{
 
 .c23{
   /* border:1px solid red; */
-  width:95px !important;
+  /* width:90px !important; */
 }
 
+.c5{
+  /* border:1px solid blue */
+}

@@ -13,7 +13,6 @@ const Resume = () => {
   // }
 
   useEffect(() => {
-
     const userId = JSON.parse(localStorage.getItem("loggedinUser"));
     axios
       .get(`https://masairesumebuilder.herokuapp.com/resume/${userId}`)
@@ -22,13 +21,9 @@ const Resume = () => {
         adddetails(res.data[res.data.length - 1]);
       })
       .catch((e) => console.log(e.message));
-    
   }, []);
 
-
-
   console.log("details = ", details);
-
 
   return (
     <div id="outerDiv">
@@ -50,7 +45,12 @@ const Resume = () => {
                 <div style={{ display: "flex" }}>
                   <p className="c44  c46">
                     <span id="span2">
-                      <img id="img2" alt="" src={details?.personal?.profilePic} title="" />
+                      <img
+                        id="img2"
+                        alt=""
+                        src={details?.personal?.profilePic}
+                        title=""
+                      />
                     </span>
                   </p>
                   <div>
@@ -77,7 +77,11 @@ const Resume = () => {
                       LinkedIn-{" "}
                     </span>
                     <span className="c8 c19 c26">
-                      <a className="c27" target="_blank" href={details?.personal?.linkedin}>
+                      <a
+                        className="c27"
+                        target="_blank"
+                        href={details?.personal?.linkedin}
+                      >
                         {details?.personal?.name}
                       </a>
                     </span>
@@ -90,7 +94,11 @@ const Resume = () => {
                     <span className="c10">Github</span>
                     <span className="c10">- </span>
                     <span className="c8 c19 c26">
-                      <a className="c27" target="_blank" href={details?.personal?.github}>
+                      <a
+                        className="c27"
+                        target="_blank"
+                        href={details?.personal?.github}
+                      >
                         {details?.personal?.name}
                       </a>
                     </span>
@@ -102,93 +110,99 @@ const Resume = () => {
             <tr className="c29">
               <td className="c41" colSpan={1} rowSpan={1}>
                 <div>
-                <p className="c5">
-                  <span className="c17 c18">PROFESSIONAL </span>
-                  <span className="c17 c18">SUMMARY</span>
-                  <span className="c14">&nbsp;</span>
-                </p>
-                <p className="c5">
-                  <span className="c1">
-                    {details?.summary}
-                    <br />
-                  </span>
-                </p>
-                <p className="c5">
-                  <span className="c14">PROJECTS </span>
-                </p>
-                {details?.projects?.map((element) => {
-                  return (
-                    <>
-                      <p className="c5">
-                        <span className="c8 c3 "><a className="link" target="_blank"  href={element.liveLink}>{element.name}</a></span>
-                        <span className="c3">&nbsp;</span>
-                        <span className="c3">|</span>
-                        <span className="c3">&nbsp;</span>
-                        <span id="span3">
-                          <a target="_blank"  href={element.gitLink}>
-                          <img
-                            id="img3"
-                            alt=""
-                            src="images/image2.png"
-                            href="www.youtube.com"
-                          />
-                          </a>
-                          
-                        </span>
-                      </p>
-                      <p className="c5">
-                        <span>{element.description}</span>
-                      </p>
-                      <p className="c5">
-                        <span className="c3">Features</span>
-                        <span className="c1">:</span>
-                      </p>
-                      {element.features.map((elem) => {
-                        return (
-                          <>
-                            <ul className="c21 lst-kix_xmzdhu5lret0-0 start">
-                              <li className="c0 li-bullet-0">
-                                <span className="c1">{elem}</span>
-                              </li>
-                            </ul>
-                          </>
-                        );
-                      })}
-                      <p className="c5">
-                        <span className="c3">Tech Stack:</span>
-
-                        <span className="c1">
-                          &nbsp;
-                          {element.techStack
-                            .map((c) => c.toUpperCase())
-                            .join(" | ")}
-                        </span>
-                      </p>
-                      <p className="c5">
-                        <span className="c3 c6">Areas of responsibility:</span>
-                      </p>
-                      <ul className="c21 lst-kix_es1hyzs1hy8g-0 start">
-                        {element.features.map((feature) => {
+                  <p className="c5">
+                    <span className="c17 c18">PROFESSIONAL </span>
+                    <span className="c17 c18">SUMMARY</span>
+                    <span className="c14">&nbsp;</span>
+                  </p>
+                  <p className="c5">
+                    <span className="c1">
+                      {details?.summary}
+                      <br />
+                    </span>
+                  </p>
+                  <p className="c5">
+                    <span className="c14">PROJECTS </span>
+                  </p>
+                  {details?.projects?.map((element) => {
+                    return (
+                      <>
+                        <p className="c5">
+                          <span className="c8 c3 ">
+                            <a
+                              className="link"
+                              target="_blank"
+                              href={element.liveLink}
+                            >
+                              {element.name}
+                            </a>
+                          </span>
+                          <span className="c3">&nbsp;</span>
+                          <span className="c3">|</span>
+                          <span className="c3">&nbsp;</span>
+                          <span id="span3">
+                            <a target="_blank" href={element.gitLink}>
+                              <img
+                                id="img3"
+                                alt=""
+                                src="images/image2.png"
+                                href="www.youtube.com"
+                              />
+                            </a>
+                          </span>
+                        </p>
+                        <p className="c5">
+                          <span>{element.description}</span>
+                        </p>
+                        <p className="c5">
+                          <span className="c3">Features</span>
+                          <span className="c1">:</span>
+                        </p>
+                        {element.features.map((elem) => {
                           return (
-                            <li className="c0 li-bullet-0">
-                              <span className="c1">{feature}</span>
-                            </li>
+                            <>
+                              <ul className="c21 lst-kix_xmzdhu5lret0-0 start">
+                                <li className="c0 li-bullet-0">
+                                  <span className="c1">{elem}</span>
+                                </li>
+                              </ul>
+                            </>
                           );
                         })}
-                      </ul>
-                      <p className="c5">
-                        <span className="c1">
-                          {`A collaborative project built by a team of ${element.team} executed
+                        <p className="c5">
+                          <span className="c3">Tech Stack:</span>
+
+                          <span className="c1">
+                            &nbsp;
+                            {element.techStack
+                              .map((c) => c.toUpperCase())
+                              .join(" | ")}
+                          </span>
+                        </p>
+                        <p className="c5">
+                          <span className="c3 c6">
+                            Areas of responsibility:
+                          </span>
+                        </p>
+                        <ul className="c21 lst-kix_es1hyzs1hy8g-0 start">
+                          {element.features.map((feature) => {
+                            return (
+                              <li className="c0 li-bullet-0">
+                                <span className="c1">{feature}</span>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                        <p className="c5">
+                          <span className="c1">
+                            {`A collaborative project built by a team of ${element.team} executed
                           in 5 days.`}
-                        </span>
-                      </p>
-                    </>
-                  );
-                })}
-                <p className="c5 c15">
-                  <span className="c1"></span>
-                </p>
-                  </div>
+                          </span>
+                        </p>
+                      </>
+                    );
+                  })}
+                </div>
               </td>
               <td className="c45" colSpan={1} rowSpan={1}>
                 <p className="c38">
@@ -199,15 +213,17 @@ const Resume = () => {
                   return (
                     <>
                       <p className="c25">
-                      <span className="c17">{education.course}</span>
-                      <span>
-                        <br />
-                        {education.institute}
-                        <br />
-                      </span>
-                      <span className="c12 c35">{education.start} - {education.end}</span>
-                    </p>
-                    <p className="c20"></p>
+                        <span className="c17">{education.course}</span>
+                        <span>
+                          <br />
+                          {education.institute}
+                          <br />
+                        </span>
+                        <span className="c12 c35">
+                          {education.start} - {education.end}
+                        </span>
+                      </p>
+                      <p className="c20"></p>
                     </>
                   );
                 })}
@@ -236,19 +252,18 @@ const Resume = () => {
                 <div className="c38" id="h.tuxh7mwdaxox">
                   <span className="c14">ACCOMPLISHMENTS </span>
                 </div>
-                {details?.accomplishments?.map((accomp)=>{
-                  return (<p className="c20">
-
-                  <span>
-                    {accomp}
-                  </span>
-                </p>)
+                {details?.accomplishments?.map((accomp) => {
+                  return (
+                    <p className="c20 c5">
+                      <span>{accomp}</span>
+                    </p>
+                  );
                 })}
-        
+
                 <div className="c38" id="h59kk2i3ikr6k">
                   <span className="c14">INTERESTS</span>
                 </div>
-                <p className="c28">
+                <p className="c28 c5">
                   <span>{details?.interests?.join(" | ")}</span>
                 </p>
               </td>
