@@ -17,13 +17,13 @@ const DownloadResume = () => {
     doc.addFileToVFS("MyFont.otf", myFont);
     doc.addFont("MyFont.otf", "MyFont", "normal");
     doc.setFont("MyFont");
+    
     doc.html(document.querySelector("#mainDiv"), {
       callback: function (pdf) {
         pdf.save("Resume.pdf");
       },
     });
   };
-  // window.location.reload()
   return (
     <>
       <Button click={handleChange} />

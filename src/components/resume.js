@@ -158,17 +158,17 @@ const Resume = () => {
                           <span className="c3">Features</span>
                           <span className="c1">:</span>
                         </p>
-                        {element.features.map((elem) => {
-                          return (
-                            <>
-                              <ul className="c21 lst-kix_xmzdhu5lret0-0 start">
-                                <li className="c0 li-bullet-0">
+                        <ul className="c21">
+                          {element.features.map((elem) => {
+                            return (
+                              <>
+                                <li className="c0">
                                   <span className="c1">{elem}</span>
                                 </li>
-                              </ul>
-                            </>
-                          );
-                        })}
+                              </>
+                            );
+                          })}
+                        </ul>
                         <p className="c5">
                           <span className="c3">Tech Stack:</span>
 
@@ -184,10 +184,10 @@ const Resume = () => {
                             Areas of responsibility:
                           </span>
                         </p>
-                        <ul className="c21 lst-kix_es1hyzs1hy8g-0 start">
+                        <ul className="c21">
                           {element.features.map((feature) => {
                             return (
-                              <li className="c0 li-bullet-0">
+                              <li className="c0 ">
                                 <span className="c1">{feature}</span>
                               </li>
                             );

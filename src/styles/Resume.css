@@ -305,6 +305,7 @@ table th {
   font-size: 9pt;
   font-family: "Proxima Nova";
   font-style: normal;
+  margin-left: 2px;
 }
 .c11 {
   color: #000000;
@@ -316,7 +317,7 @@ table th {
   font-style: normal;
 }
 .c0 {
-  margin-left: 36pt;
+  margin-left: 20pt;
   padding-top: 6pt;
   padding-left: 0pt;
   padding-bottom: 0pt;
@@ -769,6 +770,6 @@ li{
   /* width:90px !important; */
 }
 
-.c5{
+.c1{
   /* border:1px solid blue */
 }
