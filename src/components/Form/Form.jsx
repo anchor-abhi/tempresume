@@ -487,20 +487,10 @@ const Form = () => {
     axios.post("http://localhost:4567/resume", sendingPacket)
     .then((response) => {
       console.log(response);
+      navigate("/downloadresume");
     }, (error) => {
       console.log(error);
     });
-    // fetch("http://localhost:4567/resume",{
-    //   headers:{
-    //     "content-type":"application/json"
-    //   },
-    //   data:JSON.stringify(sendingPacket)
-    // })
-    // .then((res)=>res.json()).then((res)=>console.log(res))
-    // .catch((e)=>console.log(e.message));
-    
-    // alert("Data sent, check console once")
-    navigate("/downloadresume");
 
   }
 
