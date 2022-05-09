@@ -20,10 +20,8 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import "./Form.css"
 
-import data from "./admindata"
-
 var isGithubUrl = require('is-github-url');
-// localStorage.setItem("load", JSON.stringify(true));
+
 const profileMaxSize = 4098; // IN kb
 const profileMinSize = 100; // IN kb
 
@@ -51,7 +49,6 @@ const softSkills = ["Time management", "Communication", "Adaptability", "Problem
 
 
 const Form = () => {
-  
   const navigate = useNavigate();
 
   const [maxTechStacksRendering, setMaxTechStacksRendering] = useState(false); // maxTechStacksRendering for conditional
@@ -185,6 +182,16 @@ const Form = () => {
   const [projectTechStacks, setProjectTechStacks] = useState('');
   const [projectCollaborated, setProjectCollaborated] = useState(false);
 
+  
+
+  const [projectTitleError, setProjectTitleError] = useState('');
+  const [projectIntroError, setProjectIntroError] = useState('');
+  const [projectRolesError, setProjectRolesError] = useState('');
+  const [projectFeaturesError, setProjectFeaturesError] = useState('');
+  const [projectGithubLinkError, setProjectGithubLinkError] = useState('');
+  const [projectLiveLinkError, setProjectLiveLinkError] = useState('');
+  const [projectTechStacksError, setProjectTechStacksError] = useState('');
+
 
   const [editProjectDataIndex, setEditProjectDataIndex] = useState(-1)
 
@@ -192,7 +199,7 @@ const Form = () => {
 
   const handleOpenProjectForm = () => {
     if (projectData.length == 2) {
-      alert("You have already added two projects, can't add more")
+      alert("You have already added two projects, can't add more");
       return;
     }
     setOpenProjectForm(true);
@@ -204,41 +211,46 @@ const Form = () => {
 
   const addProject = () => {
     if (projectTitle.length == 0) {
-      alert("Project title can't be blank");
+      setProjectTitleError("Title field can't be blank");
       return;
     }
     if (projectIntro.length == 0) {
-      alert("Project about section can't be blank");
+      setProjectIntroError("Project about section can't be blank");
       return;
     }
     if (!isGithubUrl(projectGithubLink)) {
-      alert("Github repository link should be a valid url");
+      setProjectGithubLinkError("Github repository link should be a valid url");
       return;
     }
     if (!validateUrl(projectLiveLink)) {
-      alert("Project live link should be a valid url");
+      setProjectLiveLinkError("Project live link should be a valid url");
       return;
     }
     if (projectFeatures.length == 0) {
-      alert("Project features section can't be blank")
+      setProjectFeaturesError("Project features section can't be blank");
+      // alert("Project features section can't be blank")
       return;
     }
     var prFeatures = projectFeatures.split("\n");
     if (prFeatures.length > 3) {
-      alert("Maximum you can add 3 points in features of Project");
+      setProjectFeaturesError("Maximum you can add 3 points in features of Project");
+      // alert("Maximum you can add 3 points in features of Project");
       return;
     }
     if (projectRoles.length == 0) {
-      alert("Project roles section can't be blank")
+      setProjectRolesError("Project roles section can't be blank");
+      // alert("Project roles section can't be blank")
       return;
     }
     var prRoles = projectRoles.split("\n");
     if (prRoles.length > 3) {
-      alert("Maximum you can add 3 points in roles of Project");
+      setProjectRolesError("Maximum you can add 3 points in roles of Project");
+      // alert("Maximum you can add 3 points in roles of Project");
       return;
     }
     if (projectTechStacks.length < 1) {
-      alert("Select atleast one techstack");
+      setProjectTechStacksError("Select atleast one techstack");
+      // alert("Select atleast one techstack");
       return;
     }
 
@@ -410,7 +422,7 @@ const Form = () => {
 
           // console.log("processing");
     };
-    
+  
 
     const ProfileImg = await postDetails();
     // console.log("profileImg", ProfileImg)
@@ -472,27 +484,26 @@ const Form = () => {
     console.log(sendingPacket)
 
     
-    axios.post("https://masairesumebuilder.herokuapp.com/resume", sendingPacket)
+    axios.post("http://localhost:4567/resume", sendingPacket)
     .then((response) => {
       console.log(response);
-      navigate("/downloadresume");
     }, (error) => {
       console.log(error);
     });
-  
+    // fetch("http://localhost:4567/resume",{
+    //   headers:{
+    //     "content-type":"application/json"
+    //   },
+    //   data:JSON.stringify(sendingPacket)
+    // })
+    // .then((res)=>res.json()).then((res)=>console.log(res))
+    // .catch((e)=>console.log(e.message));
+    
+    // alert("Data sent, check console once")
+    navigate("/downloadresume");
+
   }
 
-  const adminCall =()=>{
-    let userId = JSON.parse(localStorage.getItem("loggedinUser"));
-    data.user=userId;
-    axios.post("https://masairesumebuilder.herokuapp.com/resume", data)
-    .then((response) => {
-      console.log(response);
-      navigate("/downloadresume");
-    }, (error) => {
-      console.log(error);
-    });    
-  }
 
   const [studentTechStacks, setStudentTechStacks] = useState([]);
   const [studentSoftSkills, setStudentSoftSkills] = useState([]);
@@ -649,7 +660,12 @@ const Form = () => {
             <DialogTitle>Add Project</DialogTitle>
             <DialogContent>
               <TextField
-                value={projectTitle} onInput={e => setProjectTitle(e.target.value)}
+                value={projectTitle} onInput={e => {
+                  setProjectTitle(e.target.value);
+                  setProjectTitleError('');
+                }}
+                helperText={projectTitleError}
+                error={projectTitleError}
                 size="small"
                 inputProps={{ maxLength: projectTitleMaxLength }}
                 autoFocus
@@ -661,7 +677,12 @@ const Form = () => {
                 variant="outlined"
               />
               <TextField
-                value={projectIntro} onInput={e => setProjectIntro(e.target.value)}
+                value={projectIntro}  onInput={e => {
+                  setProjectIntro(e.target.value);
+                  setProjectIntroError('');
+                }}
+                helperText={projectIntroError}
+                error={projectIntroError}
                 inputProps={{ maxLength: projectIntroMaxLength }}
                 margin="dense"
                 id="name"
@@ -673,7 +694,12 @@ const Form = () => {
                 variant="outlined"
               />
               <TextField
-                value={projectGithubLink} onInput={e => setProjectGithubLink(e.target.value)}
+                value={projectGithubLink}  onInput={e => {
+                  setProjectGithubLink(e.target.value);
+                  setProjectGithubLinkError('');
+                }}
+                helperText={projectGithubLinkError}
+                error={projectGithubLinkError}
                 size="small"
                 margin="dense"
                 id="name"
@@ -683,7 +709,12 @@ const Form = () => {
                 variant="outlined"
               />
               <TextField
-                value={projectLiveLink} onInput={e => setProjectLiveLink(e.target.value)}
+                value={projectLiveLink}  onInput={e => {
+                  setProjectLiveLink(e.target.value);
+                  setProjectLiveLinkError('');
+                }}
+                helperText={projectLiveLinkError}
+                error={projectLiveLinkError}
                 size="small"
                 margin="dense"
                 label="Enter your project live link"
@@ -692,7 +723,10 @@ const Form = () => {
               />
               <TextField
                 size="small"
-                value={projectFeatures} onInput={e => setProjectFeatures(e.target.value)}
+                value={projectFeatures} onInput={e => {setProjectFeatures(e.target.value);  setProjectFeaturesError('');
+              }}
+              helperText={projectFeaturesError}
+              error={projectFeaturesError}
                 inputProps={{ maxLength: projectFeaturesMaxLength }}
                 margin="dense"
                 multiline
@@ -703,7 +737,10 @@ const Form = () => {
               />
               <TextField
                 size="small"
-                value={projectRoles} onInput={e => setProjectRoles(e.target.value)}
+                value={projectRoles} onInput={e => {setProjectRoles(e.target.value);  setProjectRolesError('');
+              }}
+              helperText={projectRolesError}
+              error={projectRolesError}
                 multiline
                 rows={3}
                 inputProps={{ maxLength: projectRolesMaxLength }}
@@ -720,12 +757,13 @@ const Form = () => {
                 onChange={(option) => {
                   if (option.target.innerText) {
                     setProjectTechStacks([...projectTechStacks, option.target.innerText])
+                    setProjectTechStacksError("");
                     // tagsArr.push(option.target.innerText);
-                    // if (studentTechStacks.length === 5) {
-                    //   console.log(studentTechStacks.length);
-                    //   setMaxTechStacksRendering(true);
-                    // }
-                    // console.log(projectTechStacks);
+                    if (studentTechStacks.length === 5) {
+                      console.log(studentTechStacks.length);
+                      setMaxTechStacksRendering(true);
+                    }
+                    console.log(projectTechStacks);
                   }
 
                 }}
@@ -735,11 +773,14 @@ const Form = () => {
                 multiple
                 id="tags-outlined"
                 options={techStacks}
+
                 getOptionLabel={(option) => option}
                 filterSelectedOptions
                 renderInput={(params) => (
                   <TextField
                     {...params}
+                    error={projectTechStacksError}
+          helperText={projectTechStacksError}
                     label="Select the tech stacks of your project (choose maximum 5)"
                   />
                 )}
@@ -873,7 +914,6 @@ const Form = () => {
           Genrate Resume
         </Button>
       </div>
-      <button onClick={adminCall}>Developer Mode</button>
     </div>
   )
 }
