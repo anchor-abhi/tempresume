@@ -227,25 +227,30 @@ const Form = () => {
       return;
     }
     if (projectFeatures.length == 0) {
-      alert("Project features section can't be blank")
+      setProjectFeaturesError("Project features section can't be blank");
+      // alert("Project features section can't be blank")
       return;
     }
     var prFeatures = projectFeatures.split("\n");
     if (prFeatures.length > 3) {
-      alert("Maximum you can add 3 points in features of Project");
+      setProjectFeaturesError("Maximum you can add 3 points in features of Project");
+      // alert("Maximum you can add 3 points in features of Project");
       return;
     }
     if (projectRoles.length == 0) {
-      alert("Project roles section can't be blank")
+      setProjectRolesError("Project roles section can't be blank");
+      // alert("Project roles section can't be blank")
       return;
     }
     var prRoles = projectRoles.split("\n");
     if (prRoles.length > 3) {
-      alert("Maximum you can add 3 points in roles of Project");
+      setProjectRolesError("Maximum you can add 3 points in roles of Project");
+      // alert("Maximum you can add 3 points in roles of Project");
       return;
     }
     if (projectTechStacks.length < 1) {
-      alert("Select atleast one techstack");
+      setProjectTechStacksError("Select atleast one techstack");
+      // alert("Select atleast one techstack");
       return;
     }
 
@@ -718,7 +723,10 @@ const Form = () => {
               />
               <TextField
                 size="small"
-                value={projectFeatures} onInput={e => setProjectFeatures(e.target.value)}
+                value={projectFeatures} onInput={e => {setProjectFeatures(e.target.value);  setProjectFeaturesError('');
+              }}
+              helperText={projectFeaturesError}
+              error={projectFeaturesError}
                 inputProps={{ maxLength: projectFeaturesMaxLength }}
                 margin="dense"
                 multiline
@@ -729,7 +737,10 @@ const Form = () => {
               />
               <TextField
                 size="small"
-                value={projectRoles} onInput={e => setProjectRoles(e.target.value)}
+                value={projectRoles} onInput={e => {setProjectRoles(e.target.value);  setProjectRolesError('');
+              }}
+              helperText={projectRolesError}
+              error={projectRolesError}
                 multiline
                 rows={3}
                 inputProps={{ maxLength: projectRolesMaxLength }}
@@ -746,12 +757,13 @@ const Form = () => {
                 onChange={(option) => {
                   if (option.target.innerText) {
                     setProjectTechStacks([...projectTechStacks, option.target.innerText])
+                    setProjectTechStacksError("");
                     // tagsArr.push(option.target.innerText);
-                    // if (studentTechStacks.length === 5) {
-                    //   console.log(studentTechStacks.length);
-                    //   setMaxTechStacksRendering(true);
-                    // }
-                    // console.log(projectTechStacks);
+                    if (studentTechStacks.length === 5) {
+                      console.log(studentTechStacks.length);
+                      setMaxTechStacksRendering(true);
+                    }
+                    console.log(projectTechStacks);
                   }
 
                 }}
@@ -761,11 +773,14 @@ const Form = () => {
                 multiple
                 id="tags-outlined"
                 options={techStacks}
+
                 getOptionLabel={(option) => option}
                 filterSelectedOptions
                 renderInput={(params) => (
                   <TextField
                     {...params}
+                    error={projectTechStacksError}
+          helperText={projectTechStacksError}
                     label="Select the tech stacks of your project (choose maximum 5)"
                   />
                 )}
