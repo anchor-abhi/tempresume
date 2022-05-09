@@ -44,7 +44,7 @@ const projectRolesLabel = "Project Roles, each in new line (maximum " + projectR
 const projectFeaturesLabel = "Project Features, each in new line (maximum " + projectFeaturesMaxLength + " characters) *"
 
 
-const techStacks = ["HTML", "CSS", "JS", "React", "Express", "NodeJS", "MongoDB", "MUI", "ChakraUI"]
+const techStacks = ["HTML", "CSS", "JavaScript", "React","Redux","Git","SQL","Java", "Express", "NodeJS", "MongoDB", "MUI", "ChakraUI"]
 const softSkills = ["Time management", "Communication", "Adaptability", "Problem-solving", "Teamwork", "Creativity", "Leadership", "Interpersonal skills"]
 
 
@@ -193,6 +193,7 @@ const Form = () => {
   const [projectTechStacksError, setProjectTechStacksError] = useState('');
 
 
+
   const [editProjectDataIndex, setEditProjectDataIndex] = useState(-1)
 
   const [projectData, setProjectData] = useState([]);
@@ -204,7 +205,7 @@ const Form = () => {
     }
     setOpenProjectForm(true);
   };
-
+  
   const handleCloseProjectForm = () => {
     setOpenProjectForm(false);
   };
@@ -290,6 +291,26 @@ const Form = () => {
     setDisplayProjectData(true);
   }
 
+  
+  const [openExperienceForm, setOpenExperienceForm] = useState(false);
+  const [showExperienceRendering, setShowExperienceRendering] = useState(false);
+
+
+  const [workCompany, setWorkCompany] = useState('');
+  const [workDesignation, setWorkDesignation] = useState('');
+  const [workStartDate, setWorkStartDate] = useState('');
+  const [workEndDate, setWorkEndDate] = useState('');
+  const [workRoles, setWorkRoles] = useState([]);
+
+
+  const handleOpenExperienceForm = () => {
+   
+    setOpenExperienceForm(true);
+  };
+
+  const handleCloseExperienceForm = () => {
+    setOpenExperienceForm(false);
+  };
 
   function validateUrl(value) {
     return /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(value);
@@ -910,14 +931,115 @@ const Form = () => {
         </div>
       </div>
      <div style={{"textAlign":"center", "margin-top":"20px"}}>
-     <FormControlLabel control={<Switch onChange={(e) => { console.log(e.target.checked) }} />} label="Do want to add work experience in your resume?" />
-      
+     <FormControlLabel control={<Switch onChange={(e) => { setShowExperienceRendering(e.target.checked) }} />} label="Do you want to add work experience in your resume?" />
+     {!showExperienceRendering?"":
+      <div className='work-experience-cont'>
+           <Button className='add-btn' variant="outlined" onClick={handleOpenExperienceForm}>
+            Add Work Experience
+          </Button>
+          <Dialog open={openExperienceForm} onClose={handleCloseExperienceForm}>
+            <DialogTitle>Add Work Experience</DialogTitle>
+            <DialogContent>
+              <TextField
+                value={workCompany} onInput={e => {
+                  setWorkCompany(e.target.value);
+                  // setProjectTitleError('');
+                }}
+                // helperText={}
+                // error={}
+                size="small"
+                inputProps={{ maxLength: "20"}}
+                autoFocus
+                margin="dense"
+                label={"Company/Organization Name *"}
+                type="text"
+                fullWidth
+                variant="outlined"
+              />
+              <TextField
+               value={workDesignation} onInput={e => {
+                 setWorkDesignation(e.target.value);
+                 // setProjectTitleError('');
+               }}
+               // helperText={}
+               // error={}
+               size="small"
+               inputProps={{ maxLength: "20"}}
+               margin="dense"
+               label={"Designation in company *"}
+               type="text"
+               fullWidth
+               variant="outlined"
+             />
+             
+             <div className='start-end-date experience'>
+             <TextField
+              value={workStartDate} onInput={e => {
+                setWorkStartDate(e.target.value);
+                // setProjectTitleError('');
+              }}
+              // helperText={}
+              // error={}
+              size="small"
+              margin="dense"
+              label={"Start date *"}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              type="month"
+              fullWidth
+              variant="outlined"
+            /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <TextField
+             value={workEndDate} onInput={e => {
+               setWorkEndDate(e.target.value);
+               // setProjectTitleError('');
+             }}
+             // helperText={}
+             // error={}
+             size="small"
+             margin="dense"
+             label={"End date *"}
+             InputLabelProps={{
+              shrink: true,
+            }}
+             type="month"
+             fullWidth
+             variant="outlined"
+           />
+             </div>
+             <TextField
+               value={workRoles} onInput={e => {
+                 setWorkRoles(e.target.value);
+                 // setProjectTitleError('');
+               }}
+               // helperText={}
+               // error={}
+               size="small"
+               inputProps={{ maxLength: "150"}}
+               margin="dense"
+               label={"Roles in previous company, each in new line (maximum 150 characters) *"}
+               type="text"
+               fullWidth
+               multiline
+               rows={3}
+               variant="outlined"
+             />
+              </DialogContent>
+              <DialogActions>
+              <Button onClick={handleCloseExperienceForm}>Cancel</Button>
+              <Button onClick={()=>{}}>Add</Button>
+            </DialogActions>
+            </Dialog>
+        </div>
+      }
        </div>        
       <div className='submit-btn-cont'>
         <Button onClick={submitForm} className='genrate-resume-btn' color="success" variant="contained" endIcon={<ChevronRightIcon />}>
           Genrate Resume
         </Button>
       </div>
+     
     </div>
   )
 }

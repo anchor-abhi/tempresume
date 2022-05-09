@@ -258,6 +258,19 @@ text-align: justify;
   right: 3%;
 }
 
+.work-experience-cont
+{
+  border: 1px solid grey;
+    width: 50%;
+    margin: auto;
+    margin-top: 15px;
+    border-radius: 5px;
+    min-height: 200px;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color:#F8F9FA; 
+}
+
 .genrate-resume-btn
 {
   width: 50%;
@@ -269,4 +282,5 @@ text-align: justify;
   display: flex;
   justify-content: center;
 }
+
 
