@@ -54,11 +54,11 @@ const Resume = () => {
                     </span>
                   </p>
                   <div>
-                    <p className="c30 title" id="h.x8fm1uorkbaw">
+                    <div className="c30 title" id="h.x8fm1uorkbaw">
                       <span className="c40">
-                        {details?.personal?.name?.toUpperCase()}
+                        {details?.personal?.name?.toUpperCase()}                        
                       </span>
-                    </p>
+                    </div>
                     <p className="c7 subtitle" id="h.ymi089liagec">
                       <span className="c31">{details?.personal?.tagLine}</span>
                     </p>
