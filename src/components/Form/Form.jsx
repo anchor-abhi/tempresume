@@ -39,7 +39,7 @@ const courseTitleLabel = "Course/Degree Title  (maximum " + courseTitleMaxLength
 const collegeTitleLabel = "College/Institue/School name (maximum " + collegeTitleMaxLength + " characters) *"
 
 const projectTitleLabel = "Project Title  (maximum " + projectTitleMaxLength + " characters) *"
-const projectIntroLabel = "Write a quick breif about project (maximum " + projectIntroMaxLength + " characters) *"
+const projectIntroLabel = "Write a quick brief about project (maximum " + projectIntroMaxLength + " characters) *"
 const projectRolesLabel = "Project Roles, each in new line (maximum " + projectRolesMaxLength + " characters) *"
 const projectFeaturesLabel = "Project Features, each in new line (maximum " + projectFeaturesMaxLength + " characters) *"
 
@@ -909,6 +909,10 @@ const Form = () => {
 
         </div>
       </div>
+     <div style={{"textAlign":"center", "margin-top":"20px"}}>
+     <FormControlLabel control={<Switch onChange={(e) => { console.log(e.target.checked) }} />} label="Do want to add work experience in your resume?" />
+      
+       </div>        
       <div className='submit-btn-cont'>
         <Button onClick={submitForm} className='genrate-resume-btn' color="success" variant="contained" endIcon={<ChevronRightIcon />}>
           Genrate Resume
