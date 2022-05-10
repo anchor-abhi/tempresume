@@ -10,7 +10,7 @@ export const Left = ({data,state,color}) => {
   return (
     <div style={{background:state}}  className="left-container">
       <div className="profile-div">
-        <img
+        <img className="universal"
           src={data?.personal?.profilePic}
           alt=""
         />
@@ -19,41 +19,41 @@ export const Left = ({data,state,color}) => {
       {/* contact information */}
 
       <section className="contact-section">
-        <h4>CONTACT ME AT</h4>
-        <div style={{color:color}}>
-          <LocationOnIcon />
-          <span>{data?.personal?.address}</span>
+        <h4 className="universal" >CONTACT ME AT</h4>
+        <div className="universal" style={{color:color}}>
+          <LocationOnIcon className="universal" />
+          <span className="universal" >{data?.personal?.address}</span>
         </div>
 
-        <div  style={{color:color}} >
+        <div className="universal"  style={{color:color}} >
           <DraftsIcon />
-          <a style={{color:color}} href={"mailto:"+data?.personal?.email}>{data?.personal?.email}</a>
+          <a className="universal" style={{color:color}} href={"mailto:"+data?.personal?.email}>{data?.personal?.email}</a>
         </div>
 
-        <div style={{color:color}} >
+        <div className="universal" style={{color:color}} >
           <GitHubIcon />
-          <a style={{color:color}} href={data?.personal?.github} target="_blank" >{data?.personal?.name}</a>
+          <a className="universal" style={{color:color}} href={data?.personal?.github} target="_blank" >{data?.personal?.name}</a>
         </div>
 
-        <div  style={{color:color}} >
+        <div className="universal"  style={{color:color}} >
           <LinkedInIcon />
-          <a style={{color:color}} href={data?.personal?.linkedin} target="_blank">{data?.personal?.name}</a>
+          <a className="universal" style={{color:color}} href={data?.personal?.linkedin} target="_blank">{data?.personal?.name}</a>
         </div>
 
-        <div  style={{color:color}} >
+        <div className="universal"  style={{color:color}} >
           <CallIcon />
-          <a style={{color:color}} href={"tel:"+data?.personal?.mob}>{"+91" + data?.personal?.mob}</a>
+          <a className="universal" style={{color:color}} href={"tel:"+data?.personal?.mob}>{"+91" + data?.personal?.mob}</a>
         </div>
       </section>
 {/* education section */}
       <section className="education-section">
-        <h4>EDUCATION</h4>
+        <h4 className="universal" >EDUCATION</h4>
 
     {data?.education?.map((ele)=>{
       return(
-        <div style={{color:color}} >
-        <SchoolIcon/>
-        <p>{ele.course+", "}{ele.institute+" "}{ele.start+"-"}{ele.end}</p>
+        <div className="universal" style={{color:color}} >
+        <SchoolIcon className="universal"/>
+        <p className="universal">{ele.course+", "}{ele.institute+" "}{ele.start+"-"}{ele.end}</p>
       </div>
       )
     })}
@@ -63,30 +63,30 @@ export const Left = ({data,state,color}) => {
       {/* technical skills */}
 
       <section className="technical-section">
-        <h4>TECHNICAL SKILLS</h4>
-        <p style={{color:color}} className="tech">{data?.techSkills?.join(" | ")}</p>
+        <h4 className="universal">TECHNICAL SKILLS</h4>
+        <p  style={{color:color}} className="tech">{data?.techSkills?.join(" | ")}</p>
       </section>
 
       <section className="softskills-section" >
-      <h4>SOFT SKILLS</h4>
-      <div style={{color:color}} >
-        <span>{data?.softSkills?.join(" | ")}</span>
+      <h4 className="universal" >SOFT SKILLS</h4>
+      <div className="universal"  style={{color:color}} >
+        <span className="universal" >{data?.softSkills?.join(" | ")}</span>
       </div>
       </section>
 {/* interest section */}
     <section className="interest-section" >
-    <h4>INTERESTS</h4>
-    <p style={{color:color}} >{data?.interests?.join(" | ")}</p>
+    <h4 className="universal" >INTERESTS</h4>
+    <p className="universal" style={{color:color}} >{data?.interests?.join(" | ")}</p>
     </section>
 
 
 
 {/* achievements section */}
       <section className="achievements-section">
-        <h4>ACCOMPLISHMENTS</h4>
+        <h4 className="universal" >ACCOMPLISHMENTS</h4>
         {data?.accomplishments?.map((ele)=>{
           return (
-            <li style={{color:color}} >{ele}</li>
+            <li className="universal" style={{color:color}} >{ele}</li>
           )
         })}
       </section>

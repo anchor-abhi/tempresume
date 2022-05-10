@@ -1,3 +1,9 @@
+.universal,.right-container,hr,.profile-desc,.work-exp,.job-profile,.project-section,.icons-div,.project-desc,.tech-stack,.area-of-response,.team-line{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
 .right-container{
     display: flex;
     flex-direction: column;
@@ -99,9 +105,7 @@ margin-bottom: 10px;
     display:flex;
     flex-wrap: wrap;
 }
-h4,h5{
-    text-transform: uppercase;
-}
+
 
 .icons-div{
     /* border:1px solid black; */

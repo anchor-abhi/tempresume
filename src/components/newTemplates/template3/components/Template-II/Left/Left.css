@@ -1,3 +1,8 @@
+.left-container,.universal,.profile-div,.contact-section,.education-section,.technical-section,.tech,.softskills-section,.interest-section,.achievements-section{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
 .left-container {
   display: flex;
   flex-direction: column;
@@ -22,7 +27,7 @@
   border-radius: 50%;
 }
 
-h4 {
+.contact-section > h4,.education-section > h4,.technical-section > h4,.softskills-section > h4, .interest-section > h4, .achievements-section > h4 {
   color: #3f6bad;
   font-weight: 600;
   letter-spacing: 3px;

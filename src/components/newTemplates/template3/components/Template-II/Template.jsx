@@ -3,6 +3,7 @@ import { Right } from "./Right/Right";
 import "./Template.css";
 import { useEffect, useState } from "react";
 import axios from "axios"
+import { duplicateData } from "../../store/Data";
 
 export const Template = ()=>{
 
@@ -43,8 +44,8 @@ export const Template = ()=>{
       console.log("data=",data[data.length-1])
     return(
         <div className="container">
-            <Left data={data[data.length-1]} state={state} color={color} />
-            <Right data={data[data.length-1]} />
+            <Left data={duplicateData} state={state} color={color} />
+            <Right data={duplicateData} />
             <div className="colors">
                 <div onClick={grayColor} className="gray" >
                 </div>
