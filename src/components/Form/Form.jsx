@@ -20,6 +20,9 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import "./Form.css"
 
+
+
+
 var isGithubUrl = require('is-github-url');
 
 const profileMaxSize = 4098; // IN kb
@@ -49,6 +52,32 @@ const softSkills = ["Time management", "Communication", "Adaptability", "Problem
 
 
 const Form = () => {
+
+  
+  const [pageLoading, setPageLoading] = useState(true);
+  const [userPreviousData, setUserPreviousData] = useState(false);
+
+  
+  useEffect(() => {
+    
+  const userId = JSON.parse(localStorage.getItem("loggedinUser")) || null;
+  if(userId != null)
+    {
+        axios
+          .get(`https://masairesumebuilder.herokuapp.com/resume/${userId}`)
+          .then((res) => {
+            setUserPreviousData(res.data);
+          }).then(()=> setPageLoading(false))
+          .catch((e) => console.log(e.message))
+          .finally(()=>console.log(userPreviousData))
+        }
+        else
+          setPageLoading(false)
+        }, []);
+
+        
+
+
   const navigate = useNavigate();
 
   const [maxTechStacksRendering, setMaxTechStacksRendering] = useState(false); // maxTechStacksRendering for conditional
@@ -56,7 +85,7 @@ const Form = () => {
 
   const [selectedFile, setSelectedFile] = useState()
   const [preview, setPreview] = useState()
-
+ 
   // create a preview as a side effect, whenever selected file is changed
   useEffect(() => {
     if (!selectedFile) {
@@ -606,6 +635,9 @@ const Form = () => {
   const [studentInterests, setStudentInterests] = useState("");
 
   return (
+    <>
+    
+    {pageLoading ? <img className='page-loading' src="https://i.pinimg.com/originals/f6/65/6a/f6656aa6fdb6b8f905dea0bcc2d71dd8.gif" />:
     <div className='form-container'>
       <div className='header-section'>
         <div className='proflile-img'>
@@ -1148,8 +1180,10 @@ const Form = () => {
           Genrate Resume
         </Button>
       </div>
-     
+
     </div>
+}
+    </>
   )
 }
 
