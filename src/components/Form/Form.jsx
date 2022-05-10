@@ -183,6 +183,8 @@ const Form = () => {
   const [projectCollaborated, setProjectCollaborated] = useState(false);
 
   
+  const [workExperienceData, setWorkExperienceData] = useState([]);
+  const [editExperienceDataIndex, setEditExperienceDataIndex] = useState(-1)
 
   const [projectTitleError, setProjectTitleError] = useState('');
   const [projectIntroError, setProjectIntroError] = useState('');
@@ -302,6 +304,14 @@ const Form = () => {
   const [workEndDate, setWorkEndDate] = useState('');
   const [workRoles, setWorkRoles] = useState([]);
 
+  const [workCompanyError, setWorkCompanyError] = useState('');
+  const [workDesignationError, setWorkDesignationError] = useState('');
+  const [workStartDateError, setWorkStartDateError] = useState('');
+  const [workEndDateError, setWorkEndDateError] = useState('');
+  const [workRolesError, setWorkRolesError] = useState('');  
+
+  const [displayWorkExperienceData, setDisplayWorkExperienceData] = useState(false);
+
 
   const handleOpenExperienceForm = () => {
    
@@ -311,6 +321,76 @@ const Form = () => {
   const handleCloseExperienceForm = () => {
     setOpenExperienceForm(false);
   };
+
+
+
+  const addExperience = () => {
+    if (workCompany.length == 0) {
+      setWorkCompanyError("Commpany/Organization name can't be blank")
+      return;
+    }
+    if (workDesignation.length == 0) {
+      setWorkDesignationError("Designation can't be blank")
+      return;
+    }
+    if (workStartDate.length == 0) {
+      setWorkStartDateError("Start date can't be blank")
+      return;
+    }
+    if (workEndDate.length == 0) {
+      setWorkEndDateError("End date can't be blank")
+      return;
+    }
+    if (workStartDate > workEndDate) {
+      setWorkEndDateError("End date can not be earlier than start date");
+      return;
+    }
+    if (workRoles.length == 0) {
+      setWorkRolesError("Work experience roles can't be blank");
+      return;
+    }
+    var workRolesArray = workRoles.split("\n");
+    if (workRolesArray.length > 2) {
+      setWorkRolesError("Maximum you can add 2 points in work experience roles");
+      return;
+    }
+    setOpenExperienceForm(false)
+    displayExperienceDetails();
+  }
+
+  function displayExperienceDetails()
+  {
+    console.log(workExperienceData)
+    if (editExperienceDataIndex == -1) {
+      let temp = {
+        "organization": workCompany,
+        "position": workDesignation,
+        "start": workStartDate,
+        "end": workEndDate,
+        "description": workRoles
+      }
+      setWorkExperienceData([...workExperienceData, temp]);
+    }
+    else {
+      workExperienceData[editExperienceDataIndex].organization = workCompany;
+      workExperienceData[editExperienceDataIndex].position = workDesignation;
+      workExperienceData[editExperienceDataIndex].start = workStartDate;
+      workExperienceData[editExperienceDataIndex].end = workEndDate;
+      workExperienceData[editExperienceDataIndex].description = workRoles;
+    }
+    setDisplayWorkExperienceData(true);
+  }
+
+  
+  function editExperienceButtonPress(index) {
+    // console.log(index)
+    setWorkCompany(workExperienceData[index].organization);
+    setWorkDesignation(workExperienceData[index].organization);
+    setWorkStartDate(workExperienceData[index].start);
+    setWorkEndDate(workExperienceData[index].end);
+    setWorkRoles(workExperienceData[index].description);
+  }
+
 
   function validateUrl(value) {
     return /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(value);
@@ -817,7 +897,7 @@ const Form = () => {
                   </Link>  &nbsp;&nbsp; <Link className='live-link' href={el.liveLink} target="_blank" >
                     <LanguageIcon />
                   </Link>
-                  <div className='edit-delete-buttons'>
+                  <div className='edit-delete-buttons'> 
                     <Fab onClick={() => {
                       setEditProjectDataIndex(index);
                       editProjectButtonPress(index);
@@ -933,10 +1013,10 @@ const Form = () => {
               <TextField
                 value={workCompany} onInput={e => {
                   setWorkCompany(e.target.value);
-                  // setProjectTitleError('');
+                  setWorkCompanyError('');
                 }}
-                // helperText={}
-                // error={}
+                helperText={workCompanyError}
+                error={workCompanyError}
                 size="small"
                 inputProps={{ maxLength: "20"}}
                 autoFocus
@@ -949,10 +1029,10 @@ const Form = () => {
               <TextField
                value={workDesignation} onInput={e => {
                  setWorkDesignation(e.target.value);
-                 // setProjectTitleError('');
+                 setWorkDesignationError('');
                }}
-               // helperText={}
-               // error={}
+               helperText={workDesignationError}
+               error={workDesignationError}
                size="small"
                inputProps={{ maxLength: "20"}}
                margin="dense"
@@ -966,10 +1046,10 @@ const Form = () => {
              <TextField
               value={workStartDate} onInput={e => {
                 setWorkStartDate(e.target.value);
-                // setProjectTitleError('');
+                setWorkStartDateError('');
               }}
-              // helperText={}
-              // error={}
+              helperText={workStartDateError}
+              error={workStartDateError}
               size="small"
               margin="dense"
               label={"Start date *"}
@@ -983,10 +1063,10 @@ const Form = () => {
             <TextField
              value={workEndDate} onInput={e => {
                setWorkEndDate(e.target.value);
-               // setProjectTitleError('');
+               setWorkEndDateError('');
              }}
-             // helperText={}
-             // error={}
+             helperText={workEndDateError}
+             error={workEndDateError}
              size="small"
              margin="dense"
              label={"End date *"}
@@ -1001,14 +1081,14 @@ const Form = () => {
              <TextField
                value={workRoles} onInput={e => {
                  setWorkRoles(e.target.value);
-                 // setProjectTitleError('');
+                 setWorkRolesError('');
                }}
-               // helperText={}
-               // error={}
+               helperText={workRolesError}
+               error={workRolesError}
                size="small"
                inputProps={{ maxLength: "150"}}
                margin="dense"
-               label={"Roles in previous company, each in new line (maximum 150 characters) *"}
+               label={"Roles in the company, each in new line (maximum 150 characters) *"}
                type="text"
                fullWidth
                multiline
@@ -1018,9 +1098,45 @@ const Form = () => {
               </DialogContent>
               <DialogActions>
               <Button onClick={handleCloseExperienceForm}>Cancel</Button>
-              <Button onClick={()=>{}}>Add</Button>
+              <Button onClick={addExperience}>Add</Button>
             </DialogActions>
             </Dialog>
+            {displayWorkExperienceData ?
+            <div className="display-education-cont">
+              {workExperienceData.map((el, index) => (
+                <div className='display-education-section'>
+                <p>{el.organization}</p>
+                  <p>as {el.position}</p>
+                  <p>( {el.start} - {el.end} )</p>
+                  <p>
+                    <ul>
+                      {el.description.split("\n").map((elm, ind)=>{
+                          <li>{elm}</li>
+                      })}
+                    </ul>
+                  </p>
+                  <div className='edit-delete-buttons'>
+                    <Fab onClick={() => {
+                      setEditExperienceDataIndex(index);
+                      editExperienceButtonPress(index);
+                      // console.log(educationData, editEducationDataIndex )
+                      setOpenExperienceForm(true);
+                    }} color="primary" size='small' aria-label="edit">
+                      <EditIcon />
+                    </Fab>
+                    &nbsp;&nbsp;
+                    <Fab onClick={() => {
+                      var temp = [...workExperienceData];
+                      temp.splice(index, 1);
+                      setWorkExperienceData(temp);
+                    }} color="error" size='small' aria-label="delete">
+                      <DeleteIcon />
+                    </Fab>
+                  </div>
+                </div>
+              ))}
+            </div>
+            : ""}
         </div>
       }
        </div>        
