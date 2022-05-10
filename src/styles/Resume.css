@@ -566,11 +566,11 @@ li {
 }
 p {
   margin: 0;
-  color: #434343;
+  color: black;
   font-size: 9pt;
-  font-family: "Proxima Nova";
+  font-family:"sans-serif" !important;
 }
-h1 {
+/* h1 {
   padding-top: 30pt;
   color: #d9a522;
   font-weight: 700;
@@ -635,6 +635,7 @@ h6 {
   font-style: italic;
   text-align: left;
 }
+*/
 #span1 {
   overflow: hidden;
   display: inline-block;
@@ -776,4 +777,11 @@ li{
 .c43{
   /* border:1px solid blue; */
 
+}
+
+.c30{
+
+  margin-top: 7px;
+  width: 250px;
+  height: 80px;
 }
