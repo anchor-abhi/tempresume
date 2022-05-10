@@ -559,18 +559,18 @@ table th {
   line-height: 1.15;
   text-align: left;
 }
-.c21>li {
+li {
   color: #434343;
   font-size: 9pt;
   font-family: "Proxima Nova";
 }
-/* p {
+p {
   margin: 0;
   color: #434343;
   font-size: 9pt;
   font-family: "Proxima Nova";
-} */
-/* h1 {
+}
+h1 {
   padding-top: 30pt;
   color: #d9a522;
   font-weight: 700;
@@ -634,7 +634,7 @@ h6 {
   page-break-after: avoid;
   font-style: italic;
   text-align: left;
-} */
+}
 #span1 {
   overflow: hidden;
   display: inline-block;
@@ -750,14 +750,19 @@ table {
   margin-top: 10px;
 }
 
-.c21>li{
-  line-height:0.7 !important;
+li{
+  line-height: 0.7 !important;
 }
 
 .c43>div{
   /* border:1px solid black; */
   margin-left:3%;
   /* overflow: scroll; */
+}
+.c30{
+  width: 250px;
+  height: 100px;
+  /* border:1px solid green; */
 }
 .link{
   color: #000000;
@@ -771,10 +776,4 @@ table {
 .c43{
   /* border:1px solid blue; */
 
-}
-
-.c30{
-  /* border:1px solid brown; */
-  width: 250px;
-  height: fit-content;
 }
