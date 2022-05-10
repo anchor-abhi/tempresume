@@ -1,5 +1,5 @@
 import "../styles/Resume.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Loader from "./loader";
 import BasicResume from "./newTemplates/basic"

@@ -564,12 +564,12 @@ table th {
   font-size: 9pt;
   font-family: "Proxima Nova";
 }
-/* p {
+p {
   margin: 0;
-  color: #434343;
+  color: black;
   font-size: 9pt;
-  font-family: "Proxima Nova";
-} */
+  font-family:"sans-serif" !important;
+}
 /* h1 {
   padding-top: 30pt;
   color: #d9a522;
@@ -774,7 +774,8 @@ table {
 }
 
 .c30{
-  /* border:1px solid brown; */
+
+  margin-top: 7px;
   width: 250px;
-  height: fit-content;
+  height: 80px;
 }

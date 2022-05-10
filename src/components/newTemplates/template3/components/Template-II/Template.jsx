@@ -44,8 +44,8 @@ export const Template = ()=>{
       console.log("data=",data[data.length-1])
     return(
         <div className="container">
-            <Left data={duplicateData} state={state} color={color} />
-            <Right data={duplicateData} />
+            <Left data={data[data.length-1]} state={state} color={color} />
+            <Right data={data[data.length-1]} />
             <div className="colors">
                 <div onClick={grayColor} className="gray" >
                 </div>

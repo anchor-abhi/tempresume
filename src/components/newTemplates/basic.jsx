@@ -1,5 +1,5 @@
 export default function BasicResume({ details }) {
-  let name = "AbhisheK ABHI MAURYA"
+  
   return (
     <div id="outerDiv">
       <div id="mainDiv">
@@ -29,22 +29,17 @@ export default function BasicResume({ details }) {
                     </span>
                   </p>
                   <div>
-                    
                     <div className="c30 title" id="h.x8fm1uorkbaw">
-                      {details?.personal?.name?.length > 20 ? (
-                        <>
-                          <span className="c40" style={{ fontSize: "0.2em" }}>
-                            {/* {details?.personal?.name?.toUpperCase()} */}
-                            {name}
-                          </span>
-                        </>
+                      {details?.personal?.name?.length >= 18 ? (
+                        <p className="c40" style={{ fontSize: "0.6em" }}>
+                          {details?.personal?.name?.toUpperCase()}
+                          
+                        </p>
                       ) : (
-                        <>
-                          <span className="c40" style={{ fontSize: "0.9em" }}>
-                            {/* {details?.personal?.name?.toUpperCase()} */}
-                            {name}
-                          </span>
-                        </>
+                        <p className="c40" style={{ fontSize: "0.8em" }}>
+                          {details?.personal?.name?.toUpperCase()}
+
+                        </p>
                       )}
                     </div>
                     <p className="c7 subtitle">
