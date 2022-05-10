@@ -1,0 +1,13 @@
+.sliderBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 85% !important;
+}
+
+.sliderBox > p {
+  font-weight: 400;
+  margin: 0 auto 5px auto;
+}
