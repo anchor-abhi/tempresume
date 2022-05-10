@@ -314,7 +314,10 @@ const Form = () => {
 
 
   const handleOpenExperienceForm = () => {
-   
+    if (workExperienceData.length == 2) {
+      alert("You have already added two work experience, can't add more");
+      return;
+    }
     setOpenExperienceForm(true);
   };
 
@@ -323,7 +326,7 @@ const Form = () => {
   };
 
 
-
+  var workRolesArray;
   const addExperience = () => {
     if (workCompany.length == 0) {
       setWorkCompanyError("Commpany/Organization name can't be blank")
@@ -349,7 +352,7 @@ const Form = () => {
       setWorkRolesError("Work experience roles can't be blank");
       return;
     }
-    var workRolesArray = workRoles.split("\n");
+    workRolesArray = workRoles.split("\n");
     if (workRolesArray.length > 2) {
       setWorkRolesError("Maximum you can add 2 points in work experience roles");
       return;
@@ -367,8 +370,9 @@ const Form = () => {
         "position": workDesignation,
         "start": workStartDate,
         "end": workEndDate,
-        "description": workRoles
-      }
+        "description": workRolesArray
+      } 
+      console.log(temp, workExperienceData);
       setWorkExperienceData([...workExperienceData, temp]);
     }
     else {
@@ -376,7 +380,7 @@ const Form = () => {
       workExperienceData[editExperienceDataIndex].position = workDesignation;
       workExperienceData[editExperienceDataIndex].start = workStartDate;
       workExperienceData[editExperienceDataIndex].end = workEndDate;
-      workExperienceData[editExperienceDataIndex].description = workRoles;
+      workExperienceData[editExperienceDataIndex].description = workRolesArray;
     }
     setDisplayWorkExperienceData(true);
   }
@@ -388,7 +392,7 @@ const Form = () => {
     setWorkDesignation(workExperienceData[index].organization);
     setWorkStartDate(workExperienceData[index].start);
     setWorkEndDate(workExperienceData[index].end);
-    setWorkRoles(workExperienceData[index].description);
+    setWorkRoles(workExperienceData[index].description.join("\n"));
   }
 
 
@@ -1018,7 +1022,7 @@ const Form = () => {
                 helperText={workCompanyError}
                 error={workCompanyError}
                 size="small"
-                inputProps={{ maxLength: "20"}}
+                inputProps={{ maxLength: "50"}}
                 autoFocus
                 margin="dense"
                 label={"Company/Organization Name *"}
@@ -1108,18 +1112,17 @@ const Form = () => {
                 <p>{el.organization}</p>
                   <p>as {el.position}</p>
                   <p>( {el.start} - {el.end} )</p>
-                  <p>
-                    <ul>
-                      {el.description.split("\n").map((elm, ind)=>{
-                          <li>{elm}</li>
+                  <div><b>Job Description</b>
+                  <ul className="work-exp-lists">
+                      {el.description.map((elm)=>{
+                         return <li>{elm}</li>
                       })}
                     </ul>
-                  </p>
+                  </div>
                   <div className='edit-delete-buttons'>
                     <Fab onClick={() => {
                       setEditExperienceDataIndex(index);
                       editExperienceButtonPress(index);
-                      // console.log(educationData, editEducationDataIndex )
                       setOpenExperienceForm(true);
                     }} color="primary" size='small' aria-label="edit">
                       <EditIcon />

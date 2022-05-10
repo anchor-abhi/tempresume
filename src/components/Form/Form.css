@@ -270,6 +270,15 @@ text-align: justify;
     box-sizing: border-box;
     background-color:#F8F9FA; 
 }
+.work-exp-lists
+{
+  margin-top: 5px;
+}
+.work-exp-lists > li
+{
+  font-size: 14px;
+  line-height: 1 !important;
+}
 
 .genrate-resume-btn
 {
