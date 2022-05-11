@@ -39,7 +39,7 @@ const projectFeaturesMaxLength = 150;
 
 
 const courseTitleLabel = "Course/Degree Title  (maximum " + courseTitleMaxLength + " characters) *"
-const collegeTitleLabel = "College/Institue/School name (maximum " + collegeTitleMaxLength + " characters) *"
+const collegeTitleLabel = "College/institute/School name (maximum " + collegeTitleMaxLength + " characters) *"
 
 const projectTitleLabel = "Project Title  (maximum " + projectTitleMaxLength + " characters) *"
 const projectIntroLabel = "Write a quick brief about project (maximum " + projectIntroMaxLength + " characters) *"
@@ -64,13 +64,11 @@ const Form = () => {
   const userId = JSON.parse(localStorage.getItem("loggedinUser")) || null;
   if(userId != null)
     {
-      console.log("looking for user previous data");
         axios
           .get(`https://masairesumebuilder.herokuapp.com/resume/${userId}`)
           .then((res) => {
-            setUserPreviousData(res.data);        
-            console.log("In azios")
-            // console.log(res.data)
+            setUserPreviousData(res.data);
+            console.log(res.data)
             setStudentName(res.data[0].personal.name);
             setTagline(res.data[0].personal.tagLine)
             setTagline(res.data[0].personal.tagLine)
@@ -85,32 +83,23 @@ const Form = () => {
             setProjectData(res.data[0].projects)
             setStudentSoftSkills(res.data[0].softSkills)
             setStudentTechStacks(res.data[0].techSkills)
-            setStudentAccomplishment(res.data[0].accomplishments)
+            setStudentAccomplishment(res.data[0].accomplishments.join("\n"))
             setStudentInterests(res.data[0].interests)
 
             setDisplayEducationData(true);
-            // setDisplayProjectData(true);
+            setDisplayProjectData(true);
             // console.log(userPreviousData)
           })
           .then(()=>{
             setPageLoading(false)
           })
           .catch((e) => console.log(e.message))
-          // .finally(()=>{
-            
-          //   console.log("Finally-----");
-          //   console.log(userPreviousData);
-          // })
         } 
         else
         {
           setPageLoading(false)
           console.log("user is not logged in");          
         }
-      // }
-
-      // lookingForOldData();
-      // console.log("end-----------");
         }, []);
 
 
@@ -198,7 +187,7 @@ const Form = () => {
       return;
     }
     if (collegeName.length == 0) {
-      setCollegeNameError("College/Institue/School name can't be blank")
+      setCollegeNameError("College/institute/School name can't be blank")
       return;
     }
     if (startDate.length == 0) {
@@ -221,17 +210,17 @@ const Form = () => {
     if (editEducationDataIndex == -1) {
       let temp = {
         "course": courseTitle,
-        "college": collegeName,
-        "startDate": startDate,
-        "endDate": endDate
+        "institute": collegeName,
+        "start": startDate,
+        "end": endDate
       }
       setEducationData([...educationData, temp]);
     }
     else {
       educationData[editEducationDataIndex].course = courseTitle;
-      educationData[editEducationDataIndex].college = collegeName;
-      educationData[editEducationDataIndex].startDate = startDate;
-      educationData[editEducationDataIndex].endDate = endDate;
+      educationData[editEducationDataIndex].institute = collegeName;
+      educationData[editEducationDataIndex].start = startDate;
+      educationData[editEducationDataIndex].end = endDate;
     }
     setDisplayEducationData(true);
   }
@@ -331,26 +320,27 @@ const Form = () => {
   const displayProjectDetails = () => {
     if (editProjectDataIndex == -1) {
       let temp = {
-        "title": projectTitle,
-        "introduction": projectIntro,
-        "githubLink": projectGithubLink,
+        "name": projectTitle,
+        "description": projectIntro,
+        "gitLink": projectGithubLink,
         "liveLink": projectLiveLink,
         "features": projectFeatures.split("\n"),
-        "roles": projectRoles.split("\n"),
-        "collaboration": projectCollaborated,
-        "techStacks": projectTechStacks
+        "areasOfResp": projectRoles.split("\n"),
+        "solo": projectCollaborated,
+        "techStack": projectTechStacks
       }
 
       setProjectData([...projectData, temp]);
     }
     else {
-      projectData[editProjectDataIndex].title = projectTitle;
-      projectData[editProjectDataIndex].introduction = projectIntro;
-      projectData[editProjectDataIndex].githubLink = projectGithubLink;
+
+      projectData[editProjectDataIndex].name = projectTitle;
+      projectData[editProjectDataIndex].description = projectIntro;
+      projectData[editProjectDataIndex].gitLink = projectGithubLink;
       projectData[editProjectDataIndex].liveLink = projectLiveLink;
       projectData[editProjectDataIndex].features = projectFeatures.split("\n");
-      projectData[editProjectDataIndex].roles = projectRoles.split("\n");
-      projectData[editProjectDataIndex].collaboration = projectCollaborated;
+      projectData[editProjectDataIndex].areasOfResp = projectRoles.split("\n");
+      projectData[editProjectDataIndex].solor = projectCollaborated;
 
       projectData[editProjectDataIndex].techStacks = projectTechStacks;
     }
@@ -469,9 +459,9 @@ const Form = () => {
   function editFormButtonPress(index) {
     console.log(index)
     setCourseTitle(educationData[index].course);
-    setCollegeName(educationData[index].college);
-    setStartDate(educationData[index].startDate);
-    setEndDate(educationData[index].endDate);
+    setCollegeName(educationData[index].institute);
+    setStartDate(educationData[index].start);
+    setEndDate(educationData[index].end);
   }
 
 
@@ -479,14 +469,14 @@ const Form = () => {
 
     console.log(index)
 
-    setProjectTitle(projectData[index].title);
-    setProjectIntro(projectData[index].introduction);
-    setGithubLink(projectData[index].githubLink);
+    setProjectTitle(projectData[index].name);
+    setProjectIntro(projectData[index].description);
+    setProjectGithubLink(projectData[index].gitLink);
     setProjectLiveLink(projectData[index].liveLink);
     setProjectFeatures(projectData[index].features.join("\n"));
-    setProjectRoles(projectData[index].roles.join("\n"));
-    setProjectCollaborated(projectData[index].collaboration);
-    setProjectTechStacks(projectData[index].techStacks);
+    setProjectRoles(projectData[index].areasOfResp.join("\n"));
+    setProjectCollaborated(projectData[index].solo);
+    setProjectTechStacks(projectData[index].techStack);
     // console.log(e)
   }
 
@@ -674,7 +664,7 @@ const Form = () => {
   return (
     <>
     
-    {pageLoading ? <img className='page-loading' src="https://i.pinimg.com/originals/f6/65/6a/f6656aa6fdb6b8f905dea0bcc2d71dd8.gif" />:
+    {pageLoading ? <img className='page-loading' src="https://i.pinimg.com/originals/a2/de/bf/a2debfb85547f48c3a699423ba75f321.gif" />:
     <div className='form-container'>
       <div className='header-section'>
         <div className='proflile-img'>
@@ -791,8 +781,8 @@ const Form = () => {
               {educationData.map((el, index) => (
                 <div className='display-education-section'>
                   <p>{el.course}</p>
-                  <p><span>from</span> {el.college}</p>
-                  <p>( {el.startDate} - {el.endDate} )</p>
+                  <p><span>from</span> {el.institute}</p>
+                  <p>( {el.start} - {el.end} )</p>
                   <div className='edit-delete-buttons'>
                     <Fab onClick={() => {
                       setEditEducationDataIndex(index);
@@ -959,13 +949,13 @@ const Form = () => {
             <div className="display-project-cont">
               {projectData.map((el, index) => (
                 <div className='display-project-section'>
-                  <p className='title'>{el.title}</p>
-                  <p className='intro'>{el.introduction}</p>
+                  <p className='title'>{el.name}</p>
+                  <p className='intro'>{el.description}</p>
                   <p className='features'><b>Features : </b>{el.features.join(". ")}</p>
-                  <p className='roles'><b>Roles : </b>{el.roles.join(". ")}</p>
-                  <p className='collaboration'><b>Collaboration : </b>{el.collaboration ? "Yes" : "No"}</p>
-                  <p className='techStacks'><b>Techstacks : </b>{el.techStacks.join(", ")}</p>
-                  <Link className='git-link' href={el.githubLink} target="_blank" >
+                  <p className='roles'><b>Roles : </b>{el.areasOfResp.join(". ")}</p>
+                  <p className='collaboration'><b>Collaboration : </b>{el.solo ? "Yes" : "No"}</p>
+                  <p className='techStacks'><b>Techstacks : </b>{el.techStack.join(", ")}</p>
+                  <Link className='git-link' href={el.gitLink} target="_blank" >
                     <GitHubIcon />
                   </Link>  &nbsp;&nbsp; <Link className='live-link' href={el.liveLink} target="_blank" >
                     <LanguageIcon />
