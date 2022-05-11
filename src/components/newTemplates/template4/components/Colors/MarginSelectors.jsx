@@ -6,7 +6,7 @@ import "./marginSelectors.css";
 
 function MarginSelectors() {
 
-   const {imgSlider, handleImgSlider, contactSlider, handleContactSlider ,leftSlider, handleLeftSlider, rightSlider, handleRightSlider} = useContext(SliderContext);
+   const {handleRightTSlider, rightTSlider, leftTSlider, handleLeftTSlider ,imgSlider, handleImgSlider, contactSlider, handleContactSlider ,leftSlider, handleLeftSlider, rightSlider, handleRightSlider} = useContext(SliderContext);
    return (
       <Stack sx={{width: "300px", display: 'flex', justifyContent: "center", alignItems: 'center', margin: '25px auto'}} spacing="2" direction="column">
          <Box className="sliderBox" >
@@ -25,6 +25,16 @@ function MarginSelectors() {
             <p>Contact Section</p>
             <Slider aria-label="Top Margin" value={contactSlider} valueLabelDisplay="auto" min={0} max={100} onChange={handleContactSlider}/>
          </Box>
+         <Box className="sliderBox">
+            <p>Left Triangle Slider</p>
+            <Slider aria-label="Top Margin" value={leftTSlider} valueLabelDisplay="auto" min={-200} max={200} onChange={handleLeftTSlider}/>
+         </Box>
+         <Box className="sliderBox">
+            <p>Right Triangle Slider</p>
+            <Slider aria-label="Top Margin" value={rightTSlider} valueLabelDisplay="auto" min={-200} max={200} onChange={handleRightTSlider}/>
+         </Box>
+
+
       </Stack>
    )
 }
