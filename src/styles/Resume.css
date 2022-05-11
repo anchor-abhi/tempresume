@@ -559,7 +559,7 @@ table th {
   line-height: 1.15;
   text-align: left;
 }
-li {
+.c21>li {
   color: #434343;
   font-size: 9pt;
   font-family: "Proxima Nova";
@@ -634,8 +634,7 @@ h6 {
   page-break-after: avoid;
   font-style: italic;
   text-align: left;
-}
-*/
+} */
 #span1 {
   overflow: hidden;
   display: inline-block;
@@ -750,19 +749,14 @@ table {
   margin-top: 10px;
 }
 
-li{
-  line-height: 0.7 !important;
+.c21>li{
+  line-height:0.7 !important;
 }
 
 .c43>div{
   /* border:1px solid black; */
   margin-left:3%;
   /* overflow: scroll; */
-}
-.c30{
-  width: 250px;
-  height: 100px;
-  /* border:1px solid green; */
 }
 .link{
   color: #000000;

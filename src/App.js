@@ -1,9 +1,6 @@
 import ResponsiveAppBar from "./components/navbar";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import DownloadResume from "./components/downloadResume";
-import { useState } from "react";
-import UserAuth from "./components/userAuth";
 import AddRoute from "./components/routes";
+
 
 function App() {
   return (
