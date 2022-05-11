@@ -5,10 +5,14 @@ import {ColorContext} from "../../../context/ColorContext";
 import {DivsContext} from '../../../context/DivsContext';
 import {SliderContext} from '../../../context/SliderContext';
 import Education  from "../components/ResumeComponents/Education.jsx";
+import GithubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 function Resume() {
    const [data, setData] = useState([]);
    const {sColor, lColor, headingColor, textColor, leftDivColor} = useContext(ColorContext);
+   const [gitUserName, setGitUserName] = useState("");
+   const [linkedUserName, setLinkedUserName] = useState("");
    const {leftSlider, rightSlider, hasWork, setHasWork,imgSlider, contactSlider, setRightSlider} = useContext(SliderContext);
    const { selectDiv } = useContext(DivsContext);
 
@@ -16,12 +20,23 @@ function Resume() {
       const userId = JSON.parse(localStorage.getItem("loggedinUser"));
       fetch(`https://masairesumebuilder.herokuapp.com/resume/${userId}`).then((res) => res.json()).then(data => {
          setData([data[data.length-1]]); 
-         console.log(data)
+         const gitArr = data[data.length - 1].personal?.github.split("/");
+
+         // Removing empty last element if present
+         if (!gitArr[gitArr.length - 1]) gitArr.pop();
+
+         const linkedArr = data[data.length - 1].personal?.linkedin.split("/");
+         // Removing empty last element if present
+         //
+         if (!linkedArr[linkedArr.length - 1]) linkedArr.pop();
+         setLinkedUserName(linkedArr[linkedArr.length - 1]);
+         setGitUserName(gitArr[gitArr.length - 1]);
          if (data[0].workEx) {
             setHasWork(true);
             setRightSlider(90);
          }
       });
+      console.log(data);
    }, []);
 
    return (
@@ -73,10 +88,31 @@ function Resume() {
                         </div>
                         <div id="right" >
                            <div id="contact" style={{position: 'absolute' , top: contactSlider, right: 20}}>
-                              <p style={{color: textColor}} className="contactP"><span className="material-icons">call</span>: {one?.personal?.mob}</p>
-                              <p style={{color: textColor}} className="contactP"><span className="material-icons">home</span>: {one?.personal?.address}</p>
-                              <p style={{color: textColor}}className="socialP"><span className="material-icons">mail</span>Email: {one?.personal?.email}</p>
-                              <p style={{color: textColor}}className="socialP"><img className='gitImg' src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="git icon"/>: {one?.personal?.github}</p>
+                              <p style={{color: textColor}} className="contactP">
+                                 <span className="material-icons">call</span> {one?.personal?.mob}
+                              </p>
+                              <p style={{color: textColor}} className="contactP">
+                                 <span className="material-icons">home</span> {one?.personal?.address}
+                              </p>
+                              <p style={{color: textColor}} className="contactP">
+                                 <span className="material-icons">mail</span>
+                                 <a style={{color: textColor}} href={`mailto:${one?.personal?.email}`}>
+                                    {one?.personal?.email}
+                                 </a>
+                              </p>
+                              <p style={{color: textColor}} className="contactP">
+                                 <GithubIcon /> 
+                                 <a style={{color: textColor}} href={one?.personal?.github}>
+                                    {gitUserName ? gitUserName : one?.personal?.github}
+                                 </a>
+                              </p>
+                              <p style={{color: textColor}} className="contactP">
+                                 <LinkedInIcon />
+                                 <a href={one?.personal?.linkedin} style={{color: textColor}} target="_blank">
+                                    {linkedUserName ? linkedUserName : one?.personal?.linkedin}
+                                 </a>
+                              </p>   
+
                            </div>
 
                            <div id="projects" style={{marginTop: rightSlider}}>
@@ -86,11 +122,11 @@ function Resume() {
                                     return (
                                        <div key={uuid()} className="singleProject">
                                           <div className="pNameAndLink">
-                                             <a style={{color: headingColor}} href={sproject?.liveLink.startsWith("www") ? `https://${sproject?.liveLink}` : sproject?.liveLink} target="_blank">
+                                             <a style={{color: headingColor, fontWeight: 500}} href={sproject?.liveLink.startsWith("www") ? `https://${sproject?.liveLink}` : sproject?.liveLink} target="_blank">
                                                 {sproject?.name}
                                              </a>
                                              <a  href={sproject?.gitLink.startsWith("www") ? `https://${sproject?.gitLink}` : sproject?.gitLink} target="_blank"> 
-                                                <img className="gitImg" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" />
+                                                <GithubIcon />
                                              </a>
                                           </div>
                                           <p style={{color: textColor}}className="projectDesc">{sproject?.description}</p>

@@ -1,7 +1,7 @@
 #template {
   height: 842px;
   width: 595px;
-  margin:100px auto;
+  margin: 100px auto;
   position: relative;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   display: flex;
@@ -76,8 +76,7 @@
 }
 
 #contact {
-  margin-top: 15px;
-  text-align: right;
+  text-align: left;
   z-index: 800;
 }
 
@@ -86,7 +85,12 @@
   justify-content: flex-end;
   align-items: center;
   gap: 5px;
-  margin: 0;
+  width: 100%;
+  margin: 3px 0;
+}
+
+#contact > p a {
+  text-decoration: none;
 }
 
 #contact > p {

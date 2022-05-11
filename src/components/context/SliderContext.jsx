@@ -8,7 +8,7 @@ export const SliderProvider = ({children}) => {
    const [leftSlider, setLeftSlider] = useState(150);
    const [rightSlider, setRightSlider] = useState(120);
    const [imgSlider, setImgSlider] = useState(35);
-   const [contactSlider, setContactSlider] = useState(0);
+   const [contactSlider, setContactSlider] = useState(10);
    const [hasWork, setHasWork] = useState(false);
 
    const handleLeftSlider = (event, value) => {
