@@ -139,7 +139,6 @@ const Form = () => {
 
 
   const [studentName, setStudentName] = useState('');
-  const [studentProfile, setStudentProfile] = useState('');
   const [tagline, setTagline] = useState('');
   const [address, setAddress] = useState('');
   const [emailID, setEmailID] = useState('');
@@ -508,11 +507,6 @@ const Form = () => {
   
 
     const ProfileImg = await postDetails();
-    // console.log("profileImg", ProfileImg)
-    // setStudentProfile(ProfileImg.url.toString());
-    // console.log("studentProfile", studentProfile);
-    // console.log("studentProfile raw", ProfileImg.url.toString());
-    // FORM is completely validated and good to go to the backend
 
     let educationArray = []
     educationData.forEach(el => {
@@ -836,11 +830,11 @@ const Form = () => {
                     setProjectTechStacks([...projectTechStacks, option.target.innerText])
                     setProjectTechStacksError("");
                     // tagsArr.push(option.target.innerText);
-                    if (studentTechStacks.length === 5) {
-                      console.log(studentTechStacks.length);
-                      setMaxTechStacksRendering(true);
-                    }
-                    console.log(projectTechStacks);
+                    // if (studentTechStacks.length === 5) {
+                    //   console.log(studentTechStacks.length);
+                    //   setMaxTechStacksRendering(true);
+                    // }
+                    // console.log(projectTechStacks);
                   }
 
                 }}
@@ -848,6 +842,8 @@ const Form = () => {
                 size="small"
                 style={{ marginTop: "8px" }}
                 multiple
+                
+            defaultValue={projectTechStacks}
                 id="tags-outlined"
                 options={techStacks}
 
@@ -926,6 +922,7 @@ const Form = () => {
             multiple
             id="tags-outlined"
             options={techStacks}
+            defaultValue={studentTechStacks}
             getOptionLabel={(option) => option}
             filterSelectedOptions
             renderInput={(params) => (
@@ -947,6 +944,7 @@ const Form = () => {
             style={{ marginTop: "16px" }}
             multiple
             id="tags-outlined"
+            defaultValue={studentSoftSkills}
             options={softSkills}
             getOptionLabel={(option) => option}
             filterSelectedOptions
