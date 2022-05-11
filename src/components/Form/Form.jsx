@@ -53,6 +53,7 @@ const Form = () => {
   
   const [pageLoading, setPageLoading] = useState(true);
   const [userPreviousData, setUserPreviousData] = useState(false);
+  const [profilevalidation, setProfileValidation] = useState(false);
 
   
   useEffect(() => {
@@ -70,6 +71,7 @@ const Form = () => {
             setTagline(res.data[0].personal.tagLine)
             setTagline(res.data[0].personal.tagLine)
             setPreview(res.data[0].personal.profilePic)
+            // setSelectedFile(res.data[0].personal.profilePic)
             setAbout(res.data[0].summary)
             setContact(res.data[0].personal.mob)
             setAddress(res.data[0].personal.address)
@@ -85,6 +87,7 @@ const Form = () => {
 
             setDisplayEducationData(true);
             setDisplayProjectData(true);
+            setProfileValidation(true);
             // console.log(userPreviousData)
           })
           .then(()=>{
@@ -125,6 +128,7 @@ const Form = () => {
   }, [selectedFile])
 
   const onSelectFile = e => {
+    setProfileValidation(false);
     if (!e.target.files || e.target.files.length === 0) {
       setSelectedFile(undefined)
       return
@@ -396,16 +400,19 @@ const Form = () => {
 
 
   async function submitForm() {
-    if (!selectedFile) {
+    if (!selectedFile  && !profilevalidation) {
       alert("Please upload the profile image");
       return
     }
-    var imgSize = Math.round(selectedFile.size / 1024); // In MB
+   if(!profilevalidation)
+   {
+    var imgSize =  Math.round(selectedFile.size / 1024); // In MB
     if (imgSize > profileMaxSize) {
       alert("File is too big, please select a file of size less than " + Math.round(profileMaxSize / 1024) + " MB");
       return
     }
-    if (imgSize < profileMinSize) {
+   }
+    if (imgSize < profileMinSize && !profilevalidation) {
       alert("File is too small, please select a file of size greater than " + profileMinSize + " KB");
       return
     }
@@ -476,6 +483,7 @@ const Form = () => {
       return;
     }
 
+    setPageLoading(true);
 
     const postDetails = async() =>
      {
@@ -562,6 +570,7 @@ const Form = () => {
     axios.post("https://masairesumebuilder.herokuapp.com/resume", sendingPacket)
     .then((response) => {
       console.log(response);
+      setPageLoading(false);
       navigate("/downloadresume");
     }, (error) => {
       console.log(error);
