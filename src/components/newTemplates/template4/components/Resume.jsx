@@ -13,7 +13,7 @@ function Resume() {
    const {sColor, lColor, headingColor, textColor, leftDivColor} = useContext(ColorContext);
    const [gitUserName, setGitUserName] = useState("");
    const [linkedUserName, setLinkedUserName] = useState("");
-   const {leftSlider, rightSlider, hasWork, setHasWork,imgSlider, contactSlider, setRightSlider} = useContext(SliderContext);
+   const {rightTSlider, leftTSlider ,leftSlider, rightSlider, hasWork, setHasWork,imgSlider, contactSlider, setRightSlider} = useContext(SliderContext);
    const { selectDiv } = useContext(DivsContext);
 
    useEffect(() => {
@@ -36,14 +36,13 @@ function Resume() {
             setRightSlider(90);
          }
       });
-      console.log(data);
    }, []);
 
    return (
       <div style={{flex: 1.5}}> 
          <div id="template">
-            { selectDiv && <div style={{backgroundColor: sColor}} id="blueDiv"></div> }
-            { selectDiv && <div style={{backgroundColor: lColor}} id="orangeDiv"></div> }
+            { selectDiv && <div style={{backgroundColor: sColor, width: '40vw', transformOrigin: "0%", transform: `translateX(-100px) translateY(-30px) rotate(${leftTSlider}deg)`}} id="blueDiv"></div> }
+            { selectDiv && <div style={{backgroundColor: lColor, width: '40vw', transformOrigin: '100% 0%', transform: `translateX(100px) translateY(-150px) rotate(${rightTSlider + 0.5}deg)`}} id="orangeDiv"></div> }
 
             {
                data.map(one => {
