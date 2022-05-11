@@ -59,29 +59,66 @@ const Form = () => {
 
   
   useEffect(() => {
-    
+    // async function lookingForOldData()
+    // {
   const userId = JSON.parse(localStorage.getItem("loggedinUser")) || null;
   if(userId != null)
     {
+      console.log("looking for user previous data");
         axios
           .get(`https://masairesumebuilder.herokuapp.com/resume/${userId}`)
           .then((res) => {
-            setUserPreviousData(res.data);
-          }).then(()=> setPageLoading(false))
+            setUserPreviousData(res.data);        
+            console.log("In azios")
+            // console.log(res.data)
+            setStudentName(res.data[0].personal.name);
+            setTagline(res.data[0].personal.tagLine)
+            setTagline(res.data[0].personal.tagLine)
+            setPreview(res.data[0].personal.profilePic)
+            setAbout(res.data[0].summary)
+            setContact(res.data[0].personal.mob)
+            setAddress(res.data[0].personal.address)
+            setLinkedinLink(res.data[0].personal.linkedin)
+            setGithubLink(res.data[0].personal.github)
+            setEmailID(res.data[0].personal.email)
+            setEducationData(res.data[0].education)
+            setProjectData(res.data[0].projects)
+            setStudentSoftSkills(res.data[0].softSkills)
+            setStudentTechStacks(res.data[0].techSkills)
+            setStudentAccomplishment(res.data[0].accomplishments)
+            setStudentInterests(res.data[0].interests)
+
+            setDisplayEducationData(true);
+            // setDisplayProjectData(true);
+            // console.log(userPreviousData)
+          })
+          .then(()=>{
+            setPageLoading(false)
+          })
           .catch((e) => console.log(e.message))
-          .finally(()=>console.log(userPreviousData))
-        }
+          // .finally(()=>{
+            
+          //   console.log("Finally-----");
+          //   console.log(userPreviousData);
+          // })
+        } 
         else
+        {
           setPageLoading(false)
+          console.log("user is not logged in");          
+        }
+      // }
+
+      // lookingForOldData();
+      // console.log("end-----------");
         }, []);
 
-        
 
 
+ 
   const navigate = useNavigate();
 
   const [maxTechStacksRendering, setMaxTechStacksRendering] = useState(false); // maxTechStacksRendering for conditional
-
 
   const [selectedFile, setSelectedFile] = useState()
   const [preview, setPreview] = useState()
