@@ -1,0 +1,245 @@
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+#template {
+  height: 842px;
+  width: 595px;
+  margin: 100px auto;
+  position: relative;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  overflow: hidden;
+}
+
+#left {
+  flex: 1;
+  background-color: rgb(223, 224, 224);
+  padding: 0 20px;
+  text-align: left;
+}
+
+#right {
+  flex: 1.5;
+  text-align: left;
+  z-index: 100;
+  color: rgb(29, 29, 29);
+  padding: 0 20px;
+}
+
+#right p {
+  font-size: 12px;
+  margin: 0;
+}
+
+#blueDiv {
+  width: 400px;
+  height: 200px;
+  z-index: 60;
+  position: absolute;
+  transform: translate(-150px, -100px) rotate(-20deg);
+}
+
+#orangeDiv {
+  width: 700px;
+  height: 300px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 70;
+  transform: translate(100px, -223px) rotate(13deg);
+}
+
+#profileImg {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  z-index: 1000;
+  position: absolute;
+  top: 35px;
+  left: 30px;
+}
+
+#skillsAndFramework,
+#softSkills,
+#aboutMePara,
+#contact,
+#education,
+#projects,
+#workEx {
+  line-height: 15px;
+}
+
+#workEx p {
+  font-weight: 600;
+  margin: 4px 0;
+}
+
+#workEx p > span {
+  font-weight: 0 !important;
+}
+
+#contact {
+  text-align: left;
+  z-index: 800;
+}
+
+#contact > p {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  margin: 3px 0;
+}
+
+#contact > p a {
+  text-decoration: none;
+}
+
+#contact > p {
+  line-height: 15px;
+}
+
+#contact > p > span.material-icons {
+  font-size: 15px;
+}
+
+#left h4 {
+  margin: 0 0 4px 0;
+}
+
+#workEx h4 {
+  margin: 5px 0 0 0;
+}
+
+#education h4 {
+  margin: 10px 0;
+}
+
+#left h5,
+#left p,
+#workEx h5 {
+  margin: 0;
+}
+
+#aboutMePara {
+  margin-top: 10px !important;
+}
+
+#aboutMePara > h4 {
+  margin-top: 0;
+}
+
+#left > div {
+  margin-bottom: 12px;
+}
+
+#left .oneEdu {
+  margin-bottom: 10px;
+}
+
+#left span,
+#left p {
+  font-size: 11px;
+}
+
+#nameAndDesignation {
+  text-align: left;
+  margin-top: 150px;
+}
+
+#nameAndDesignation > h1,
+#nameAndDesignation > h2 {
+  margin: 0;
+  font-weight: 500;
+}
+
+#nameAndDesignation {
+  margin-bottom: 10px !important;
+}
+
+#aboutMePara > h3 {
+  margin: 0;
+  margin-top: 10px;
+}
+
+#aboutMePara > p {
+  font-size: 11px;
+  margin: 0;
+}
+
+#projects {
+  margin-top: 10px;
+}
+
+#projects > h2,
+#education h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+#education h5 {
+  margin: 5px 0 0 0;
+}
+
+#education h2 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.pNameAndLink {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+.pNameAndLink > a {
+  color: black;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 13px !important;
+  margin: 0;
+}
+
+.gitImg {
+  width: 15px;
+  height: 15px;
+}
+
+.projectFeatures > ul,
+.areasOfResp > ul,
+#workEx ul {
+  margin: 0;
+  font-size: 11px;
+}
+
+.projectFeatures > h5 {
+  margin: 5px 0 0 0;
+}
+
+p.techStack {
+  font-size: 11px !important;
+  margin: 5px 0 !important;
+}
+
+span.heading {
+  font-weight: 600 !important;
+}
+
+.areasOfResp > h5 {
+  margin: 0;
+}
+
+.singleProject {
+  margin-top: 10px;
+}
+
+#right p {
+  font-size: 11px;
+}

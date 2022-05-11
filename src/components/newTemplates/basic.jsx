@@ -38,6 +38,7 @@ export default function BasicResume({ details }) {
                       ) : (
                         <p className="c40" style={{ fontSize: "0.8em" }}>
                           {details?.personal?.name?.toUpperCase()}
+
                         </p>
                       )}
                     </div>
@@ -153,6 +154,7 @@ export default function BasicResume({ details }) {
                         </ul>
                         <p className="c5">
                           <span className="c3">Tech Stack:</span>
+
                           <span className="c1">
                             &nbsp;
                             {element.techStack
@@ -208,6 +210,7 @@ export default function BasicResume({ details }) {
                     </>
                   );
                 })}
+
                 <p className="c22 c25">
                   <span className="c12 c35"></span>
                 </p>
@@ -239,6 +242,7 @@ export default function BasicResume({ details }) {
                     </p>
                   );
                 })}
+
                 <div className="c38" id="h59kk2i3ikr6k">
                   <span className="c14">INTERESTS</span>
                 </div>
