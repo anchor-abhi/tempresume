@@ -284,3 +284,31 @@ text-align: justify;
 }
 
 
+
+.cropContainer
+{
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background-color: #333;
+}
+.cropButton
+{
+    flex-shrink: 0;
+    margin-left: 16px;
+}
+.controls
+{
+    padding: 16px;
+}
+.sliderContainer
+{
+    display: flex;
+    flex: 1;
+    align-items: center;
+}
+.slider
+{
+    padding: 22px 0px;
+    margin-left: 32px;
+}

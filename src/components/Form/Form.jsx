@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -18,7 +18,17 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LanguageIcon from '@mui/icons-material/Language';
 import axios from "axios";
 import { useNavigate } from "react-router";
+import Cropper from 'react-easy-crop'
+import Slider from '@mui/material/Slider'
+import Typography from '@mui/material/Typography'
+import { withStyles } from '@mui/material/styles'
+// import ImgDialog from './ImgDialog'
+import getCroppedImg from './cropImage'
 import "./Form.css"
+
+const dogImg =
+  'https://img.huffingtonpost.com/asset/5ab4d4ac2000007d06eb2c56.jpeg?cache=sih0jwle4e&ops=1910_1000'
+
 
 var isGithubUrl = require('is-github-url');
 
@@ -49,6 +59,44 @@ const softSkills = ["Time management", "Communication", "Adaptability", "Problem
 
 
 const Form = () => {
+
+   const [crop, setCrop] = useState({ x: 0, y: 0 })
+    const [rotation, setRotation] = useState(0)
+    const [zoom, setZoom] = useState(1)
+    const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
+    const [croppedImage, setCroppedImage] = useState(null)
+  
+    const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+      setCroppedAreaPixels(croppedAreaPixels)
+    }, [])
+  
+    const showCroppedImage = useCallback(async () => {
+      try {
+        const croppedImage = await getCroppedImg(
+          dogImg,
+          croppedAreaPixels,
+          rotation
+        )
+        console.log('donee', { croppedImage })
+        setOpenDialog(false);
+        setCroppedImage(croppedImage)
+      } catch (e) {
+        console.error(e)
+      }
+    }, [croppedAreaPixels, rotation])
+  
+ 
+    const [openDialog, setOpenDialog] = useState(false);
+  
+    function handleCloseForm()
+    {
+      setOpenDialog(false);
+    }
+    function handleOpenForm()
+    {
+      setOpenDialog(true);
+    }
+  
 
   
   const [pageLoading, setPageLoading] = useState(true);
