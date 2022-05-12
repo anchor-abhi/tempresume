@@ -26,8 +26,7 @@ import { withStyles } from '@mui/material/styles'
 import getCroppedImg from './cropImage'
 import "./Form.css"
 
-const dogImg =
-  'https://img.huffingtonpost.com/asset/5ab4d4ac2000007d06eb2c56.jpeg?cache=sih0jwle4e&ops=1910_1000'
+const dog ='https://img.huffingtonpost.com/asset/5ab4d4ac2000007d06eb2c56.jpeg?cache=sih0jwle4e&ops=1910_1000'
 
 
 var isGithubUrl = require('is-github-url');
@@ -73,13 +72,15 @@ const Form = () => {
     const showCroppedImage = useCallback(async () => {
       try {
         const croppedImage = await getCroppedImg(
-          dogImg,
+          dog,
           croppedAreaPixels,
           rotation
         )
         console.log('donee', { croppedImage })
         setOpenDialog(false);
         setCroppedImage(croppedImage)
+        setPreview(croppedImage)
+        // setSelectedFile(URL.createObjectURL(croppedImage))
       } catch (e) {
         console.error(e)
       }
@@ -182,7 +183,8 @@ const Form = () => {
       return
     }
 
-    setSelectedFile(e.target.files[0])
+    setOpenDialog(true);
+    // setSelectedFile(e.target.files[0])
   }
 
 
@@ -640,6 +642,80 @@ const Form = () => {
             <input type="file" onChange={onSelectFile} accept="image/png, image/jpeg" className="custom-file-input" />
           </div> */}
         </div>
+        <Dialog open={openDialog} onClose={handleCloseForm}>
+      <DialogContent>
+  
+      <div style={{"width":"35vw"}}>
+        <div className="cropContainer">
+          <Cropper
+            image={dog}
+            crop={crop}
+            rotation={rotation}
+            zoom={zoom}
+            aspect={2.5 / 3}
+            onCropChange={setCrop}
+            onRotationChange={setRotation}
+            onCropComplete={onCropComplete}
+            onZoomChange={setZoom}
+          />
+        </div>
+        <div className="controls">
+          <div className="sliderContainer">
+            <Typography
+              variant="overline"
+              // classes={{ root: classes.sliderLabel }}
+              className='sliderLabel'
+            >
+              Zoom
+            </Typography>
+            <Slider
+              value={zoom}
+              min={1}
+              max={3}
+              step={0.01}
+              aria-labelledby="Zoom"
+              // classes={{ root: classes.slider }}
+              className='slider'
+              onChange={(e, zoom) => setZoom(zoom)}
+            />
+          </div>
+          <div className="sliderContainer">
+            <Typography
+              variant="overline"
+              // classes={{ root: classes.sliderLabel }}
+              className='sliderLabel'
+            >
+              Rotation
+            </Typography>
+            <Slider
+              value={rotation}
+              min={0}
+              max={360}
+              step={1}
+              aria-labelledby="Rotation"
+              // classes={{ root: classes.slider }}
+              className='slider'
+              onChange={(e, rotation) => setRotation(rotation)}
+            />
+          </div>
+        </div>
+        {/* <ImgDialog img={croppedImage} onClose={onClose} /> */}
+      </div>
+      </DialogContent>
+      <DialogActions>
+                <Button variant="contained" onClick={handleCloseForm}>Cancel</Button>
+                <Button
+            onClick={showCroppedImage}
+            variant="contained"
+            color="primary"
+            // classes={{ root: classes.cropButton }}
+        className='cropButton'
+          >
+            Show Result
+          </Button>
+              </DialogActions>
+      </Dialog>
+      
         <div className='basic-input'>
           <div className='name-and-tagline'>
             <input value={studentName} onInput={e => setStudentName(e.target.value)} type={"text"} placeholder={"Enter your full name *"} />
