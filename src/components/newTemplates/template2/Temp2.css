@@ -1,13 +1,13 @@
-*{
+/* *{
   margin: 0px;
   padding: 0px;
-}
+} */
 .accom{
   display: flex;
   flex-direction: column;
   row-gap: 10px;
 }
-.App{
+.Temp2{
   width: 595px;
   height: 842px;
   border: 2px solid red;

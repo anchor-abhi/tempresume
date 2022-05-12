@@ -7,7 +7,7 @@ import Form from "./Form/Form.jsx";
 import Temp4 from "./newTemplates/template4/temp4"
 import {Template} from "./newTemplates/template3/components/Template-II/Template"
 import { Demo } from "./Form/Demo";
-import {Temp2} from "./newTemplates/template2/"
+import Temp2 from "./newTemplates/template2/Temp2"
 export default function AddRoute(){
 
     return (
