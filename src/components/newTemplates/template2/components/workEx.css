@@ -1,0 +1,27 @@
+.date{
+    font-size: 10px;
+    margin-top: 5px;
+    color: rgb(37, 207, 207);
+}
+
+.eduction{
+    /* padding-left: 2%; */
+   /* margin-bottom: 4%; */
+}
+.institut{
+    font-size: 12px;
+}
+
+.list{
+    margin-left: 8%;
+    font-size: 12px;
+}
+.dis{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.dis>h5{
+    font-size: 13px;
+}

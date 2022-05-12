@@ -1,0 +1,63 @@
+.container{
+    width: 100%;
+    /* border: 2px solid teal; */
+    color: #FFFFFF;
+}
+.pic{
+    width: 70px;
+    height: 70px;
+    margin: 20px 5%;
+    /* margin-left: 10%;
+    margin-top: 20px; */
+    border-radius: 50%;
+    border: 3px solid rgb(77, 240, 77);
+}
+.bottomHead{
+    background-color: #1C2328;
+    padding: 1% 10%;
+   
+}
+.bottomHead2{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+}
+.bottomHead>div{
+    width: auto !important;
+}
+.p{
+    font-size: 10px;
+    line-height: 15px;
+}
+.ico{
+    width: 200px;
+    display: flex;
+    column-gap: 5%;
+}
+.css-i4bv87-MuiSvgIcon-root{
+    font-size: 13px !important;
+}
+
+.inner{
+    width: 97%;
+   padding: 2% 4%; 
+    display: grid;
+    grid-template-columns: 75% 22%;
+    grid-gap: 2%;
+}
+.topHead{
+    background-color: #2F3B44;
+   
+}
+.summary{
+    font-size:12px;
+    text-align: justify;
+
+}
+.box{
+    border: 2px solid red;
+}
+.name{
+    line-height: 45px;
+    font-size: 22px;
+}

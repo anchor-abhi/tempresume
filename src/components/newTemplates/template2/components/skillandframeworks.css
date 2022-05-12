@@ -1,0 +1,10 @@
+.skill{
+    border-radius: 5px;
+    background-color: #2F3B44;
+    padding: 3px 6px;
+    color: white;
+    margin-top: 5px;
+}
+.skill>p{
+    font-size: 12px;
+}

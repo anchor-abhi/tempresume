@@ -1,0 +1,16 @@
+.title{
+    
+    line-height: 32px;
+    color: rgb(37, 207, 207);
+    
+}
+
+.title div{
+    display: inline-block;
+    border-bottom: 3px solid rgb(37, 207, 207);
+    padding-bottom: -10;
+}
+
+.title h5{
+    margin-bottom: -4px;
+}
