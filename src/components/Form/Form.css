@@ -312,3 +312,12 @@ text-align: justify;
     padding: 22px 0px;
     margin-left: 32px;
 }
+.cancel-btn > .MuiButton-root
+{
+  background-color: grey;
+  margin-right: 10px;
+}
+.cancel-btn > .MuiButton-root:hover
+{
+  background-color: rgb(87, 87, 87);
+}
