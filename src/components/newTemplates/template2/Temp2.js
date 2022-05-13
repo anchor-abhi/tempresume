@@ -23,7 +23,9 @@ function Temp2() {
       }, []);
       console.log("data=",data)
   return (
+    
     <div className="Temp2">
+        
         <Header add={data?.personal?.address} name={data?.personal?.name} pic={data?.personal?.profilePic} tagLine={data?.personal?.tagLine} email={data?.personal?.email} mobile={data?.personal?.mob}  linkedin={data?.personal?.linkedin} address={data?.personal?.address} github={data?.personal?.github} summary={data?.summary}></Header>
         <div className="section">
             <div className="">
@@ -68,3 +70,4 @@ function Temp2() {
 }
 
 export default Temp2;
+
