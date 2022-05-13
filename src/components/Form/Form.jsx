@@ -21,18 +21,14 @@ import { useNavigate } from "react-router";
 import Cropper from 'react-easy-crop'
 import Slider from '@mui/material/Slider'
 import Typography from '@mui/material/Typography'
-import { withStyles } from '@mui/material/styles'
-// import ImgDialog from './ImgDialog'
 import getCroppedImg from './cropImage'
 import "./Form.css"
 
-const dog ='https://img.huffingtonpost.com/asset/5ab4d4ac2000007d06eb2c56.jpeg?cache=sih0jwle4e&ops=1910_1000'
-
-
+const dog ='https://img.huffingtonpost.com/asset/5ab4d4ac2000007d06eb2c56.jpeg?cache=sih0jwle4e&ops=1910_1000';
 var isGithubUrl = require('is-github-url');
 
-const profileMaxSize = 4098; // IN kb
-const profileMinSize = 100; // IN kb
+const profileMaxSize = 4098;
+const profileMinSize = 100;
 
 const courseTitleMaxLength = 50;
 const collegeTitleMaxLength = 50;
@@ -42,8 +38,6 @@ const projectIntroMaxLength = 100;
 const projectRolesMaxLength = 150;
 const projectFeaturesMaxLength = 150;
 
-
-
 const courseTitleLabel = "Course/Degree Title  (maximum " + courseTitleMaxLength + " characters) *"
 const collegeTitleLabel = "College/institute/School name (maximum " + collegeTitleMaxLength + " characters) *"
 
@@ -52,14 +46,12 @@ const projectIntroLabel = "Write a quick brief about project (maximum " + projec
 const projectRolesLabel = "Project Roles, each in new line (maximum " + projectRolesMaxLength + " characters) *"
 const projectFeaturesLabel = "Project Features, each in new line (maximum " + projectFeaturesMaxLength + " characters) *"
 
-
 const techStacks = ["HTML", "CSS", "JavaScript", "React","Redux","Git","SQL","Java", "Express", "NodeJS", "MongoDB", "MUI", "ChakraUI"]
 const softSkills = ["Time management", "Communication", "Adaptability", "Problem-solving", "Teamwork", "Creativity", "Leadership", "Interpersonal skills"]
 
 
 const Form = () => {
-
-   const [crop, setCrop] = useState({ x: 0, y: 0 })
+    const [crop, setCrop] = useState({ x: 0, y: 0 })
     const [rotation, setRotation] = useState(0)
     const [zoom, setZoom] = useState(1)
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
@@ -68,11 +60,13 @@ const Form = () => {
     const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
       setCroppedAreaPixels(croppedAreaPixels)
     }, [])
-  
+
+
+
     const showCroppedImage = useCallback(async () => {
       try {
         const croppedImage = await getCroppedImg(
-          dog,
+          URL.createObjectURL(selectedFile),
           croppedAreaPixels,
           rotation
         )
@@ -86,7 +80,6 @@ const Form = () => {
       }
     }, [croppedAreaPixels, rotation])
   
- 
     const [openDialog, setOpenDialog] = useState(false);
   
     function handleCloseForm()
@@ -97,8 +90,6 @@ const Form = () => {
     {
       setOpenDialog(true);
     }
-  
-
   
   const [pageLoading, setPageLoading] = useState(true);
   const [userPreviousData, setUserPreviousData] = useState(false);
@@ -116,7 +107,13 @@ const Form = () => {
           .then((res) => {
             setUserPreviousData(res.data);
             console.log(res.data)
-            setStudentName(res.data[0].personal.name);
+            if(res.data.length == 0)
+            {
+              setPageLoading(false);
+
+            }
+            else{
+              setStudentName(res.data[0].personal.name);
             setTagline(res.data[0].personal.tagLine)
             setTagline(res.data[0].personal.tagLine)
             setPreview(res.data[0].personal.profilePic)
@@ -137,6 +134,7 @@ const Form = () => {
             setDisplayEducationData(true);
             setDisplayProjectData(true);
             setProfileValidation(true);
+            }
             // console.log(userPreviousData)
           })
           .then(()=>{
@@ -184,7 +182,7 @@ const Form = () => {
     }
 
     setOpenDialog(true);
-    // setSelectedFile(e.target.files[0])
+    setSelectedFile(e.target.files[0])
   }
 
 
@@ -648,7 +646,7 @@ const Form = () => {
       <div style={{"width":"35vw"}}>
         <div className="cropContainer">
           <Cropper
-            image={dog}
+            image={selectedFile && URL.createObjectURL(selectedFile)}
             crop={crop}
             rotation={rotation}
             zoom={zoom}
@@ -703,7 +701,9 @@ const Form = () => {
       </div>
       </DialogContent>
       <DialogActions>
-                <Button variant="contained" onClick={handleCloseForm}>Cancel</Button>
+              <span className='cancel-btn'>
+              <Button  variant="contained" onClick={handleCloseForm}>Cancel</Button>
+              </span>
                 <Button
             onClick={showCroppedImage}
             variant="contained"
