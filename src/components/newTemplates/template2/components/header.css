@@ -1,7 +1,7 @@
-.container{
+.cont{
     width: 100%;
     /* border: 2px solid teal; */
-    color: #FFFFFF;
+    color: #FFFFFF !important;
 }
 .pic{
     width: 70px;
@@ -21,13 +21,16 @@
     width: 90%;
     display: flex;
     justify-content: space-between;
+    color: #FFFFFF
 }
 .bottomHead>div{
     width: auto !important;
+    
 }
 .p{
     font-size: 10px;
     line-height: 15px;
+    color: #FFFFFF
 }
 .ico{
     width: 200px;
@@ -40,19 +43,19 @@
 
 .inner{
     width: 97%;
-   padding: 2% 4%; 
+   padding: 0% 4%; 
     display: grid;
     grid-template-columns: 75% 22%;
     grid-gap: 2%;
 }
 .topHead{
-    background-color: #2F3B44;
-   
+    background-color: #2F3B44 !important;
+    color: #FFFFFF
 }
 .summary{
     font-size:12px;
     text-align: justify;
-
+    color: #FFFFFF
 }
 .box{
     border: 2px solid red;
@@ -60,4 +63,5 @@
 .name{
     line-height: 45px;
     font-size: 22px;
+    color: #FFFFFF
 }
