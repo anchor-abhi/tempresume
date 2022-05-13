@@ -113,23 +113,24 @@ const Form = () => {
 
             }
             else{
-              setStudentName(res.data[res.data.length-1].personal.name);
-            setTagline(res.data[res.data.length-1].personal.tagLine)
-            setTagline(res.data[res.data.length-1].personal.tagLine)
-            setPreview(res.data[res.data.length-1].personal.profilePic)
-            // setSelectedFile(res.data[res.data.length-1].personal.profilePic)
-            setAbout(res.data[res.data.length-1].summary)
-            setContact(res.data[res.data.length-1].personal.mob)
-            setAddress(res.data[res.data.length-1].personal.address)
-            setLinkedinLink(res.data[res.data.length-1].personal.linkedin)
-            setGithubLink(res.data[res.data.length-1].personal.github)
-            setEmailID(res.data[res.data.length-1].personal.email)
-            setEducationData(res.data[res.data.length-1].education)
-            setProjectData(res.data[res.data.length-1].projects)
-            setStudentSoftSkills(res.data[res.data.length-1].softSkills)
-            setStudentTechStacks(res.data[res.data.length-1].techSkills)
-            setStudentAccomplishment(res.data[res.data.length-1].accomplishments.join("\n"))
-            setStudentInterests(res.data[res.data.length-1].interests.join(", "))
+              let dataLength = res.data.length-1;
+              setStudentName(res.data[dataLength].personal.name);
+            setTagline(res.data[dataLength].personal.tagLine)
+            setTagline(res.data[dataLength].personal.tagLine)
+            setPreview(res.data[dataLength].personal.profilePic)
+            // setSelectedFile(res.data[dataLength].personal.profilePic)
+            setAbout(res.data[dataLength].summary)
+            setContact(res.data[dataLength].personal.mob)
+            setAddress(res.data[dataLength].personal.address)
+            setLinkedinLink(res.data[dataLength].personal.linkedin)
+            setGithubLink(res.data[dataLength].personal.github)
+            setEmailID(res.data[dataLength].personal.email)
+            setEducationData(res.data[dataLength].education)
+            setProjectData(res.data[dataLength].projects)
+            setStudentSoftSkills(res.data[dataLength].softSkills)
+            setStudentTechStacks(res.data[dataLength].techSkills)
+            setStudentAccomplishment(res.data[dataLength].accomplishments.join("\n"))
+            setStudentInterests(res.data[dataLength].interests.join(", "))
 
             setDisplayEducationData(true);
             setDisplayProjectData(true);
@@ -639,14 +640,20 @@ const Form = () => {
     }
 
     alert("data validated");
-    return;
-    setPageLoading(true);
+    // console.log(selectedFile)
+  //   const myFile = new File([croppedImage], 'image.jpeg', {
+  //     type: croppedImage.type
+  // });
+  //   console.log(myFile)
+  //   console.log(selectedFile);
+    // return;
+    // setPageLoading(true);
 
     const postDetails = async() =>
      {
         try{
           const data = new FormData();
-        data.append("file", preview);
+        data.append("file", selectedFile );
         data.append("upload_preset", "resume-automation");
         data.append("cloud_name", "resume-automation");
        return fetch("https://api.cloudinary.com/v1_1/resume-automation/image/upload", {
@@ -654,11 +661,11 @@ const Form = () => {
           body: data,
         })
         .then((response)=>response.json())
-        .then((responseJson)=>{return responseJson});
-          // .then((res) => res.json())
-          // // .then((data) => {
-          // //  return data.url.toString();
-          // // })
+          .then((responseJson)=>{return responseJson});
+            // .then((res) => res.json())
+            // // .then((data) => {
+            // //  return data.url.toString();
+            // // })
         }
           catch(err) {
             console.log(err);
@@ -667,8 +674,13 @@ const Form = () => {
           }
     };
   
+    var ProfileImg = preview;
+    if(!selectedFile && !preview)
+    {
+      ProfileImg = await postDetails();
+    }
 
-    const ProfileImg = await postDetails();
+  
 
     let educationArray = []
     educationData.forEach(el => {
@@ -698,11 +710,12 @@ const Form = () => {
     })
 
     // // console.log(projectArray);
+    ProfileImg = (typeof(ProfileImg)) == "string" ? ProfileImg : ProfileImg.url.toString()  
     var userId = JSON.parse(localStorage.getItem("loggedinUser"))
     var sendingPacket = {
       "user": userId,
       "personal": {
-        "profilePic": ProfileImg.url.toString(),
+        "profilePic":  ProfileImg,
         "name": studentName,
         "tagLine": tagline,
         "email": emailID,
@@ -720,9 +733,16 @@ const Form = () => {
       "interests": interestsTemp
     }
 
+    if(showExperienceRendering)
+    {
+      sendingPacket["workEx"] = workExperienceData;
+    }
+
     console.log(sendingPacket)
 
-    
+    // return
+
+
     axios.post("https://masairesumebuilder.herokuapp.com/resume", sendingPacket)
     .then((response) => {
       console.log(response);
