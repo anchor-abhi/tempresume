@@ -408,7 +408,16 @@ const Form = () => {
   const [workEndDate, setWorkEndDate] = useState('');
   const [workRoles, setWorkRoles] = useState([]);
 
+  const [workCompanyError, setWorkCompanyError] = useState('');
+  const [workDesignationError, setWorkDesignationError] = useState('');
+  const [workStartDateError, setWorkStartDateError] = useState('');
+  const [workEndDateError, setWorkEndDateError] = useState('');
+  const [workRolesError, setWorkRolesError] = useState('');  
+
+  const [displayWorkExperienceData, setDisplayWorkExperienceData] = useState(false);
+
   const [workExperienceData, setWorkExperienceData] = useState([]);
+  const [editExperienceDataIndex, setEditExperienceDataIndex] = useState(-1)
 
   const handleOpenExperienceForm = () => {
    if(workExperienceData.length == 2)
@@ -423,6 +432,79 @@ const Form = () => {
     setOpenExperienceForm(false);
   };
 
+
+
+  var workRolesArray;
+  const addExperience = () => {
+    if (workCompany.length == 0) {
+      setWorkCompanyError("Commpany/Organization name can't be blank")
+      return;
+    }
+    if (workDesignation.length == 0) {
+      setWorkDesignationError("Designation can't be blank")
+      return;
+    }
+    if (workStartDate.length == 0) {
+      setWorkStartDateError("Start date can't be blank")
+      return;
+    }
+    if (workEndDate.length == 0) {
+      setWorkEndDateError("End date can't be blank")
+      return;
+    }
+    if (workStartDate > workEndDate) {
+      setWorkEndDateError("End date can not be earlier than start date");
+      return;
+    }
+    if (workRoles.length == 0) {
+      setWorkRolesError("Work experience roles can't be blank");
+      return;
+    }
+    workRolesArray = workRoles.split("\n");
+    if (workRolesArray.length > 2) {
+      setWorkRolesError("Maximum you can add 2 points in work experience roles");
+      return;
+    }
+    setOpenExperienceForm(false)
+    displayExperienceDetails();
+  }
+
+  function displayExperienceDetails()
+  {
+    console.log(workExperienceData, editExperienceDataIndex)
+    if (editExperienceDataIndex == -1) {
+      let temp = {
+        "organization": workCompany,
+        "position": workDesignation,
+        "start": workStartDate,
+        "end": workEndDate,
+        "description": workRolesArray
+      } 
+      console.log(temp, workExperienceData);
+      setWorkExperienceData([...workExperienceData, temp]);
+    }
+    else {
+      workExperienceData[editExperienceDataIndex].organization = workCompany;
+      workExperienceData[editExperienceDataIndex].position = workDesignation;
+      workExperienceData[editExperienceDataIndex].start = workStartDate;
+      workExperienceData[editExperienceDataIndex].end = workEndDate;
+      workExperienceData[editExperienceDataIndex].description = workRolesArray;
+    }
+    setDisplayWorkExperienceData(true);
+  }
+
+  
+  function editExperienceButtonPress(index) {
+    // console.log(index)
+    setWorkCompany(workExperienceData[index].organization);
+    setWorkDesignation(workExperienceData[index].organization);
+    setWorkStartDate(workExperienceData[index].start);
+    setWorkEndDate(workExperienceData[index].end);
+    setWorkRoles(workExperienceData[index].description.join("\n"));
+
+    setEditExperienceDataIndex(-1);
+  }
+
   function validateUrl(value) {
     return /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(value);
   }
@@ -433,6 +515,8 @@ const Form = () => {
     setCollegeName(educationData[index].institute);
     setStartDate(educationData[index].start);
     setEndDate(educationData[index].end);
+
+    setEditEducationDataIndex(-1);
   }
 
 
@@ -448,6 +532,8 @@ const Form = () => {
     setProjectRoles(projectData[index].areasOfResp.join("\n"));
     setProjectCollaborated(projectData[index].solo);
     setProjectTechStacks(projectData[index].techStack);
+
+    setEditProjectDataIndex(-1);
     // console.log(e)
   }
 
@@ -976,8 +1062,6 @@ const Form = () => {
               <FormGroup>
                 <FormControlLabel control={<Switch checked={projectCollaborated} onChange={(e) => { setProjectCollaborated(e.target.checked) }} />} label="Was it a Collaborative project?" />
               </FormGroup>
-              {console.log(projectTechStacks)}
-              {console.log(typeof(projectTechStacks))}
               <Autocomplete
                 onChange={(option) => {
                   if (option.target.innerText) {
@@ -1151,12 +1235,12 @@ const Form = () => {
               <TextField
                 value={workCompany} onInput={e => {
                   setWorkCompany(e.target.value);
-                  // setProjectTitleError('');
+                  setWorkCompanyError('');
                 }}
-                // helperText={}
-                // error={}
+                helperText={workCompanyError}
+                error={workCompanyError}
                 size="small"
-                inputProps={{ maxLength: "20"}}
+                inputProps={{ maxLength: "50"}}
                 autoFocus
                 margin="dense"
                 label={"Company/Organization Name *"}
@@ -1167,10 +1251,10 @@ const Form = () => {
               <TextField
                value={workDesignation} onInput={e => {
                  setWorkDesignation(e.target.value);
-                 // setProjectTitleError('');
+                 setWorkDesignationError('');
                }}
-               // helperText={}
-               // error={}
+               helperText={workDesignationError}
+               error={workDesignationError}
                size="small"
                inputProps={{ maxLength: "20"}}
                margin="dense"
@@ -1184,10 +1268,10 @@ const Form = () => {
              <TextField
               value={workStartDate} onInput={e => {
                 setWorkStartDate(e.target.value);
-                // setProjectTitleError('');
+                setWorkStartDateError('');
               }}
-              // helperText={}
-              // error={}
+              helperText={workStartDateError}
+              error={workStartDateError}
               size="small"
               margin="dense"
               label={"Start date *"}
@@ -1201,10 +1285,10 @@ const Form = () => {
             <TextField
              value={workEndDate} onInput={e => {
                setWorkEndDate(e.target.value);
-               // setProjectTitleError('');
+               setWorkEndDateError('');
              }}
-             // helperText={}
-             // error={}
+             helperText={workEndDateError}
+             error={workEndDateError}
              size="small"
              margin="dense"
              label={"End date *"}
@@ -1219,14 +1303,14 @@ const Form = () => {
              <TextField
                value={workRoles} onInput={e => {
                  setWorkRoles(e.target.value);
-                 // setProjectTitleError('');
+                 setWorkRolesError('');
                }}
-               // helperText={}
-               // error={}
+               helperText={workRolesError}
+               error={workRolesError}
                size="small"
-               inputProps={{ maxLength: "300"}}
+               inputProps={{ maxLength: "150"}}
                margin="dense"
-               label={"Roles in previous company, each in new line (maximum 150 characters) *"}
+               label={"Roles in the company, each in new line (maximum 150 characters) *"}
                type="text"
                fullWidth
                multiline
@@ -1236,15 +1320,50 @@ const Form = () => {
               </DialogContent>
               <DialogActions>
               <Button onClick={handleCloseExperienceForm}>Cancel</Button>
-              <Button onClick={()=>{}}>Add</Button>
+              <Button onClick={addExperience}>Add</Button>
             </DialogActions>
             </Dialog>
+            {displayWorkExperienceData ?
+            <div className="display-education-cont">
+              {workExperienceData.map((el, index) => (
+                <div className='display-education-section'>
+                <p>{el.organization}</p>
+                  <p>as {el.position}</p>
+                  <p>( {el.start} - {el.end} )</p>
+                  <div><b>Job Description</b>
+                  <ul className="work-exp-lists">
+                      {el.description.map((elm)=>{
+                         return <li>{elm}</li>
+                      })}
+                    </ul>
+                  </div>
+                  <div className='edit-delete-buttons'>
+                    <Fab onClick={() => {
+                      setEditExperienceDataIndex(index);
+                      editExperienceButtonPress(index);
+                      setOpenExperienceForm(true);
+                    }} color="primary" size='small' aria-label="edit">
+                      <EditIcon />
+                    </Fab>
+                    &nbsp;&nbsp;
+                    <Fab onClick={() => {
+                      var temp = [...workExperienceData];
+                      temp.splice(index, 1);
+                      setWorkExperienceData(temp);
+                    }} color="error" size='small' aria-label="delete">
+                      <DeleteIcon />
+                    </Fab>
+                  </div>
+                </div>
+              ))}
+            </div>
+            : ""}
         </div>
       }
        </div>        
       <div className='submit-btn-cont'>
         <Button onClick={submitForm} className='genrate-resume-btn' color="success" variant="contained" endIcon={<ChevronRightIcon />}>
-          Genrate Resume
+          Generate Resume
         </Button>
       </div>
      
