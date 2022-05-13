@@ -46,7 +46,7 @@ const projectIntroLabel = "Write a quick brief about project (maximum " + projec
 const projectRolesLabel = "Project Roles, each in new line (maximum " + projectRolesMaxLength + " characters) *"
 const projectFeaturesLabel = "Project Features, each in new line (maximum " + projectFeaturesMaxLength + " characters) *"
 
-const techStacks = ["HTML", "CSS", "JavaScript", "React","Redux","Git","SQL","Java", "Express", "NodeJS", "MongoDB", "MUI", "ChakraUI"]
+const techStacks = ["HTML", "CSS", "JavaScript", "React","Redux","Git","SQL","Java", "Express", "NodeJS", "MongoDB", "MUI", "ChakraUI", "Python" , "Flask" , "Keras"]
 const softSkills = ["Time management", "Communication", "Adaptability", "Problem-solving", "Teamwork", "Creativity", "Leadership", "Interpersonal skills"]
 
 
@@ -168,9 +168,9 @@ const Form = () => {
     }
 
     const objectUrl = URL.createObjectURL(selectedFile)
-    setPreview(objectUrl)
+    // setPreview(objectUrl)
 
-    // free memory when ever this component is unmounted
+    // // free memory when ever this component is unmounted
     return () => URL.revokeObjectURL(objectUrl)
   }, [selectedFile])
 
@@ -275,7 +275,7 @@ const Form = () => {
   }
 
 
-  const [openProjectForm, setOpenProjectForm] = React.useState(false);
+  const [openProjectForm, setOpenProjectForm] = useState(false);
 
   const [projectTitle, setProjectTitle] = useState('');
   const [projectIntro, setProjectIntro] = useState('');
@@ -307,6 +307,7 @@ const Form = () => {
       alert("You have already added two projects, can't add more");
       return;
     }
+    console.log("add project button is clicked")
     setOpenProjectForm(true);
   };
   
@@ -871,7 +872,7 @@ const Form = () => {
                 fullWidth
                 variant="outlined"
               />
-              <TextField
+               <TextField
                 value={projectIntro}  onInput={e => {
                   setProjectIntro(e.target.value);
                   setProjectIntroError('');
@@ -947,7 +948,8 @@ const Form = () => {
               <FormGroup>
                 <FormControlLabel control={<Switch checked={projectCollaborated} onChange={(e) => { setProjectCollaborated(e.target.checked) }} />} label="Was it a Collaborative project?" />
               </FormGroup>
-
+              {console.log(projectTechStacks)}
+              {console.log(typeof(projectTechStacks))}
               <Autocomplete
                 onChange={(option) => {
                   if (option.target.innerText) {
@@ -962,12 +964,12 @@ const Form = () => {
                   }
 
                 }}
-                readOnly={maxTechStacksRendering ? true : false}
+                // readOnly={maxTechStacksRendering ? true : false}
                 size="small"
                 style={{ marginTop: "8px" }}
                 multiple
                 
-            defaultValue={projectTechStacks}
+            defaultValue={typeof(projectTechStacks) == "string" ? [] : projectTechStacks}
                 id="tags-outlined"
                 options={techStacks}
 
@@ -1084,7 +1086,7 @@ const Form = () => {
             size="small"
             style={{ marginTop: "16px" }}
             value={studentAccomplishment} onInput={e => setStudentAccomplishment(e.target.value)}
-            inputProps={{ maxLength: 150 }}
+            inputProps={{ maxLength: "200" }}
             margin="dense"
             multiline
             rows={3}
@@ -1194,7 +1196,7 @@ const Form = () => {
                // helperText={}
                // error={}
                size="small"
-               inputProps={{ maxLength: "150"}}
+               inputProps={{ maxLength: "300"}}
                margin="dense"
                label={"Roles in previous company, each in new line (maximum 150 characters) *"}
                type="text"
