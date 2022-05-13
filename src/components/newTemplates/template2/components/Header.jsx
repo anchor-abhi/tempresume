@@ -6,9 +6,9 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 function Header({name,summary,pic,email,mobile,linkedin,github,add}){
     console.log()
-    return <div className="container">
+    return <div className="cont">
           
-            <div className="topHead">
+            <div className="topHead" style={{color:"#2F3B44",}}>
                 <div className="inner">
                 <div className="">
                     <h3 className="name">{name}</h3>
