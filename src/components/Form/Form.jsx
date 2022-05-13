@@ -674,7 +674,8 @@ const Form = () => {
       }
     }
 
-    alert("data validated");
+    alert("data validated, and good to go");
+    setPageLoading(true);
     // console.log(selectedFile)
   //   const myFile = new File([croppedImage], 'image.jpeg', {
   //     type: croppedImage.type
