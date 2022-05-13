@@ -223,6 +223,10 @@ const Form = () => {
       alert("You already have added three educations, can't add more")
       return;
     }
+    setCollegeName("");
+      setCourseTitle("");
+      setStartDate("");
+      setEndDate("");
     setEditEducationDataIndex(-1);
     setOpenEducationForm(true);
   };
@@ -264,6 +268,10 @@ const Form = () => {
         "start": startDate,
         "end": endDate
       }
+      setCollegeName("");
+      setCourseTitle("");
+      setStartDate("");
+      setEndDate("");
       setEducationData([...educationData, temp]);
     }
     else {
@@ -308,7 +316,15 @@ const Form = () => {
       alert("You have already added two projects, can't add more");
       return;
     }
-    console.log("add project button is clicked")
+    
+    setProjectTitle("");
+    setProjectFeatures("")
+    setProjectCollaborated(false);
+    setProjectGithubLink("");
+    setProjectLiveLink("");
+    setProjectRoles("");
+    setProjectTechStacks("");
+    setProjectIntro("");
     setOpenProjectForm(true);
   };
   
@@ -379,6 +395,15 @@ const Form = () => {
         "techStack": projectTechStacks
       }
 
+      setProjectTitle("");
+      setProjectFeatures("")
+      setProjectCollaborated(false);
+      setProjectGithubLink("");
+      setProjectLiveLink("");
+      setProjectRoles("");
+      setProjectTechStacks("");
+      setProjectIntro("");
+
       setProjectData([...projectData, temp]);
     }
     else {
@@ -426,7 +451,12 @@ const Form = () => {
      alert("You have already added two work experience, can't add more")
      return;
    }
-    setOpenExperienceForm(true);
+   setWorkCompany("");
+   setWorkDesignation("");
+   setWorkEndDate("");
+   setWorkRoles([]);
+   setWorkStartDate(""); 
+   setOpenExperienceForm(true);
   };
 
   const handleCloseExperienceForm = () => {
@@ -481,7 +511,12 @@ const Form = () => {
         "end": workEndDate,
         "description": workRolesArray
       } 
-      console.log(temp, workExperienceData);
+      setWorkCompany("");
+      setWorkDesignation("");
+      setWorkEndDate("");
+      setWorkRoles([]);
+      setWorkStartDate("");
+      // console.log(temp, workExperienceData);
       setWorkExperienceData([...workExperienceData, temp]);
     }
     else {
