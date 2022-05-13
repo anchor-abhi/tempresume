@@ -129,7 +129,7 @@ const Form = () => {
             setStudentSoftSkills(res.data[res.data.length-1].softSkills)
             setStudentTechStacks(res.data[res.data.length-1].techSkills)
             setStudentAccomplishment(res.data[res.data.length-1].accomplishments.join("\n"))
-            setStudentInterests(res.data[res.data.length-1].interests)
+            setStudentInterests(res.data[res.data.length-1].interests.join(", "))
 
             setDisplayEducationData(true);
             setDisplayProjectData(true);
@@ -520,12 +520,19 @@ const Form = () => {
       return;
     }
 
-    let accomplishmentsTemp = studentAccomplishment.split("\n");
+    if(studentAccomplishment.length != 0 && studentAccomplishment.length < 30)
+    {
+      alert("There should be atleast 50 characters in Accomplishment");
+      return;
+    }
+    
+    var accomplishmentsTemp = studentAccomplishment.split("\n");
     if (accomplishmentsTemp.length > 3) {
       alert("Maximum you can add 3 accomplishments in your resume");
       return;
     }
-    let interestsTemp = studentInterests.split(",");
+    console.log(studentInterests)
+    var interestsTemp = studentInterests.split(",");
     if (interestsTemp.length > 5) {
       alert("Maximum you can add 5 interests in your resume");
       return;
@@ -536,7 +543,7 @@ const Form = () => {
     const postDetails = async() =>
      {
         const data = new FormData();
-        data.append("file", selectedFile);
+        data.append("file", preview);
         data.append("upload_preset", "resume-automation");
         data.append("cloud_name", "resume-automation");
        return fetch("https://api.cloudinary.com/v1_1/resume-automation/image/upload", {
@@ -616,7 +623,7 @@ const Form = () => {
       setPageLoading(false);
       navigate("/downloadresume");
     }, (error) => {
-      console.log(error);
+      alert(error);
     });
 
   }
@@ -1099,7 +1106,7 @@ const Form = () => {
             size="small"
             style={{ marginTop: "10px" }}
             value={studentInterests} onInput={e => setStudentInterests(e.target.value)}
-            inputProps={{ maxLength: 100 }}
+            inputProps={{ maxLength: "100" }}
             margin="dense"
             multiline
             rows={2}
