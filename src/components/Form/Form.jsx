@@ -113,23 +113,23 @@ const Form = () => {
 
             }
             else{
-              setStudentName(res.data[0].personal.name);
-            setTagline(res.data[0].personal.tagLine)
-            setTagline(res.data[0].personal.tagLine)
-            setPreview(res.data[0].personal.profilePic)
-            // setSelectedFile(res.data[0].personal.profilePic)
-            setAbout(res.data[0].summary)
-            setContact(res.data[0].personal.mob)
-            setAddress(res.data[0].personal.address)
-            setLinkedinLink(res.data[0].personal.linkedin)
-            setGithubLink(res.data[0].personal.github)
-            setEmailID(res.data[0].personal.email)
-            setEducationData(res.data[0].education)
-            setProjectData(res.data[0].projects)
-            setStudentSoftSkills(res.data[0].softSkills)
-            setStudentTechStacks(res.data[0].techSkills)
-            setStudentAccomplishment(res.data[0].accomplishments.join("\n"))
-            setStudentInterests(res.data[0].interests)
+              setStudentName(res.data[res.data.length-1].personal.name);
+            setTagline(res.data[res.data.length-1].personal.tagLine)
+            setTagline(res.data[res.data.length-1].personal.tagLine)
+            setPreview(res.data[res.data.length-1].personal.profilePic)
+            // setSelectedFile(res.data[res.data.length-1].personal.profilePic)
+            setAbout(res.data[res.data.length-1].summary)
+            setContact(res.data[res.data.length-1].personal.mob)
+            setAddress(res.data[res.data.length-1].personal.address)
+            setLinkedinLink(res.data[res.data.length-1].personal.linkedin)
+            setGithubLink(res.data[res.data.length-1].personal.github)
+            setEmailID(res.data[res.data.length-1].personal.email)
+            setEducationData(res.data[res.data.length-1].education)
+            setProjectData(res.data[res.data.length-1].projects)
+            setStudentSoftSkills(res.data[res.data.length-1].softSkills)
+            setStudentTechStacks(res.data[res.data.length-1].techSkills)
+            setStudentAccomplishment(res.data[res.data.length-1].accomplishments.join("\n"))
+            setStudentInterests(res.data[res.data.length-1].interests)
 
             setDisplayEducationData(true);
             setDisplayProjectData(true);
