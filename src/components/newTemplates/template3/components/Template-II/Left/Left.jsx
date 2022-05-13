@@ -53,7 +53,7 @@ export const Left = ({data,state,color}) => {
       return(
         <div className="universal" style={{color:color}} >
         <SchoolIcon className="universal"/>
-        <p className="universal">{ele.course+", "}{ele.institute+" "}{ele.start+"-"}{ele.end}</p>
+        <p style={{color:color}} className="universal">{ele.course+", "}{ele.institute+" "}{ele.start+"-"}{ele.end}</p>
       </div>
       )
     })}
