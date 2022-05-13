@@ -408,9 +408,14 @@ const Form = () => {
   const [workEndDate, setWorkEndDate] = useState('');
   const [workRoles, setWorkRoles] = useState([]);
 
+  const [workExperienceData, setWorkExperienceData] = useState([]);
 
   const handleOpenExperienceForm = () => {
-   
+   if(workExperienceData.length == 2)
+   {
+     alert("You have already added two work experience, can't add more")
+     return;
+   }
     setOpenExperienceForm(true);
   };
 
@@ -499,8 +504,8 @@ const Form = () => {
       return
     }
 
-    if (about.length < 100) {
-      alert("write atleast 100 characters in about section")
+    if (about.length < 200) {
+      alert("write atleast 200 characters in about section")
       return
     }
     if (educationData.length == 0) {
@@ -538,11 +543,23 @@ const Form = () => {
       return;
     }
 
+    if(showExperienceRendering)
+    {
+      if(workExperienceData.length == 0)
+      {
+        alert("You have selected to add work experience in your resume, but haven't added any. So either add atleast one work experience or off the toggle button");
+        return
+      }
+    }
+
+    alert("data validated");
+    return;
     setPageLoading(true);
 
     const postDetails = async() =>
      {
-        const data = new FormData();
+        try{
+          const data = new FormData();
         data.append("file", preview);
         data.append("upload_preset", "resume-automation");
         data.append("cloud_name", "resume-automation");
@@ -556,9 +573,12 @@ const Form = () => {
           // // .then((data) => {
           // //  return data.url.toString();
           // // })
-          // .catch((err) => console.log(err))
-
-          // console.log("processing");
+        }
+          catch(err) {
+            console.log(err);
+            alert("Something went wrong, while uploading image, please contact the Admin.")
+            return;
+          }
     };
   
 
@@ -624,6 +644,7 @@ const Form = () => {
       navigate("/downloadresume");
     }, (error) => {
       alert(error);
+      alert("something went wrong while sending data to server, please contact admin");
     });
 
   }
@@ -752,7 +773,7 @@ const Form = () => {
           </div>
         </div>
         <div className='input2'>
-          <textarea value={about} onInput={e => setAbout(e.target.value)} placeholder={"Enter your about section (maximum 300 characters) *"} maxLength={"300"} ></textarea>
+          <textarea value={about} onInput={e => setAbout(e.target.value)} placeholder={"Enter your about section (maximum 250 characters) *"} maxLength={"250"} ></textarea>
         </div>
       </div>
       <hr />
