@@ -132,6 +132,13 @@ const Form = () => {
             setStudentAccomplishment(res.data[dataLength].accomplishments.join("\n"))
             setStudentInterests(res.data[dataLength].interests.join(", "))
 
+            if(res.data[dataLength].workEx)
+            {
+              setWorkExperienceData(res.data[dataLength].workEx)
+              setShowExperienceRendering(true);
+              setDisplayWorkExperienceData(true);
+            }
+            
             setDisplayEducationData(true);
             setDisplayProjectData(true);
             setProfileValidation(true);
@@ -506,7 +513,7 @@ const Form = () => {
     console.log(workExperienceData, editExperienceDataIndex)
     if (editExperienceDataIndex == -1) {
       let temp = {
-        "organization": workCompany,
+        "organisation": workCompany,
         "position": workDesignation,
         "start": workStartDate,
         "end": workEndDate,
@@ -521,7 +528,7 @@ const Form = () => {
       setWorkExperienceData([...workExperienceData, temp]);
     }
     else {
-      workExperienceData[editExperienceDataIndex].organization = workCompany;
+      workExperienceData[editExperienceDataIndex].organisation = workCompany;
       workExperienceData[editExperienceDataIndex].position = workDesignation;
       workExperienceData[editExperienceDataIndex].start = workStartDate;
       workExperienceData[editExperienceDataIndex].end = workEndDate;
@@ -533,8 +540,8 @@ const Form = () => {
   
   function editExperienceButtonPress(index) {
     // console.log(index)
-    setWorkCompany(workExperienceData[index].organization);
-    setWorkDesignation(workExperienceData[index].organization);
+    setWorkCompany(workExperienceData[index].organisation);
+    setWorkDesignation(workExperienceData[index].position);
     setWorkStartDate(workExperienceData[index].start);
     setWorkEndDate(workExperienceData[index].end);
     setWorkRoles(workExperienceData[index].description.join("\n"));
@@ -1295,7 +1302,7 @@ const Form = () => {
         </div>
       </div>
      <div style={{"textAlign":"center", "margin-top":"20px"}}>
-     <FormControlLabel control={<Switch onChange={(e) => { setShowExperienceRendering(e.target.checked) }} />} label="Do you want to add work experience in your resume?" />
+     <FormControlLabel control={<Switch checked={showExperienceRendering} onChange={(e) => { setShowExperienceRendering(e.target.checked) }} />} label="Do you want to add work experience in your resume?" />
      {!showExperienceRendering?"":
       <div className='work-experience-cont'>
            <Button className='add-btn' variant="outlined" onClick={handleOpenExperienceForm}>
@@ -1395,11 +1402,12 @@ const Form = () => {
               <Button onClick={addExperience}>Add</Button>
             </DialogActions>
             </Dialog>
+
             {displayWorkExperienceData ?
             <div className="display-education-cont">
               {workExperienceData.map((el, index) => (
                 <div className='display-education-section'>
-                <p>{el.organization}</p>
+                <p>{el.organisation}</p>
                   <p>as {el.position}</p>
                   <p>( {el.start} - {el.end} )</p>
                   <div><b>Job Description</b>
