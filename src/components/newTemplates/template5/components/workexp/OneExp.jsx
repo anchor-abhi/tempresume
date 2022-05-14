@@ -15,8 +15,11 @@ export const OneExp = (props)=>{
                     </div>
                     <div className='job-profile'>
                       <ul>
-                        <li>{"Developed and extensive experience in Integration testing & programming"}</li>
-                        <li>{"Add Your Text here"}</li>
+                        {props?.work_ex?.map((elm)=>{
+                          return (
+                            <li>{el.description}</li>
+                          )
+                        })}
                       </ul>
                     </div>
                   </div>

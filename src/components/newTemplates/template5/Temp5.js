@@ -37,8 +37,8 @@ function Temp5() {
           </div>
         </div>
         <div className='right-side'>
-          {data?.work_ex !== undefined ? (
-            <Work_Exp work_ex={data?.work_ex}/>
+          {data?.workEx !== undefined ? (
+            <Work_Exp work_ex={data?.workEx}/>
           ): <></>}
           <Projects projects={data?.projects}/>
           <Contact Data={data?.personal}/>
