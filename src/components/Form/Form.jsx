@@ -110,7 +110,6 @@ const Form = () => {
             if(res.data.length == 0)
             {
               setPageLoading(false);
-
             }
             else{
               let dataLength = res.data.length-1;
@@ -783,7 +782,7 @@ const Form = () => {
     .then((response) => {
       console.log("response=",response);
       setPageLoading(false);
-      // navigate("/downloadresume");
+      navigate("/downloadresume");
     }, (error) => {
       alert(error);
       alert("something went wrong while sending data to server, please contact admin");
