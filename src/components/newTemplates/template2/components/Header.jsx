@@ -15,7 +15,7 @@ function Header({name,summary,pic,email,mobile,linkedin,github,add}){
                     <p className="summary">{summary}</p>
                 </div>
                 <div className="">
-                    <img className="pic" src={pic} alt="" />
+                    <img className="picP" src={pic} alt="" />
                 </div>
             </div>
             </div>
