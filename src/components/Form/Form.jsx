@@ -468,7 +468,7 @@ const Form = () => {
   var workRolesArray;
   const addExperience = () => {
     if (workCompany.length == 0) {
-      setWorkCompanyError("Commpany/Organization name can't be blank")
+      setWorkCompanyError("Commpany/Organisation name can't be blank")
       return;
     }
     if (workDesignation.length == 0) {
@@ -505,7 +505,7 @@ const Form = () => {
     console.log(workExperienceData, editExperienceDataIndex)
     if (editExperienceDataIndex == -1) {
       let temp = {
-        "organization": workCompany,
+        "organisation": workCompany,
         "position": workDesignation,
         "start": workStartDate,
         "end": workEndDate,
@@ -520,7 +520,7 @@ const Form = () => {
       setWorkExperienceData([...workExperienceData, temp]);
     }
     else {
-      workExperienceData[editExperienceDataIndex].organization = workCompany;
+      workExperienceData[editExperienceDataIndex].organisation = workCompany;
       workExperienceData[editExperienceDataIndex].position = workDesignation;
       workExperienceData[editExperienceDataIndex].start = workStartDate;
       workExperienceData[editExperienceDataIndex].end = workEndDate;
@@ -532,8 +532,8 @@ const Form = () => {
   
   function editExperienceButtonPress(index) {
     // console.log(index)
-    setWorkCompany(workExperienceData[index].organization);
-    setWorkDesignation(workExperienceData[index].organization);
+    setWorkCompany(workExperienceData[index].organisation);
+    setWorkDesignation(workExperienceData[index].organisation);
     setWorkStartDate(workExperienceData[index].start);
     setWorkEndDate(workExperienceData[index].end);
     setWorkRoles(workExperienceData[index].description.join("\n"));
@@ -774,16 +774,16 @@ const Form = () => {
       sendingPacket["workEx"] = workExperienceData;
     }
 
-    console.log(sendingPacket)
+    console.log("sending=",sendingPacket)
 
     // return
 
 
     axios.post("https://masairesumebuilder.herokuapp.com/resume", sendingPacket)
     .then((response) => {
-      console.log(response);
+      console.log("response=",response);
       setPageLoading(false);
-      navigate("/downloadresume");
+      // navigate("/downloadresume");
     }, (error) => {
       alert(error);
       alert("something went wrong while sending data to server, please contact admin");
@@ -1299,7 +1299,7 @@ const Form = () => {
                 inputProps={{ maxLength: "50"}}
                 autoFocus
                 margin="dense"
-                label={"Company/Organization Name *"}
+                label={"Company/Organisation Name *"}
                 type="text"
                 fullWidth
                 variant="outlined"
@@ -1383,7 +1383,7 @@ const Form = () => {
             <div className="display-education-cont">
               {workExperienceData.map((el, index) => (
                 <div className='display-education-section'>
-                <p>{el.organization}</p>
+                <p>{el.organisation}</p>
                   <p>as {el.position}</p>
                   <p>( {el.start} - {el.end} )</p>
                   <div><b>Job Description</b>
