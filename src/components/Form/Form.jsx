@@ -132,7 +132,7 @@ const Form = () => {
             setStudentAccomplishment(res.data[dataLength].accomplishments.join("\n"))
             setStudentInterests(res.data[dataLength].interests.join(", "))
 
-            if(res.data[dataLength].workEx)
+            if(res.data[dataLength].workEx && res.data[dataLength].workEx.length != 0)
             {
               setWorkExperienceData(res.data[dataLength].workEx)
               setShowExperienceRendering(true);
@@ -682,7 +682,6 @@ const Form = () => {
       }
     }
 
-    alert("data validated, and good to go");
     // setPageLoading(true);
     // console.log(typeof(croppedImage))
     // console.log(croppedImage);
@@ -707,7 +706,7 @@ const Form = () => {
 
     // return;
 
-    // setPageLoading(true);
+    setPageLoading(true);
 
     const postDetails = async() =>
      {
@@ -796,6 +795,10 @@ const Form = () => {
     {
       sendingPacket["workEx"] = workExperienceData;
     }
+    else
+    {
+      sendingPacket["workEx"] = [];
+    }
 
     console.log("sending=",sendingPacket)
 
@@ -806,7 +809,7 @@ const Form = () => {
     .then((response) => {
       console.log("response=",response);
       setPageLoading(false);
-      // navigate("/downloadresume");
+      navigate("/downloadresume");
     }, (error) => {
       alert(error);
       alert("something went wrong while sending data to server, please contact admin");
