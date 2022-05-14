@@ -168,10 +168,10 @@ export default function BasicResume({ details }) {
                           </span>
                         </p>
                         <ul className="c21">
-                          {element.features.map((feature) => {
+                          {element.areasOfResp.map((resp) => {
                             return (
                               <li className="c0 ">
-                                <span className="c1">{feature}</span>
+                                <span className="c1">{resp}</span>
                               </li>
                             );
                           })}
