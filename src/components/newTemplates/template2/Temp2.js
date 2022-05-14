@@ -24,11 +24,10 @@ function Temp2() {
   return (
     
     <div className="Temp2">
-        
         <Header add={data?.personal?.address} name={data?.personal?.name} pic={data?.personal?.profilePic} tagLine={data?.personal?.tagLine} email={data?.personal?.email} mobile={data?.personal?.mob}  linkedin={data?.personal?.linkedin} address={data?.personal?.address} github={data?.personal?.github} summary={data?.summary}></Header>
         <div className="section">
             <div className="">
-                   {data.workEx.length!=0? <div className='edu'>
+                   {data?.workEx?.length!=0? <div className='edu'>
                           <Title cont="PROFESSIONAL EXPERIENCE"></Title>
                           {data?.workEx?.map(el=><WorkEx name={el.organisation} start={el.start} end={el.end} pos={el.position} description={el.description}></WorkEx>)}
                     </div>:""}
