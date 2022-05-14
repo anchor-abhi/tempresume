@@ -64,6 +64,7 @@ export const Demo = () => {
   
       <div style={{"width":"35vw"}}>
         <div className="cropContainer">
+          {console.log(dogImg)}
           <Cropper
             image={dogImg}
             crop={crop}
