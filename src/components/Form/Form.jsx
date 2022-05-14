@@ -131,6 +131,13 @@ const Form = () => {
             setStudentAccomplishment(res.data[dataLength].accomplishments.join("\n"))
             setStudentInterests(res.data[dataLength].interests.join(", "))
 
+            if(res.data[dataLength].workEx)
+            {
+              setWorkExperienceData(res.data[dataLength].workEx)
+              setShowExperienceRendering(true);
+              setDisplayWorkExperienceData(true);
+            }
+            
             setDisplayEducationData(true);
             setDisplayProjectData(true);
             setProfileValidation(true);
@@ -261,6 +268,7 @@ const Form = () => {
 
   const displayEducationDetails = () => {
     if (editEducationDataIndex == -1) {
+      console.log(collegeName, startDate, endDate)
       let temp = {
         "course": courseTitle,
         "institute": collegeName,
@@ -491,8 +499,8 @@ const Form = () => {
       return;
     }
     workRolesArray = workRoles.split("\n");
-    if (workRolesArray.length > 2) {
-      setWorkRolesError("Maximum you can add 2 points in work experience roles");
+    if (workRolesArray.length > 3) {
+      setWorkRolesError("Maximum you can add 3 points in work experience roles");
       return;
     }
     setOpenExperienceForm(false)
@@ -532,7 +540,7 @@ const Form = () => {
   function editExperienceButtonPress(index) {
     // console.log(index)
     setWorkCompany(workExperienceData[index].organisation);
-    setWorkDesignation(workExperienceData[index].organisation);
+    setWorkDesignation(workExperienceData[index].position);
     setWorkStartDate(workExperienceData[index].start);
     setWorkEndDate(workExperienceData[index].end);
     setWorkRoles(workExperienceData[index].description.join("\n"));
@@ -625,8 +633,8 @@ const Form = () => {
       return
     }
 
-    if (about.length < 200) {
-      alert("write atleast 200 characters in about section")
+    if (about.length < 100) {
+      alert("write atleast 100 characters in about section")
       return
     }
     if (educationData.length == 0) {
@@ -674,14 +682,30 @@ const Form = () => {
     }
 
     alert("data validated, and good to go");
-    setPageLoading(true);
-    // console.log(selectedFile)
-  //   const myFile = new File([croppedImage], 'image.jpeg', {
-  //     type: croppedImage.type
+    // setPageLoading(true);
+    // console.log(typeof(croppedImage))
+    // console.log(croppedImage);
+    // console.log(typeof(preview))
+    // console.log(preview);
+  //   const myFile = new File([croppedImage], 'image.jpg', {
+  //     type: selectedFile.type
   // });
-  //   console.log(myFile)
-  //   console.log(selectedFile);
+  
+  // console.log(croppedImage);
+  // console.log(selectedFile);
+  // console.log(myFile);
+
+  // return;
+//   var reader = new FileReader();
+// reader.readAsDataURL(croppedImage); 
+// reader.onloadend = function() {
+//   var base64data = reader.result;                
+//   console.log(base64data);
+// }
+
+
     // return;
+
     // setPageLoading(true);
 
     const postDetails = async() =>
@@ -710,13 +734,12 @@ const Form = () => {
     };
   
     var ProfileImg = preview;
-    if(!selectedFile && !preview)
+    if(selectedFile)
     {
       ProfileImg = await postDetails();
     }
 
-  
-
+ 
     let educationArray = []
     educationData.forEach(el => {
       educationArray.push({
@@ -760,8 +783,8 @@ const Form = () => {
         "github": githubLink
       },
       "summary": about,
-      "projects": projectArray,
-      "education": educationArray,
+      "projects": projectData,
+      "education": educationData,
       "techSkills": studentTechStacks,
       "softSkills": studentSoftSkills,
       "accomplishments": accomplishmentsTemp,
@@ -793,7 +816,7 @@ const Form = () => {
 
   const [studentTechStacks, setStudentTechStacks] = useState([]);
   const [studentSoftSkills, setStudentSoftSkills] = useState([]);
-  const [studentAccomplishment, setStudentAccomplishment] = useState([]);
+  const [studentAccomplishment, setStudentAccomplishment] = useState("");
   const [studentInterests, setStudentInterests] = useState("");
 
   return (
@@ -914,7 +937,7 @@ const Form = () => {
           </div>
         </div>
         <div className='input2'>
-          <textarea value={about} onInput={e => setAbout(e.target.value)} placeholder={"Enter your about section (maximum 250 characters) *"} maxLength={"250"} ></textarea>
+          <textarea value={about} onInput={e => setAbout(e.target.value)} placeholder={"Enter your about section (maximum 300 characters) *"} maxLength={"300"} ></textarea>
         </div>
       </div>
       <hr />
@@ -1278,7 +1301,7 @@ const Form = () => {
         </div>
       </div>
      <div style={{"textAlign":"center", "margin-top":"20px"}}>
-     <FormControlLabel control={<Switch onChange={(e) => { setShowExperienceRendering(e.target.checked) }} />} label="Do you want to add work experience in your resume?" />
+     <FormControlLabel control={<Switch checked={showExperienceRendering} onChange={(e) => { setShowExperienceRendering(e.target.checked) }} />} label="Do you want to add work experience in your resume?" />
      {!showExperienceRendering?"":
       <div className='work-experience-cont'>
            <Button className='add-btn' variant="outlined" onClick={handleOpenExperienceForm}>
@@ -1363,9 +1386,9 @@ const Form = () => {
                helperText={workRolesError}
                error={workRolesError}
                size="small"
-               inputProps={{ maxLength: "150"}}
+               inputProps={{ maxLength: "400"}}
                margin="dense"
-               label={"Roles in the company, each in new line (maximum 150 characters) *"}
+               label={"Roles in the company, each in new line (maximum 400 characters) *"}
                type="text"
                fullWidth
                multiline
@@ -1378,6 +1401,7 @@ const Form = () => {
               <Button onClick={addExperience}>Add</Button>
             </DialogActions>
             </Dialog>
+
             {displayWorkExperienceData ?
             <div className="display-education-cont">
               {workExperienceData.map((el, index) => (
