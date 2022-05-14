@@ -2,7 +2,7 @@ import "./project.css"
 
 import GitHubIcon from '@mui/icons-material/GitHub';
 function Projects({name,dis,features,techStack,areasOfResp,deploy,git}){
-    return <div className="">
+    return <div className="proj">
         <div className="pro">
             <div><a href={deploy} target="_blank"><h5>{name}</h5></a></div>
             <div className="icon"><a href={git} target="_blank"><GitHubIcon></GitHubIcon></a></div>
