@@ -86,7 +86,7 @@ export const Left = ({data,state,color}) => {
         <h4 className="universal" >ACCOMPLISHMENTS</h4>
         {data?.accomplishments?.map((ele)=>{
           return (
-            <li className="universal" style={{color:color}} >{ele}</li>
+            <li  className="universal" style={{color:color,lineHeight:"18px"}} >{ele}</li>
           )
         })}
       </section>
