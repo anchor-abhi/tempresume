@@ -9,6 +9,7 @@ import { Template } from "./newTemplates/template3/components/Template-II/Templa
 import { Demo } from "./Form/Demo";
 import Temp2 from "./newTemplates/template2/Temp2";
 import Temp5 from "./newTemplates/template5/Temp5";
+import TemplateSelector from "../Pages/TemplateSelector";
 
 export default function AddRoute() {
 	return (
