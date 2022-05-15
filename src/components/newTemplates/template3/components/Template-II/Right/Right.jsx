@@ -22,7 +22,7 @@ export const Right = ({ data }) => {
           <p className="universal" > <span className="workDetails">Organisation: </span> {ele.organisation}</p>
           <p className="universal" > <span className="workDetails">Position: </span>{ele.position}</p>
           <p className="universal" > <span className="workDetails" >Duration: </span> {ele.start +" to " + ele.end}</p>
-          <div className="job-profile"> <span className="workDetails" >Profile: </span> {ele.description.join(" | ")}</div>
+          <div className="job-profile"> <span className="workDetails" >ROLES: </span> {ele.description.join(" | ")}</div>
         </div>
       )
     })
