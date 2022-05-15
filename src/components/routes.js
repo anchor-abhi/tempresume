@@ -6,6 +6,7 @@ import DownloadResume from "./downloadResume";
 import Form from "./Form/Form.jsx";
 import Temp4 from "./newTemplates/template4/temp4";
 import { Template } from "./newTemplates/template3/components/Template-II/Template";
+import TemplateSelector from "../Pages/TemplateSelector";
 import { Demo } from "./Form/Demo";
 import Temp2 from "./newTemplates/template2/Temp2";
 import Temp5 from "./newTemplates/template5/Temp5"
@@ -24,6 +25,7 @@ export default function AddRoute() {
         <Route path="/image" element={<Demo />} />
         <Route path="/temp2" element={<Temp2 />} />
         <Route path="/temp5" element={<Temp5 />} />
+        <Route path="/selecttemplate" element={<TemplateSelector />} />
       </Routes>
     </>
   );
