@@ -9,7 +9,8 @@ import { Template } from "./newTemplates/template3/components/Template-II/Templa
 import TemplateSelector from "../Pages/TemplateSelector";
 import { Demo } from "./Form/Demo";
 import Temp2 from "./newTemplates/template2/Temp2";
-import Temp5 from "./newTemplates/template5/Temp5"
+import Temp5 from "./newTemplates/template5/Temp5";
+import UpdatePass from "./updatePass";
 
 export default function AddRoute() {
   return (
@@ -26,6 +27,7 @@ export default function AddRoute() {
         <Route path="/temp2" element={<Temp2 />} />
         <Route path="/temp5" element={<Temp5 />} />
         <Route path="/selecttemplate" element={<TemplateSelector />} />
+        <Route path="/forgot-password/:token" element={<UpdatePass/>} />
       </Routes>
     </>
   );
