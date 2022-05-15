@@ -271,13 +271,13 @@
 .Work-ex{
   max-height: 50%;
 }
-.Projects{
+.Projects-sec{
   height: fit-content;
 }
-.Work-ex,.Projects{
+.Work-ex,.Projects-sec{
   position: relative;
 }
-.Work-ex > div ,.Projects > div:nth-child(1){
+.Work-ex > div ,.Projects-sec > div:nth-child(1){
   display: flex;
 }
 .right-side-heading{
@@ -316,7 +316,7 @@
   padding-bottom: 8px;
 }
 
-.work-desc,.project-desc{
+.work-desc,.proj-desc{
   padding: 10px 0px 0px 20px;
   width: 100%;
   display: flex;
@@ -354,27 +354,27 @@
   font-weight: 400;
   left: 15px;
 }
-.project-desc{
+.proj-desc{
   padding-top: 0;
   padding-bottom: 0;
   margin-left: 20px;
   margin-bottom: 5px;
 }
-.project-name > div{
+.proj-name > div{
   display: flex;
   align-items: center;
 }
-.project-name > div > a{
+.proj-name > div > a{
   text-decoration: none;
 }
-.project-name > div > a > span{
+.proj-name > div > a > span{
   margin: 0;
   padding-right: 5px;
   font-size: 1.2em;
   font-weight: 600;
   color: #3a3a3c;
 }
-.project-name > p{
+.proj-name > p{
   font-size: 1.1em;
   line-height:1.1em;
   font-weight: 400;

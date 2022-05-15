@@ -6,8 +6,8 @@ export const SingleProject = (props)=>{
           <div className='all-about-projects'>
                 {props?.projects?.map((el)=>{
                   return (
-                    <div className='project-desc'>
-                      <div className='project-name'>
+                    <div className='proj-desc'>
+                      <div className='proj-name'>
                         <div>
                           <a href={el.liveLink}><span>{el.name}</span></a><a href={el.gitLink}><span><GitHubIcon style={{
                             width: "15px",

@@ -6,7 +6,7 @@ import { SingleProject } from "./SingleProject";
 import { Heading2 } from "../Headings/Right-side-Headings";
 export const Projects = (props)=>{
     return (
-        <div className='Projects'>
+        <div className='Projects-sec'>
             <Heading2 Icon={<LibraryBooksIcon style={{
                 width: "20px",
                 height: "20px",
