@@ -9,7 +9,7 @@ export const Right = ({ data }) => {
       {/*  */}
       <div className="profile-desc">
         <h4 style={{marginBottom:"3px"}} className="universal">PERSONAL PROFILE</h4>
-        <p className="universal" style={{fontSize:"12px",fontFamily:'Roboto'}}>{data?.summary}</p>
+        <p className="universal" style={{fontSize:"11px",fontFamily:'Roboto'}}>{data?.summary}</p>
       </div>
 
     {/* optional work experience */}
@@ -18,7 +18,7 @@ export const Right = ({ data }) => {
     {
     data?.workEx?.map((ele)=>{
       return(
-        <div className="universal" style={{fontSize:"11.5px"}}>
+        <div className="universal" style={{fontSize:"11px"}}>
           <p className="universal" > <span className="workDetails">Organisation: </span> {ele.organisation}</p>
           <p className="universal" > <span className="workDetails">Position: </span>{ele.position}</p>
           <p className="universal" > <span className="workDetails" >Duration: </span> {ele.start +" to " + ele.end}</p>
@@ -36,7 +36,7 @@ export const Right = ({ data }) => {
       {/* project section */}
 
       <section className="project-section">
-        <h4 className="universal" style={{marginBottom:"-1px"}} >PROJECTS</h4>
+        <h4 className="universal" style={{marginBottom:"-6px"}} >PROJECTS</h4>
         {/* first project */}
         {data?.projects?.map((ele) => {
           return (
@@ -44,7 +44,7 @@ export const Right = ({ data }) => {
               {/* deplye link and github link */}
               <div className="icons-div" >
                 <h4 className="universal"
-                  style={{ cursor: "pointer" ,paddingTop:"6px"}}
+                  style={{ cursor: "pointer" ,paddingTop:"6px",marginTop:"-10px"}}
                   onClick={() => {
                     window.open(ele.liveLink);
                   }}
@@ -67,7 +67,7 @@ export const Right = ({ data }) => {
                     <li className="universal"
                       style={{
                         lineHeight: data?.workEx?.length == 0 ? "12px" : "6px",
-                        fontSize:"12px"
+                        fontSize:"11px"
                       }}
                     >
                       {list}
@@ -82,11 +82,11 @@ export const Right = ({ data }) => {
                 {ele.areasOfResp.map((res) => {
                   return <li className="universal"  style={{
                     lineHeight: data?.workEx?.length == 0 ? "12px" : "6px",
-                    fontSize:"12px"
+                    fontSize:"11px"
                   }} >{res}</li>;
                 })}
                 {ele.solo ? (
-                  <p style={{fontSize:"12px"}} className="team-line">Solo Project </p>
+                  <p style={{fontSize:"11px"}} className="team-line">Solo Project </p>
                 ) : (
                   <p style={{fontSize:"11px"}} className="team-line">
                     {"A collaborative project built by a team of " +
