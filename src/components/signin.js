@@ -66,6 +66,22 @@ export default function SignIn() {
       });
   };
 
+  const forgotPass=()=>{
+    const email=prompt("Enter your email");
+    axios.post(`https://masairesumebuilder.herokuapp.com/user/forgot-password`,{email})
+    .then((res)=>{
+      if(res.data.err){
+        alert(res.data.err);
+      }
+      else{
+        alert(res.data);
+      }
+    })
+    .catch((e)=>{
+      console.log(e.message)
+    })
+  }
+    
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -124,7 +140,7 @@ export default function SignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link onClick={forgotPass} variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
