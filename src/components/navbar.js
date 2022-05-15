@@ -11,6 +11,9 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import { useState, useEffect } from "react";
+import axios from "axios";
+
 
 const pages = [];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -33,7 +36,18 @@ const ResponsiveAppBar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
+const [image, setImage] = useState("")
+useEffect(() => {
+  const userId = JSON.parse(localStorage.getItem("loggedinUser"));
+  axios
+    .get(`https://masairesumebuilder.herokuapp.com/resume/${userId}`)
+    .then((res) => {
+      console.log(res.data);
+      setImage(res.data[res.data.length - 1]?.personal?.profilePic);
+      
+    })
+    .catch((e) => console.log(e.message));
+}, []);
   return (
     <AppBar position="fixed" width="100%" zindex="5000">
       <Container maxWidth="xl">
@@ -108,7 +122,7 @@ const ResponsiveAppBar = () => {
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
                   alt="Remy Sharp"
-                  src="https://lh3.googleusercontent.com/_dYiI9XA99g1pgelw9pLE2CXMq39_1AwHael8tqfFv88GR7laqGDKot6kbnQYvfIxdNR_KA=s85"
+                  src={image ? image : null}
                 />
               </IconButton>
             </Tooltip>
