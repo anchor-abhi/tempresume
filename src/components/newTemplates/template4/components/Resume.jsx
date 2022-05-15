@@ -59,7 +59,7 @@ function Resume() {
 					<div
 						style={{
 							backgroundColor: sColor,
-							width: "40vw",
+							width: "900px",
 							transformOrigin: "0%",
 							transform: `translateX(-100px) translateY(-30px) rotate(${leftTSlider}deg)`,
 						}}
@@ -70,15 +70,18 @@ function Resume() {
 					<div
 						style={{
 							backgroundColor: lColor,
-							width: "40vw",
+							width: "900px",
 							transformOrigin: "0% 100%",
-							transform: `translateX(165px) translateY(-300px) rotate(${
-								rightTSlider + 0.5
-							}deg)`,
+							transform: `translateX(305px) translateY(-100%)
+							rotate(${rightTSlider + 0.5}deg)`,
 						}}
 						id="orangeDiv"
 					></div>
 				)}
+
+				{/* rotate(${
+								rightTSlider + 0.5
+							}deg)`, */}
 				{data.map((one) => {
 					return (
 						<>
