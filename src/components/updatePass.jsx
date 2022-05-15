@@ -65,7 +65,7 @@ export default function UpdatePass() {
       }
     }
   };
-
+  localStorage.setItem("loggedinUser",JSON.stringify(null));
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
