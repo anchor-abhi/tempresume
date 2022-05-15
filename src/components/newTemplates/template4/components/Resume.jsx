@@ -45,7 +45,7 @@ function Resume() {
 				if (!linkedArr[linkedArr.length - 1]) linkedArr.pop();
 				setLinkedUserName(linkedArr[linkedArr.length - 1]);
 				setGitUserName(gitArr[gitArr.length - 1]);
-				if (data[0].workEx) {
+				if (data[data.length-1].workEx) {
 					setHasWork(true);
 					setRightSlider(90);
 				}
@@ -82,6 +82,7 @@ function Resume() {
 				{data.map((one) => {
 					return (
 						<>
+						
 							<div key={uuid()} id="left" style={{ background: leftDivColor }}>
 								<div id="nameAndDesignation" style={{ marginTop: leftSlider }}>
 									<h2 style={{ color: headingColor }} id="nameH1">

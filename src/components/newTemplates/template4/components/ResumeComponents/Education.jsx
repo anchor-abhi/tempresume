@@ -1,5 +1,6 @@
 import {v4 as uuid} from "uuid";
 function Education({one, headingColor, textColor}) {
+   console.log("one=",one.education)
    return (
       <div id="education">
          <h2 style={{color: headingColor}}>Education</h2>

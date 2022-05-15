@@ -315,13 +315,14 @@
 .all-about-work{
   padding-bottom: 8px;
 }
+
 .work-desc,.project-desc{
-  padding: 10px 0 0px 20px;
+  padding: 10px 0px 0px 20px;
   width: 100%;
   display: flex;
   flex-direction: column;
-  row-gap: 2px;
 }
+
 .designation::before{
   content: '';
   position: absolute;
@@ -354,9 +355,10 @@
   left: 15px;
 }
 .project-desc{
-  margin: 0;
   padding-top: 0;
   padding-bottom: 0;
+  margin-left: 20px;
+  margin-bottom: 5px;
 }
 .project-name > div{
   display: flex;
@@ -368,12 +370,13 @@
 .project-name > div > a > span{
   margin: 0;
   padding-right: 5px;
-  font-size: 0.8em;
+  font-size: 1.2em;
   font-weight: 600;
   color: #3a3a3c;
 }
 .project-name > p{
-  font-size: 0.75em;
+  font-size: 1.1em;
+  line-height:1.1em;
   font-weight: 400;
 }
 .features {
@@ -388,20 +391,19 @@
   row-gap: 0;
 }
 .features > div:last-child > span{
-  font-size: 0.75em;
+  font-size: 0.9em;
   font-weight: 400;
 }
 .features > div > p{
-  font-size: 0.8em;
-  font-weight: 500;
-  color: #06aedb;
+  font-size: 1.1em;
+  font-weight: 800;
 }
 .features > div > ul{
   position: relative;
   left: 15px;
 }
 .features > div > ul > li{
-  font-size: 0.75em;
+  font-size: 0.9em;
   font-weight: 400;
 }
 .roles {
@@ -409,20 +411,19 @@
   flex-direction: column;
 }
 .roles > p:first-child{
-  font-size: 0.8em;
-  font-weight: 500;
-  color: #06aedb;
+  font-size: 1em;
+  font-weight: 800;
 }
 .roles > ul{
   position: relative;
   left: 15px;
 }
 .roles > ul > li{
-  font-size: 0.75em;
+  font-size: 0.9em;
   font-weight: 400;
 }
 .roles > p:last-child{
-  font-size: 0.75em;
+  font-size: 0.95em;
   font-weight: 400;
 }
 .Contact{

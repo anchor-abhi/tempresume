@@ -8,25 +8,21 @@ export const Right = ({ data }) => {
       <hr className="hr" />
       {/*  */}
       <div className="profile-desc">
-        <h4 className="universal">PERSONAL PROFILE</h4>
-        <p className="universal" style={{fontSize:"11px"}}>{data?.summary}</p>
+        <h4 style={{marginBottom:"3px"}} className="universal">PERSONAL PROFILE</h4>
+        <p className="universal" style={{fontSize:"11px",fontFamily:'Roboto'}}>{data?.summary}</p>
       </div>
 
     {/* optional work experience */}
-    {/* { data?.workEx?.length !== 0 ? <section className="work-exp" >
+    { data?.workEx?.length !== 0 ? <section className="work-exp" >
     <h4 className="universal" >WORK EXPERIENCE</h4>
     {
     data?.workEx?.map((ele)=>{
       return(
         <div className="universal" style={{fontSize:"11px"}}>
-          <p className="universal" >Organisation:{ele.organisation}</p>
-          <p className="universal" >Position:{ele.position}</p>
-          <p className="universal" >Duration:{ele.start +" to " + ele.end}</p>
-          <div className="job-profile">Job Profile:{ele.description.map((task)=>{
-            return(
-              <li className="universal" style={{listStyleType:"none", fontSize:"11px"}} >{task+" | "}</li>
-            )
-          })}</div>
+          <p className="universal" > <span className="workDetails">Organisation: </span> {ele.organisation}</p>
+          <p className="universal" > <span className="workDetails">Position: </span>{ele.position}</p>
+          <p className="universal" > <span className="workDetails" >Duration: </span> {ele.start +" to " + ele.end}</p>
+          <div className="job-profile"> <span className="workDetails" >ROLES: </span> {ele.description.join(" | ")}</div>
         </div>
       )
     })
@@ -34,13 +30,13 @@ export const Right = ({ data }) => {
     }
     </section> : ""
     
-  } */}
+  }
     
 
       {/* project section */}
 
       <section className="project-section">
-        <h4 className="universal" style={{marginBottom:"-1px"}} >PROJECTS</h4>
+        <h4 className="universal" style={{marginBottom:"-6px"}} >PROJECTS</h4>
         {/* first project */}
         {data?.projects?.map((ele) => {
           return (
@@ -48,7 +44,7 @@ export const Right = ({ data }) => {
               {/* deplye link and github link */}
               <div className="icons-div" >
                 <h4 className="universal"
-                  style={{ cursor: "pointer" ,paddingTop:"6px"}}
+                  style={{ cursor: "pointer" ,paddingTop:"6px",marginTop:"-10px"}}
                   onClick={() => {
                     window.open(ele.liveLink);
                   }}
@@ -70,7 +66,7 @@ export const Right = ({ data }) => {
                   return (
                     <li className="universal"
                       style={{
-                        // lineHeight: data?.workEx?.length == 0 ? "12px" : "5px",
+                        lineHeight: data?.workEx?.length == 0 ? "12px" : "6px",
                         fontSize:"11px"
                       }}
                     >
@@ -85,7 +81,7 @@ export const Right = ({ data }) => {
                 <h4 className="area-of-response">Area of responsibility</h4>
                 {ele.areasOfResp.map((res) => {
                   return <li className="universal"  style={{
-                    // lineHeight: data?.workEx?.length == 0 ? "12px" : "5px",
+                    lineHeight: data?.workEx?.length == 0 ? "12px" : "6px",
                     fontSize:"11px"
                   }} >{res}</li>;
                 })}

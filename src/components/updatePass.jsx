@@ -3,10 +3,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
@@ -14,8 +11,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import { TokenContext } from "./context/context";
-import { useContext } from "react";
+import { useParams } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -37,51 +33,39 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignIn() {
-  const { token, set } = useContext(TokenContext);
-
+export default function UpdatePass() {
+  const { token } = useParams();
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    axios
-      .post("https://masairesumebuilder.herokuapp.com/user/login", {
-        email: data.get("email"),
-        password: data.get("password"),
-      })
-      .then((res) => {
-        console.log(res);
-        if (res.data.err) {
-          alert(res.data.err);
-        } else {
-          // set(res.data.token);
-          console.log(res.data.user[0]._id);
-          localStorage.setItem("loggedinUser",JSON.stringify(res.data.user[0]._id));
-          navigate("/createform");
-        }
-      })
-      .catch((e) => {
-        console.log(e.message);
-      });
+    if (data.get("pass") != data.get("conf-pass")) {
+      alert("Passwords does not match");
+    } else {
+      if (data.get("pass").length > 6) {
+        axios
+          .post(
+            `https://masairesumebuilder.herokuapp.com/user/update-password/${token}`,
+            {
+              password: data.get("pass"),
+            }
+          )
+          .then((res) => {
+            console.log(res);
+            if (res.data.err) {
+              alert(res.data.err);
+            } else {
+              alert("passupdated");
+                navigate("/signin");
+            }
+          });
+      } else {
+          alert("Password too short")
+      }
+    }
   };
 
-  const forgotPass=()=>{
-    const email=prompt("Enter your email");
-    axios.post(`https://masairesumebuilder.herokuapp.com/user/forgot-password`,{email})
-    .then((res)=>{
-      if(res.data.err){
-        alert(res.data.err);
-      }
-      else{
-        alert(res.data);
-      }
-    })
-    .catch((e)=>{
-      console.log(e.message)
-    })
-  }
-    
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -98,7 +82,7 @@ export default function SignIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Update Password
           </Typography>
           <Box
             component="form"
@@ -110,46 +94,30 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="pass"
+              label="New Password"
+              name="pass"
+              type="password"
               autoFocus
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
+              id="conf-pass"
+              label="Confirm Password"
+              name="conf-pass"
+              autoFocus
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Update
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link onClick={forgotPass} variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
