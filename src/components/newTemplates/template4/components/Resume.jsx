@@ -29,7 +29,7 @@ function Resume() {
 
 	useEffect(() => {
 		const userId = JSON.parse(localStorage.getItem("loggedinUser"));
-		fetch(`https://masairesumebuilder.herokuapp.com/resume/${userId}`)
+		fetch(`http://localhost:8080/data`)
 			.then((res) => res.json())
 			.then((data) => {
 				setData([data[data.length - 1]]);
