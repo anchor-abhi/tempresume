@@ -320,6 +320,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  row-gap: 2px;
 }
 .designation::before{
   content: '';
@@ -372,7 +373,7 @@
   color: #3a3a3c;
 }
 .project-name > p{
-  font-size: 0.65em;
+  font-size: 0.75em;
   font-weight: 400;
 }
 .features {
@@ -387,19 +388,20 @@
   row-gap: 0;
 }
 .features > div:last-child > span{
-  font-size: 0.65em;
+  font-size: 0.75em;
   font-weight: 400;
 }
 .features > div > p{
-  font-size: 0.7em;
+  font-size: 0.8em;
   font-weight: 500;
+  color: #06aedb;
 }
 .features > div > ul{
   position: relative;
   left: 15px;
 }
 .features > div > ul > li{
-  font-size: 0.65em;
+  font-size: 0.75em;
   font-weight: 400;
 }
 .roles {
@@ -407,19 +409,20 @@
   flex-direction: column;
 }
 .roles > p:first-child{
-  font-size: 0.7em;
+  font-size: 0.8em;
   font-weight: 500;
+  color: #06aedb;
 }
 .roles > ul{
   position: relative;
   left: 15px;
 }
 .roles > ul > li{
-  font-size: 0.65em;
+  font-size: 0.75em;
   font-weight: 400;
 }
 .roles > p:last-child{
-  font-size: 0.65em;
+  font-size: 0.75em;
   font-weight: 400;
 }
 .Contact{
