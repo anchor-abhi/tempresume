@@ -60,7 +60,7 @@ export const Right = ({ data }) => {
               </div>
               {/* aboutproject */}
               <div className="universal">
-                <p className="project-desc">{ele.description}</p>
+                <p className="project-description">{ele.description}</p>
                 <h4 className="universal" style={{marginBottom:"0px"}}>Features</h4>
                 {ele.features.map((list) => {
                   return (
