@@ -74,7 +74,7 @@ export default function SignIn() {
         alert(res.data.err);
       }
       else{
-        alert(res.data);
+        alert("Email sent successfully, please check your spam as well");
       }
     })
     .catch((e)=>{
