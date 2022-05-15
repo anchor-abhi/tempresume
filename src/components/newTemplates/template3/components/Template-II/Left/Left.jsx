@@ -53,7 +53,7 @@ export const Left = ({data,state,color}) => {
       return(
         <div className="universal" style={{color:color}} >
         <SchoolIcon className="universal"/>
-        <p style={{color:color}} className="universal">{ele.course+", "}{ele.institute+" "}{ele.start+"-"}{ele.end}</p>
+        <p style={{color:color,fontSize:"11px"}} className="universal">{ele.course+", "}{ele.institute+" "}{ele.start+"-"}{ele.end}</p>
       </div>
       )
     })}
@@ -76,7 +76,7 @@ export const Left = ({data,state,color}) => {
 {/* interest section */}
     <section className="interest-section" >
     <h4 className="universal" >INTERESTS</h4>
-    <p className="universal" style={{color:color}} >{data?.interests?.join(" | ")}</p>
+    <p className="universal" style={{color:color,fontSize:"11px"}} >{data?.interests?.join(" | ")}</p>
     </section>
 
 

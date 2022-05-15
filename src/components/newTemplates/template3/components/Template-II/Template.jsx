@@ -3,6 +3,7 @@ import { Right } from "./Right/Right";
 import "./Template.css";
 import { useEffect, useState } from "react";
 import axios from "axios"
+import {duplicateData} from "../../store/Data"
 export const Template = ()=>{
     let [state,setState] = useState("white")
     let [color,setColor] = useState("black")
