@@ -36,6 +36,7 @@ const theme = createTheme();
 
 export default function SignUp() {
   const navigate = useNavigate();
+  localStorage.setItem("loggedinUser",JSON.stringify(null));
   const handleSubmit = (event) => {
     event.preventDefault();
     var data = new FormData(event.currentTarget);

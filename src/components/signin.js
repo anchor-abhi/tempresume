@@ -38,7 +38,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
-  const { token, set } = useContext(TokenContext);
+  localStorage.setItem("loggedinUser",JSON.stringify(null));
 
   const navigate = useNavigate();
 
