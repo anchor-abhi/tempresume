@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -18,12 +18,17 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LanguageIcon from '@mui/icons-material/Language';
 import axios from "axios";
 import { useNavigate } from "react-router";
+import Cropper from 'react-easy-crop'
+import Slider from '@mui/material/Slider'
+import Typography from '@mui/material/Typography'
+import getCroppedImg from './cropImage'
 import "./Form.css"
 
+const dog ='https://img.huffingtonpost.com/asset/5ab4d4ac2000007d06eb2c56.jpeg?cache=sih0jwle4e&ops=1910_1000';
 var isGithubUrl = require('is-github-url');
 
-const profileMaxSize = 4098; // IN kb
-const profileMinSize = 100; // IN kb
+const profileMaxSize = 4098;
+const profileMinSize = 100;
 
 const courseTitleMaxLength = 50;
 const collegeTitleMaxLength = 50;
@@ -33,22 +38,127 @@ const projectIntroMaxLength = 100;
 const projectRolesMaxLength = 150;
 const projectFeaturesMaxLength = 150;
 
-
-
 const courseTitleLabel = "Course/Degree Title  (maximum " + courseTitleMaxLength + " characters) *"
-const collegeTitleLabel = "College/Institue/School name (maximum " + collegeTitleMaxLength + " characters) *"
+const collegeTitleLabel = "College/institute/School name (maximum " + collegeTitleMaxLength + " characters) *"
 
 const projectTitleLabel = "Project Title  (maximum " + projectTitleMaxLength + " characters) *"
 const projectIntroLabel = "Write a quick brief about project (maximum " + projectIntroMaxLength + " characters) *"
 const projectRolesLabel = "Project Roles, each in new line (maximum " + projectRolesMaxLength + " characters) *"
 const projectFeaturesLabel = "Project Features, each in new line (maximum " + projectFeaturesMaxLength + " characters) *"
 
-
-const techStacks = ["HTML", "CSS", "JavaScript", "React","Redux","Git","SQL","Java", "Express", "NodeJS", "MongoDB", "MUI", "ChakraUI"]
+const techStacks = ["HTML", "CSS", "JavaScript", "React","Redux","Git","SQL","Java", "Express", "NodeJS", "MongoDB", "MUI", "ChakraUI", "Python" , "Flask" , "Keras"]
 const softSkills = ["Time management", "Communication", "Adaptability", "Problem-solving", "Teamwork", "Creativity", "Leadership", "Interpersonal skills"]
 
 
 const Form = () => {
+    const [crop, setCrop] = useState({ x: 0, y: 0 })
+    const [rotation, setRotation] = useState(0)
+    const [zoom, setZoom] = useState(1)
+    const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
+    const [croppedImage, setCroppedImage] = useState(null)
+  
+    const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+      setCroppedAreaPixels(croppedAreaPixels)
+    }, [])
+
+
+
+    const showCroppedImage = useCallback(async () => {
+      try {
+        const croppedImage = await getCroppedImg(
+          URL.createObjectURL(selectedFile),
+          croppedAreaPixels,
+          rotation
+        )
+        console.log('donee', { croppedImage })
+        setOpenDialog(false);
+        setCroppedImage(croppedImage)
+        setPreview(croppedImage)
+        // setSelectedFile(URL.createObjectURL(croppedImage))
+      } catch (e) {
+        console.error(e)
+      }
+    }, [croppedAreaPixels, rotation])
+  
+    const [openDialog, setOpenDialog] = useState(false);
+  
+    function handleCloseForm()
+    {
+      setOpenDialog(false);
+    }
+    function handleOpenForm()
+    {
+      setOpenDialog(true);
+    }
+  
+  const [pageLoading, setPageLoading] = useState(true);
+  const [userPreviousData, setUserPreviousData] = useState(false);
+  const [profilevalidation, setProfileValidation] = useState(false);
+
+  
+  useEffect(() => {
+    // async function lookingForOldData()
+    // {
+  const userId = JSON.parse(localStorage.getItem("loggedinUser")) || null;
+  if(userId != null)
+    {
+        axios
+          .get(`https://masairesumebuilder.herokuapp.com/resume/${userId}`)
+          .then((res) => {
+            setUserPreviousData(res.data);
+            console.log(res.data)
+            if(res.data.length == 0)
+            {
+              setPageLoading(false);
+            }
+            else{
+              let dataLength = res.data.length-1;
+              setStudentName(res.data[dataLength].personal.name);
+            setTagline(res.data[dataLength].personal.tagLine)
+            setTagline(res.data[dataLength].personal.tagLine)
+            setPreview(res.data[dataLength].personal.profilePic)
+            // setSelectedFile(res.data[dataLength].personal.profilePic)
+            setAbout(res.data[dataLength].summary)
+            setContact(res.data[dataLength].personal.mob)
+            setAddress(res.data[dataLength].personal.address)
+            setLinkedinLink(res.data[dataLength].personal.linkedin)
+            setGithubLink(res.data[dataLength].personal.github)
+            setEmailID(res.data[dataLength].personal.email)
+            setEducationData(res.data[dataLength].education)
+            setProjectData(res.data[dataLength].projects)
+            setStudentSoftSkills(res.data[dataLength].softSkills)
+            setStudentTechStacks(res.data[dataLength].techSkills)
+            setStudentAccomplishment(res.data[dataLength].accomplishments.join("\n"))
+            setStudentInterests(res.data[dataLength].interests.join(", "))
+
+            if(res.data[dataLength].workEx && res.data[dataLength].workEx.length != 0)
+            {
+              setWorkExperienceData(res.data[dataLength].workEx)
+              setShowExperienceRendering(true);
+              setDisplayWorkExperienceData(true);
+            }
+            
+            setDisplayEducationData(true);
+            setDisplayProjectData(true);
+            setProfileValidation(true);
+            }
+            // console.log(userPreviousData)
+          })
+          .then(()=>{
+            setPageLoading(false)
+          })
+          .catch((e) => console.log(e.message))
+        } 
+        else
+        {
+          setPageLoading(false)
+          console.log("user is not logged in");          
+        }
+        }, []);
+
+
+
+ 
   const navigate = useNavigate();
 
   const [maxTechStacksRendering, setMaxTechStacksRendering] = useState(false); // maxTechStacksRendering for conditional
@@ -65,24 +175,25 @@ const Form = () => {
     }
 
     const objectUrl = URL.createObjectURL(selectedFile)
-    setPreview(objectUrl)
+    // setPreview(objectUrl)
 
-    // free memory when ever this component is unmounted
+    // // free memory when ever this component is unmounted
     return () => URL.revokeObjectURL(objectUrl)
   }, [selectedFile])
 
   const onSelectFile = e => {
+    setProfileValidation(false);
     if (!e.target.files || e.target.files.length === 0) {
       setSelectedFile(undefined)
       return
     }
 
+    setOpenDialog(true);
     setSelectedFile(e.target.files[0])
   }
 
 
   const [studentName, setStudentName] = useState('');
-  const [studentProfile, setStudentProfile] = useState('');
   const [tagline, setTagline] = useState('');
   const [address, setAddress] = useState('');
   const [emailID, setEmailID] = useState('');
@@ -118,6 +229,10 @@ const Form = () => {
       alert("You already have added three educations, can't add more")
       return;
     }
+    setCollegeName("");
+      setCourseTitle("");
+      setStartDate("");
+      setEndDate("");
     setEditEducationDataIndex(-1);
     setOpenEducationForm(true);
   };
@@ -132,7 +247,7 @@ const Form = () => {
       return;
     }
     if (collegeName.length == 0) {
-      setCollegeNameError("College/Institue/School name can't be blank")
+      setCollegeNameError("College/institute/School name can't be blank")
       return;
     }
     if (startDate.length == 0) {
@@ -153,25 +268,30 @@ const Form = () => {
 
   const displayEducationDetails = () => {
     if (editEducationDataIndex == -1) {
+      console.log(collegeName, startDate, endDate)
       let temp = {
         "course": courseTitle,
-        "college": collegeName,
-        "startDate": startDate,
-        "endDate": endDate
+        "institute": collegeName,
+        "start": startDate,
+        "end": endDate
       }
+      setCollegeName("");
+      setCourseTitle("");
+      setStartDate("");
+      setEndDate("");
       setEducationData([...educationData, temp]);
     }
     else {
       educationData[editEducationDataIndex].course = courseTitle;
-      educationData[editEducationDataIndex].college = collegeName;
-      educationData[editEducationDataIndex].startDate = startDate;
-      educationData[editEducationDataIndex].endDate = endDate;
+      educationData[editEducationDataIndex].institute = collegeName;
+      educationData[editEducationDataIndex].start = startDate;
+      educationData[editEducationDataIndex].end = endDate;
     }
     setDisplayEducationData(true);
   }
 
 
-  const [openProjectForm, setOpenProjectForm] = React.useState(false);
+  const [openProjectForm, setOpenProjectForm] = useState(false);
 
   const [projectTitle, setProjectTitle] = useState('');
   const [projectIntro, setProjectIntro] = useState('');
@@ -203,6 +323,15 @@ const Form = () => {
       alert("You have already added two projects, can't add more");
       return;
     }
+    
+    setProjectTitle("");
+    setProjectFeatures("")
+    setProjectCollaborated(false);
+    setProjectGithubLink("");
+    setProjectLiveLink("");
+    setProjectRoles("");
+    setProjectTechStacks("");
+    setProjectIntro("");
     setOpenProjectForm(true);
   };
   
@@ -263,26 +392,36 @@ const Form = () => {
   const displayProjectDetails = () => {
     if (editProjectDataIndex == -1) {
       let temp = {
-        "title": projectTitle,
-        "introduction": projectIntro,
-        "githubLink": projectGithubLink,
+        "name": projectTitle,
+        "description": projectIntro,
+        "gitLink": projectGithubLink,
         "liveLink": projectLiveLink,
         "features": projectFeatures.split("\n"),
-        "roles": projectRoles.split("\n"),
-        "collaboration": projectCollaborated,
-        "techStacks": projectTechStacks
+        "areasOfResp": projectRoles.split("\n"),
+        "solo": projectCollaborated,
+        "techStack": projectTechStacks
       }
+
+      setProjectTitle("");
+      setProjectFeatures("")
+      setProjectCollaborated(false);
+      setProjectGithubLink("");
+      setProjectLiveLink("");
+      setProjectRoles("");
+      setProjectTechStacks("");
+      setProjectIntro("");
 
       setProjectData([...projectData, temp]);
     }
     else {
-      projectData[editProjectDataIndex].title = projectTitle;
-      projectData[editProjectDataIndex].introduction = projectIntro;
-      projectData[editProjectDataIndex].githubLink = projectGithubLink;
+
+      projectData[editProjectDataIndex].name = projectTitle;
+      projectData[editProjectDataIndex].description = projectIntro;
+      projectData[editProjectDataIndex].gitLink = projectGithubLink;
       projectData[editProjectDataIndex].liveLink = projectLiveLink;
       projectData[editProjectDataIndex].features = projectFeatures.split("\n");
-      projectData[editProjectDataIndex].roles = projectRoles.split("\n");
-      projectData[editProjectDataIndex].collaboration = projectCollaborated;
+      projectData[editProjectDataIndex].areasOfResp = projectRoles.split("\n");
+      projectData[editProjectDataIndex].solor = projectCollaborated;
 
       projectData[editProjectDataIndex].techStacks = projectTechStacks;
     }
@@ -302,15 +441,112 @@ const Form = () => {
   const [workEndDate, setWorkEndDate] = useState('');
   const [workRoles, setWorkRoles] = useState([]);
 
+  const [workCompanyError, setWorkCompanyError] = useState('');
+  const [workDesignationError, setWorkDesignationError] = useState('');
+  const [workStartDateError, setWorkStartDateError] = useState('');
+  const [workEndDateError, setWorkEndDateError] = useState('');
+  const [workRolesError, setWorkRolesError] = useState('');  
+
+  const [displayWorkExperienceData, setDisplayWorkExperienceData] = useState(false);
+
+  const [workExperienceData, setWorkExperienceData] = useState([]);
+  const [editExperienceDataIndex, setEditExperienceDataIndex] = useState(-1)
 
   const handleOpenExperienceForm = () => {
-   
-    setOpenExperienceForm(true);
+   if(workExperienceData.length == 2)
+   {
+     alert("You have already added two work experience, can't add more")
+     return;
+   }
+   setWorkCompany("");
+   setWorkDesignation("");
+   setWorkEndDate("");
+   setWorkRoles([]);
+   setWorkStartDate(""); 
+   setOpenExperienceForm(true);
   };
 
   const handleCloseExperienceForm = () => {
     setOpenExperienceForm(false);
   };
+
+
+
+  var workRolesArray;
+  const addExperience = () => {
+    if (workCompany.length == 0) {
+      setWorkCompanyError("Commpany/Organisation name can't be blank")
+      return;
+    }
+    if (workDesignation.length == 0) {
+      setWorkDesignationError("Designation can't be blank")
+      return;
+    }
+    if (workStartDate.length == 0) {
+      setWorkStartDateError("Start date can't be blank")
+      return;
+    }
+    if (workEndDate.length == 0) {
+      setWorkEndDateError("End date can't be blank")
+      return;
+    }
+    if (workStartDate > workEndDate) {
+      setWorkEndDateError("End date can not be earlier than start date");
+      return;
+    }
+    if (workRoles.length == 0) {
+      setWorkRolesError("Work experience roles can't be blank");
+      return;
+    }
+    workRolesArray = workRoles.split("\n");
+    if (workRolesArray.length > 3) {
+      setWorkRolesError("Maximum you can add 3 points in work experience roles");
+      return;
+    }
+    setOpenExperienceForm(false)
+    displayExperienceDetails();
+  }
+
+  function displayExperienceDetails()
+  {
+    console.log(workExperienceData, editExperienceDataIndex)
+    if (editExperienceDataIndex == -1) {
+      let temp = {
+        "organisation": workCompany,
+        "position": workDesignation,
+        "start": workStartDate,
+        "end": workEndDate,
+        "description": workRolesArray
+      } 
+      setWorkCompany("");
+      setWorkDesignation("");
+      setWorkEndDate("");
+      setWorkRoles([]);
+      setWorkStartDate("");
+      // console.log(temp, workExperienceData);
+      setWorkExperienceData([...workExperienceData, temp]);
+    }
+    else {
+      workExperienceData[editExperienceDataIndex].organisation = workCompany;
+      workExperienceData[editExperienceDataIndex].position = workDesignation;
+      workExperienceData[editExperienceDataIndex].start = workStartDate;
+      workExperienceData[editExperienceDataIndex].end = workEndDate;
+      workExperienceData[editExperienceDataIndex].description = workRolesArray;
+    }
+    setDisplayWorkExperienceData(true);
+  }
+
+  
+  function editExperienceButtonPress(index) {
+    // console.log(index)
+    setWorkCompany(workExperienceData[index].organisation);
+    setWorkDesignation(workExperienceData[index].position);
+    setWorkStartDate(workExperienceData[index].start);
+    setWorkEndDate(workExperienceData[index].end);
+    setWorkRoles(workExperienceData[index].description.join("\n"));
+
+    setEditExperienceDataIndex(-1);
+  }
 
   function validateUrl(value) {
     return /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(value);
@@ -319,9 +555,11 @@ const Form = () => {
   function editFormButtonPress(index) {
     console.log(index)
     setCourseTitle(educationData[index].course);
-    setCollegeName(educationData[index].college);
-    setStartDate(educationData[index].startDate);
-    setEndDate(educationData[index].endDate);
+    setCollegeName(educationData[index].institute);
+    setStartDate(educationData[index].start);
+    setEndDate(educationData[index].end);
+
+    setEditEducationDataIndex(-1);
   }
 
 
@@ -329,29 +567,34 @@ const Form = () => {
 
     console.log(index)
 
-    setProjectTitle(projectData[index].title);
-    setProjectIntro(projectData[index].introduction);
-    setGithubLink(projectData[index].githubLink);
+    setProjectTitle(projectData[index].name);
+    setProjectIntro(projectData[index].description);
+    setProjectGithubLink(projectData[index].gitLink);
     setProjectLiveLink(projectData[index].liveLink);
     setProjectFeatures(projectData[index].features.join("\n"));
-    setProjectRoles(projectData[index].roles.join("\n"));
-    setProjectCollaborated(projectData[index].collaboration);
-    setProjectTechStacks(projectData[index].techStacks);
+    setProjectRoles(projectData[index].areasOfResp.join("\n"));
+    setProjectCollaborated(projectData[index].solo);
+    setProjectTechStacks(projectData[index].techStack);
+
+    setEditProjectDataIndex(-1);
     // console.log(e)
   }
 
 
   async function submitForm() {
-    if (!selectedFile) {
+    if (!selectedFile  && !profilevalidation) {
       alert("Please upload the profile image");
       return
     }
-    var imgSize = Math.round(selectedFile.size / 1024); // In MB
+   if(!profilevalidation)
+   {
+    var imgSize =  Math.round(selectedFile.size / 1024); // In MB
     if (imgSize > profileMaxSize) {
       alert("File is too big, please select a file of size less than " + Math.round(profileMaxSize / 1024) + " MB");
       return
     }
-    if (imgSize < profileMinSize) {
+   }
+    if (imgSize < profileMinSize && !profilevalidation) {
       alert("File is too small, please select a file of size greater than " + profileMinSize + " KB");
       return
     }
@@ -411,22 +654,64 @@ const Form = () => {
       return;
     }
 
-    let accomplishmentsTemp = studentAccomplishment.split("\n");
+    if(studentAccomplishment.length != 0 && studentAccomplishment.length < 30)
+    {
+      alert("There should be atleast 50 characters in Accomplishment");
+      return;
+    }
+    
+    var accomplishmentsTemp = studentAccomplishment.split("\n");
     if (accomplishmentsTemp.length > 3) {
       alert("Maximum you can add 3 accomplishments in your resume");
       return;
     }
-    let interestsTemp = studentInterests.split(",");
+    console.log(studentInterests)
+    var interestsTemp = studentInterests.split(",");
     if (interestsTemp.length > 5) {
       alert("Maximum you can add 5 interests in your resume");
       return;
     }
 
+    if(showExperienceRendering)
+    {
+      if(workExperienceData.length == 0)
+      {
+        alert("You have selected to add work experience in your resume, but haven't added any. So either add atleast one work experience or off the toggle button");
+        return
+      }
+    }
+
+    // setPageLoading(true);
+    // console.log(typeof(croppedImage))
+    // console.log(croppedImage);
+    // console.log(typeof(preview))
+    // console.log(preview);
+  //   const myFile = new File([croppedImage], 'image.jpg', {
+  //     type: selectedFile.type
+  // });
+  
+  // console.log(croppedImage);
+  // console.log(selectedFile);
+  // console.log(myFile);
+
+  // return;
+//   var reader = new FileReader();
+// reader.readAsDataURL(croppedImage); 
+// reader.onloadend = function() {
+//   var base64data = reader.result;                
+//   console.log(base64data);
+// }
+
+
+    // return;
+
+    setPageLoading(true);
 
     const postDetails = async() =>
      {
-        const data = new FormData();
-        data.append("file", selectedFile);
+        try{
+          const data = new FormData();
+        data.append("file", selectedFile );
         data.append("upload_preset", "resume-automation");
         data.append("cloud_name", "resume-automation");
        return fetch("https://api.cloudinary.com/v1_1/resume-automation/image/upload", {
@@ -434,24 +719,26 @@ const Form = () => {
           body: data,
         })
         .then((response)=>response.json())
-        .then((responseJson)=>{return responseJson});
-          // .then((res) => res.json())
-          // // .then((data) => {
-          // //  return data.url.toString();
-          // // })
-          // .catch((err) => console.log(err))
-
-          // console.log("processing");
+          .then((responseJson)=>{return responseJson});
+            // .then((res) => res.json())
+            // // .then((data) => {
+            // //  return data.url.toString();
+            // // })
+        }
+          catch(err) {
+            console.log(err);
+            alert("Something went wrong, while uploading image, please contact the Admin.")
+            return;
+          }
     };
   
+    var ProfileImg = preview;
+    if(selectedFile)
+    {
+      ProfileImg = await postDetails();
+    }
 
-    const ProfileImg = await postDetails();
-    // console.log("profileImg", ProfileImg)
-    // setStudentProfile(ProfileImg.url.toString());
-    // console.log("studentProfile", studentProfile);
-    // console.log("studentProfile raw", ProfileImg.url.toString());
-    // FORM is completely validated and good to go to the backend
-
+ 
     let educationArray = []
     educationData.forEach(el => {
       educationArray.push({
@@ -480,11 +767,12 @@ const Form = () => {
     })
 
     // // console.log(projectArray);
+    ProfileImg = (typeof(ProfileImg)) == "string" ? ProfileImg : ProfileImg.url.toString()  
     var userId = JSON.parse(localStorage.getItem("loggedinUser"))
     var sendingPacket = {
       "user": userId,
       "personal": {
-        "profilePic": ProfileImg.url.toString(),
+        "profilePic":  ProfileImg,
         "name": studentName,
         "tagLine": tagline,
         "email": emailID,
@@ -494,23 +782,36 @@ const Form = () => {
         "github": githubLink
       },
       "summary": about,
-      "projects": projectArray,
-      "education": educationArray,
+      "projects": projectData,
+      "education": educationData,
       "techSkills": studentTechStacks,
       "softSkills": studentSoftSkills,
       "accomplishments": accomplishmentsTemp,
       "interests": interestsTemp
     }
 
-    console.log(sendingPacket)
+    if(showExperienceRendering)
+    {
+      sendingPacket["workEx"] = workExperienceData;
+    }
+    else
+    {
+      sendingPacket["workEx"] = [];
+    }
 
-    
+    console.log("sending=",sendingPacket)
+
+    // return
+
+
     axios.post("https://masairesumebuilder.herokuapp.com/resume", sendingPacket)
     .then((response) => {
-      console.log(response);
+      console.log("response=",response);
+      setPageLoading(false);
       navigate("/downloadresume");
     }, (error) => {
-      console.log(error);
+      alert(error);
+      alert("something went wrong while sending data to server, please contact admin");
     });
 
   }
@@ -518,10 +819,13 @@ const Form = () => {
 
   const [studentTechStacks, setStudentTechStacks] = useState([]);
   const [studentSoftSkills, setStudentSoftSkills] = useState([]);
-  const [studentAccomplishment, setStudentAccomplishment] = useState([]);
+  const [studentAccomplishment, setStudentAccomplishment] = useState("");
   const [studentInterests, setStudentInterests] = useState("");
 
   return (
+    <>
+    
+    {pageLoading ? <img className='page-loading' src="https://i.pinimg.com/originals/a2/de/bf/a2debfb85547f48c3a699423ba75f321.gif" />:
     <div className='form-container'>
       <div className='header-section'>
         <div className='proflile-img'>
@@ -532,6 +836,82 @@ const Form = () => {
             <input type="file" onChange={onSelectFile} accept="image/png, image/jpeg" className="custom-file-input" />
           </div> */}
         </div>
+        <Dialog open={openDialog} onClose={handleCloseForm}>
+      <DialogContent>
+  
+      <div style={{"width":"35vw"}}>
+        <div className="cropContainer">
+          <Cropper
+            image={selectedFile && URL.createObjectURL(selectedFile)}
+            crop={crop}
+            rotation={rotation}
+            zoom={zoom}
+            aspect={2.5 / 3}
+            onCropChange={setCrop}
+            onRotationChange={setRotation}
+            onCropComplete={onCropComplete}
+            onZoomChange={setZoom}
+          />
+        </div>
+        <div className="controls">
+          <div className="sliderContainer">
+            <Typography
+              variant="overline"
+              // classes={{ root: classes.sliderLabel }}
+              className='sliderLabel'
+            >
+              Zoom
+            </Typography>
+            <Slider
+              value={zoom}
+              min={1}
+              max={3}
+              step={0.01}
+              aria-labelledby="Zoom"
+              // classes={{ root: classes.slider }}
+              className='slider'
+              onChange={(e, zoom) => setZoom(zoom)}
+            />
+          </div>
+          <div className="sliderContainer">
+            <Typography
+              variant="overline"
+              // classes={{ root: classes.sliderLabel }}
+              className='sliderLabel'
+            >
+              Rotation
+            </Typography>
+            <Slider
+              value={rotation}
+              min={0}
+              max={360}
+              step={1}
+              aria-labelledby="Rotation"
+              // classes={{ root: classes.slider }}
+              className='slider'
+              onChange={(e, rotation) => setRotation(rotation)}
+            />
+          </div>
+        </div>
+        {/* <ImgDialog img={croppedImage} onClose={onClose} /> */}
+      </div>
+      </DialogContent>
+      <DialogActions>
+              <span className='cancel-btn'>
+              <Button  variant="contained" onClick={handleCloseForm}>Cancel</Button>
+              </span>
+                <Button
+            onClick={showCroppedImage}
+            variant="contained"
+            color="primary"
+            // classes={{ root: classes.cropButton }}
+        className='cropButton'
+          >
+            Show Result
+          </Button>
+              </DialogActions>
+      </Dialog>
+      
         <div className='basic-input'>
           <div className='name-and-tagline'>
             <input value={studentName} onInput={e => setStudentName(e.target.value)} type={"text"} placeholder={"Enter your full name *"} />
@@ -638,8 +1018,8 @@ const Form = () => {
               {educationData.map((el, index) => (
                 <div className='display-education-section'>
                   <p>{el.course}</p>
-                  <p><span>from</span> {el.college}</p>
-                  <p>( {el.startDate} - {el.endDate} )</p>
+                  <p><span>from</span> {el.institute}</p>
+                  <p>( {el.start} - {el.end} )</p>
                   <div className='edit-delete-buttons'>
                     <Fab onClick={() => {
                       setEditEducationDataIndex(index);
@@ -687,7 +1067,7 @@ const Form = () => {
                 fullWidth
                 variant="outlined"
               />
-              <TextField
+               <TextField
                 value={projectIntro}  onInput={e => {
                   setProjectIntro(e.target.value);
                   setProjectIntroError('');
@@ -763,25 +1143,26 @@ const Form = () => {
               <FormGroup>
                 <FormControlLabel control={<Switch checked={projectCollaborated} onChange={(e) => { setProjectCollaborated(e.target.checked) }} />} label="Was it a Collaborative project?" />
               </FormGroup>
-
               <Autocomplete
                 onChange={(option) => {
                   if (option.target.innerText) {
                     setProjectTechStacks([...projectTechStacks, option.target.innerText])
                     setProjectTechStacksError("");
                     // tagsArr.push(option.target.innerText);
-                    if (studentTechStacks.length === 5) {
-                      console.log(studentTechStacks.length);
-                      setMaxTechStacksRendering(true);
-                    }
-                    console.log(projectTechStacks);
+                    // if (studentTechStacks.length === 5) {
+                    //   console.log(studentTechStacks.length);
+                    //   setMaxTechStacksRendering(true);
+                    // }
+                    // console.log(projectTechStacks);
                   }
 
                 }}
-                readOnly={maxTechStacksRendering ? true : false}
+                // readOnly={maxTechStacksRendering ? true : false}
                 size="small"
                 style={{ marginTop: "8px" }}
                 multiple
+                
+            defaultValue={typeof(projectTechStacks) == "string" ? [] : projectTechStacks}
                 id="tags-outlined"
                 options={techStacks}
 
@@ -806,13 +1187,13 @@ const Form = () => {
             <div className="display-project-cont">
               {projectData.map((el, index) => (
                 <div className='display-project-section'>
-                  <p className='title'>{el.title}</p>
-                  <p className='intro'>{el.introduction}</p>
+                  <p className='title'>{el.name}</p>
+                  <p className='intro'>{el.description}</p>
                   <p className='features'><b>Features : </b>{el.features.join(". ")}</p>
-                  <p className='roles'><b>Roles : </b>{el.roles.join(". ")}</p>
-                  <p className='collaboration'><b>Collaboration : </b>{el.collaboration ? "Yes" : "No"}</p>
-                  <p className='techStacks'><b>Techstacks : </b>{el.techStacks.join(", ")}</p>
-                  <Link className='git-link' href={el.githubLink} target="_blank" >
+                  <p className='roles'><b>Roles : </b>{el.areasOfResp.join(". ")}</p>
+                  <p className='collaboration'><b>Collaboration : </b>{el.solo ? "Yes" : "No"}</p>
+                  <p className='techStacks'><b>Techstacks : </b>{el.techStack.join(", ")}</p>
+                  <Link className='git-link' href={el.gitLink} target="_blank" >
                     <GitHubIcon />
                   </Link>  &nbsp;&nbsp; <Link className='live-link' href={el.liveLink} target="_blank" >
                     <LanguageIcon />
@@ -860,6 +1241,7 @@ const Form = () => {
             multiple
             id="tags-outlined"
             options={techStacks}
+            defaultValue={studentTechStacks}
             getOptionLabel={(option) => option}
             filterSelectedOptions
             renderInput={(params) => (
@@ -881,6 +1263,7 @@ const Form = () => {
             style={{ marginTop: "16px" }}
             multiple
             id="tags-outlined"
+            defaultValue={studentSoftSkills}
             options={softSkills}
             getOptionLabel={(option) => option}
             filterSelectedOptions
@@ -896,7 +1279,7 @@ const Form = () => {
             size="small"
             style={{ marginTop: "16px" }}
             value={studentAccomplishment} onInput={e => setStudentAccomplishment(e.target.value)}
-            inputProps={{ maxLength: 150 }}
+            inputProps={{ maxLength: "200" }}
             margin="dense"
             multiline
             rows={3}
@@ -909,7 +1292,7 @@ const Form = () => {
             size="small"
             style={{ marginTop: "10px" }}
             value={studentInterests} onInput={e => setStudentInterests(e.target.value)}
-            inputProps={{ maxLength: 100 }}
+            inputProps={{ maxLength: "100" }}
             margin="dense"
             multiline
             rows={2}
@@ -921,7 +1304,7 @@ const Form = () => {
         </div>
       </div>
      <div style={{"textAlign":"center", "margin-top":"20px"}}>
-     <FormControlLabel control={<Switch onChange={(e) => { setShowExperienceRendering(e.target.checked) }} />} label="Do you want to add work experience in your resume?" />
+     <FormControlLabel control={<Switch checked={showExperienceRendering} onChange={(e) => { setShowExperienceRendering(e.target.checked) }} />} label="Do you want to add work experience in your resume?" />
      {!showExperienceRendering?"":
       <div className='work-experience-cont'>
            <Button className='add-btn' variant="outlined" onClick={handleOpenExperienceForm}>
@@ -933,15 +1316,15 @@ const Form = () => {
               <TextField
                 value={workCompany} onInput={e => {
                   setWorkCompany(e.target.value);
-                  // setProjectTitleError('');
+                  setWorkCompanyError('');
                 }}
-                // helperText={}
-                // error={}
+                helperText={workCompanyError}
+                error={workCompanyError}
                 size="small"
-                inputProps={{ maxLength: "20"}}
+                inputProps={{ maxLength: "50"}}
                 autoFocus
                 margin="dense"
-                label={"Company/Organization Name *"}
+                label={"Company/Organisation Name *"}
                 type="text"
                 fullWidth
                 variant="outlined"
@@ -949,10 +1332,10 @@ const Form = () => {
               <TextField
                value={workDesignation} onInput={e => {
                  setWorkDesignation(e.target.value);
-                 // setProjectTitleError('');
+                 setWorkDesignationError('');
                }}
-               // helperText={}
-               // error={}
+               helperText={workDesignationError}
+               error={workDesignationError}
                size="small"
                inputProps={{ maxLength: "20"}}
                margin="dense"
@@ -966,10 +1349,10 @@ const Form = () => {
              <TextField
               value={workStartDate} onInput={e => {
                 setWorkStartDate(e.target.value);
-                // setProjectTitleError('');
+                setWorkStartDateError('');
               }}
-              // helperText={}
-              // error={}
+              helperText={workStartDateError}
+              error={workStartDateError}
               size="small"
               margin="dense"
               label={"Start date *"}
@@ -983,10 +1366,10 @@ const Form = () => {
             <TextField
              value={workEndDate} onInput={e => {
                setWorkEndDate(e.target.value);
-               // setProjectTitleError('');
+               setWorkEndDateError('');
              }}
-             // helperText={}
-             // error={}
+             helperText={workEndDateError}
+             error={workEndDateError}
              size="small"
              margin="dense"
              label={"End date *"}
@@ -1001,14 +1384,14 @@ const Form = () => {
              <TextField
                value={workRoles} onInput={e => {
                  setWorkRoles(e.target.value);
-                 // setProjectTitleError('');
+                 setWorkRolesError('');
                }}
-               // helperText={}
-               // error={}
+               helperText={workRolesError}
+               error={workRolesError}
                size="small"
-               inputProps={{ maxLength: "150"}}
+               inputProps={{ maxLength: "400"}}
                margin="dense"
-               label={"Roles in previous company, each in new line (maximum 150 characters) *"}
+               label={"Roles in the company, each in new line (maximum 400 characters) *"}
                type="text"
                fullWidth
                multiline
@@ -1018,19 +1401,57 @@ const Form = () => {
               </DialogContent>
               <DialogActions>
               <Button onClick={handleCloseExperienceForm}>Cancel</Button>
-              <Button onClick={()=>{}}>Add</Button>
+              <Button onClick={addExperience}>Add</Button>
             </DialogActions>
             </Dialog>
+
+            {displayWorkExperienceData ?
+            <div className="display-education-cont">
+              {workExperienceData.map((el, index) => (
+                <div className='display-education-section'>
+                <p>{el.organisation}</p>
+                  <p>as {el.position}</p>
+                  <p>( {el.start} - {el.end} )</p>
+                  <div><b>Job Description</b>
+                  <ul className="work-exp-lists">
+                      {el.description.map((elm)=>{
+                         return <li>{elm}</li>
+                      })}
+                    </ul>
+                  </div>
+                  <div className='edit-delete-buttons'>
+                    <Fab onClick={() => {
+                      setEditExperienceDataIndex(index);
+                      editExperienceButtonPress(index);
+                      setOpenExperienceForm(true);
+                    }} color="primary" size='small' aria-label="edit">
+                      <EditIcon />
+                    </Fab>
+                    &nbsp;&nbsp;
+                    <Fab onClick={() => {
+                      var temp = [...workExperienceData];
+                      temp.splice(index, 1);
+                      setWorkExperienceData(temp);
+                    }} color="error" size='small' aria-label="delete">
+                      <DeleteIcon />
+                    </Fab>
+                  </div>
+                </div>
+              ))}
+            </div>
+            : ""}
         </div>
       }
        </div>        
       <div className='submit-btn-cont'>
         <Button onClick={submitForm} className='genrate-resume-btn' color="success" variant="contained" endIcon={<ChevronRightIcon />}>
-          Genrate Resume
+          Generate Resume
         </Button>
       </div>
      
     </div>
+  }
+  </>
   )
 }
 

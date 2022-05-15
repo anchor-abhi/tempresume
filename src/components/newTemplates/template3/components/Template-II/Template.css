@@ -9,7 +9,7 @@
   height: 842px;
   margin: 70px auto;
   display: flex;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif !important;
 
 }
 .container > div {
@@ -55,4 +55,7 @@
 
 .maroon {
   background-color: maroon;
+}
+.workDetails{
+  font-weight: bold;
 }

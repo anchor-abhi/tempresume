@@ -8,25 +8,21 @@ export const Right = ({ data }) => {
       <hr className="hr" />
       {/*  */}
       <div className="profile-desc">
-        <h4 className="universal">PERSONAL PROFILE</h4>
-        <p className="universal" style={{fontSize:"11px"}}>{data?.summary}</p>
+        <h4 style={{marginBottom:"3px"}} className="universal">PERSONAL PROFILE</h4>
+        <p className="universal" style={{fontSize:"12px",fontFamily:'Roboto'}}>{data?.summary}</p>
       </div>
 
     {/* optional work experience */}
-    {/* { data?.workEx?.length !== 0 ? <section className="work-exp" >
+    { data?.workEx?.length !== 0 ? <section className="work-exp" >
     <h4 className="universal" >WORK EXPERIENCE</h4>
     {
     data?.workEx?.map((ele)=>{
       return(
-        <div className="universal" style={{fontSize:"11px"}}>
-          <p className="universal" >Organisation:{ele.organisation}</p>
-          <p className="universal" >Position:{ele.position}</p>
-          <p className="universal" >Duration:{ele.start +" to " + ele.end}</p>
-          <div className="job-profile">Job Profile:{ele.description.map((task)=>{
-            return(
-              <li className="universal" style={{listStyleType:"none", fontSize:"11px"}} >{task+" | "}</li>
-            )
-          })}</div>
+        <div className="universal" style={{fontSize:"11.5px"}}>
+          <p className="universal" > <span className="workDetails">Organisation: </span> {ele.organisation}</p>
+          <p className="universal" > <span className="workDetails">Position: </span>{ele.position}</p>
+          <p className="universal" > <span className="workDetails" >Duration: </span> {ele.start +" to " + ele.end}</p>
+          <div className="job-profile"> <span className="workDetails" >Profile: </span> {ele.description.join(" | ")}</div>
         </div>
       )
     })
@@ -34,7 +30,7 @@ export const Right = ({ data }) => {
     }
     </section> : ""
     
-  } */}
+  }
     
 
       {/* project section */}
@@ -70,8 +66,8 @@ export const Right = ({ data }) => {
                   return (
                     <li className="universal"
                       style={{
-                        // lineHeight: data?.workEx?.length == 0 ? "12px" : "5px",
-                        fontSize:"11px"
+                        lineHeight: data?.workEx?.length == 0 ? "12px" : "6px",
+                        fontSize:"12px"
                       }}
                     >
                       {list}
@@ -85,12 +81,12 @@ export const Right = ({ data }) => {
                 <h4 className="area-of-response">Area of responsibility</h4>
                 {ele.areasOfResp.map((res) => {
                   return <li className="universal"  style={{
-                    // lineHeight: data?.workEx?.length == 0 ? "12px" : "5px",
-                    fontSize:"11px"
+                    lineHeight: data?.workEx?.length == 0 ? "12px" : "6px",
+                    fontSize:"12px"
                   }} >{res}</li>;
                 })}
                 {ele.solo ? (
-                  <p style={{fontSize:"11px"}} className="team-line">Solo Project </p>
+                  <p style={{fontSize:"12px"}} className="team-line">Solo Project </p>
                 ) : (
                   <p style={{fontSize:"11px"}} className="team-line">
                     {"A collaborative project built by a team of " +

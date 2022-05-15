@@ -32,6 +32,7 @@ function Resume() {
 		fetch(`http://localhost:8080/data`)
 			.then((res) => res.json())
 			.then((data) => {
+				console.log(data)
 				setData([data[data.length - 1]]);
 				const gitArr = data[data.length - 1].personal?.github.split("/");
 

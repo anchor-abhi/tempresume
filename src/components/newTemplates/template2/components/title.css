@@ -1,0 +1,17 @@
+.t{
+    
+    line-height: 32px;
+    color: rgb(37, 207, 207);
+    
+}
+
+.t div{
+    display: inline-block;
+    margin-bottom: 3px;
+    border-bottom: 3px solid rgb(37, 207, 207);
+    padding-bottom: -10;
+}
+
+.t h5{
+    margin-bottom: -4px;
+}

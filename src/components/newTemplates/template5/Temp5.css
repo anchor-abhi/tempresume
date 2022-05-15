@@ -1,0 +1,473 @@
+.Temp5{
+  display: grid;
+  place-content: center;
+}
+.template-container *{
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.template-container{
+  margin: 50px auto;
+  width: 595px;
+  height: 842px;
+  padding: 15px;
+  padding-bottom: 0;
+  border: 1px solid black;
+  display: flex;
+}
+.left-side{
+  width: 45%;
+  height: 100%;
+  background: #3a3a3c;
+  display: flex;
+  flex-direction: column;
+}
+.right-side{
+  width: 55%;
+  height: 100%;
+}
+.left-top{
+  height: 45%;
+  width: 100%;
+}
+.pic-section{
+  position: relative;
+  width: 100%;
+  height: 40%;
+}
+.pic-top{
+  width: 100%;
+  background: white;
+  height: 50%;
+  margin: 0;
+  outline: none;
+}
+.pic-bottom{
+  width: 90%;
+  margin: 0 auto;
+  height: 50%;
+  background-color: #06aedb;
+}
+.pic{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  width: 160px;
+  height: 100px;
+  padding: 15px 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.about-section{
+  width: 90%;
+  height: 60%;
+  margin: auto;
+  background: #06aedb;
+  display: flex;
+  flex-direction: column;
+}
+.Name-title{
+  width: 100%;
+  height: 20%;
+  color: white;
+  text-align: center;
+}
+.Name-title > p:nth-child(1){
+  font-weight: 500;
+  font-size: 1.3em;
+  margin: 0;
+}
+.Name-title > p:nth-child(2){
+  font-size: 1em;
+  margin-bottom: 5px;
+}
+.about{
+  width: 90%;
+  height: 95%;
+  margin: auto;
+  padding: 10px 0 0 0;
+  overflow-y: hidden;
+}
+.about > div:nth-child(1) {
+  position:  relative;
+}
+.about > div:nth-child(1) > p{
+  position: relative;
+  color: white;
+  /* left: -10px; */
+}
+.about > div > hr{
+  color: white;
+  width: 80px;
+  position: relative;
+  margin: 5px 0;
+  left: -10px;
+  border: 0.5px solid white;
+}
+.about > div > hr + div{
+  width: 7px;
+  height: 7px;
+  border: none;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  left: 66px;
+  top: 23px;
+}
+.about > div:nth-child(2) > p{
+  color: white;
+  font-size: 0.7em;
+  word-spacing: 2px;
+  overflow-wrap: break-word;
+}
+.left-bottom{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  height: 65%;
+}
+.left-bottom > div {
+  position: relative;
+  width: 100%;
+  height: fit-content;
+}
+.Education{
+  margin-top: 5px;
+}
+.heading{
+  padding: 10px;
+  position: relative;
+}
+.heading > div:nth-child(1){
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  align-items: center;
+}
+.heading > div > p{
+  font-size: 1.2em;
+  color: #06aedb;
+  font-weight: 500;
+}
+.slash{
+  position: absolute;
+  left: -5px;
+  height: 5px;
+  color: white;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="3px" height="3px" viewBox="0 0 3 3" fill="white"><polygon points="0,0.5 0,1.5 1.5,3 2.5,3"/><polygon points="2.5,0 1.5,0 3,1.5 3,0.5"/></svg>');
+  background-size: 3px 3px;
+  width: 53%;
+}
+.slash + hr{
+  position: absolute;
+  left: 136px;
+  top: 37px;
+  height: 0.5px;
+  background-color: white;
+  width: 50px;
+  margin: 0;
+}
+.slash + hr + div{
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: white;
+  position: absolute;
+  top: 35px;
+  left: 188px;
+}
+.Edu-info{
+  padding: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 5px;
+}
+.Edu-info > div {
+  display: flex;
+}
+.Edu-info > div:nth-child(2){
+  width: 85%;
+}
+.Edu-info > div:nth-child(1){
+  align-items: flex-start;
+}
+.Edu-info > div:nth-child(2){
+  flex-direction: column;
+}
+.Edu-info > div > div > p:nth-child(1){
+  font-size: 0.75em;
+  font-weight: 500;
+  color: white;
+}
+.Edu-info > div > div > div{
+  display: flex;
+  justify-content: space-between;
+}
+.Edu-info > div > div > div > p{
+  font-size: 0.7em;
+  font-weight: 400;
+  color: white;
+}
+.Edu-info > div > div > div > p:nth-child(2){
+  font-weight: 500;
+}
+.Skill-info{
+  width: 80%;
+  padding: 5px;
+  font-size: 0.75em;
+  font-weight: 400;
+  color: white;
+  position: relative;
+  left: 8%;
+}
+.Skill-info > div > span{
+  font-weight: 500;
+}
+.acheivment-pointers{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 90%;
+}
+.acheivment-pointers > div{
+  display: flex;
+  gap: 5px;
+  padding: 5px;
+}
+.acheivment-pointers > div > div:nth-child(2) > p:nth-child(1){
+  font-size: 0.75em;
+  font-weight: 500;
+  color: white;
+}
+.acheivment-pointers > div > div:nth-child(2) > p:nth-child(2){
+  font-size: 0.7em;
+  font-weight: 400;
+  color: white;
+}
+.acheivment-pointers > div > div:nth-child(2) > p:nth-child(3){
+  font-size: 0.75em;
+  font-weight: 500;
+  color: white;
+}
+
+/* right side stylings */
+.right-side{
+  width: 55%;
+  padding: 10px;
+  box-sizing: border-box;
+  position: relative;
+  
+}
+.Work-ex{
+  max-height: 50%;
+}
+.Projects{
+  height: fit-content;
+}
+.Work-ex,.Projects{
+  position: relative;
+}
+.Work-ex > div ,.Projects > div:nth-child(1){
+  display: flex;
+}
+.right-side-heading{
+  position: relative;
+  width: fit-content;
+  padding: 5px;
+  padding-right: 30px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background-color: #404042;
+}
+.right-side-heading > span{
+  font-size: 1.1rem;
+  color: white;
+  font-weight: 500;
+} 
+.triangle{
+  width: 0; 
+  height: 0; 
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 20px solid #404042;
+}
+
+.all-about-work,.all-about-projects{
+  width: 80%;
+  height: fit-content;
+  max-height: fit-content;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  border-left: 5px double #404042;
+}
+.all-about-work{
+  padding-bottom: 8px;
+}
+.work-desc,.project-desc{
+  padding: 10px 0 10px 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.designation::before{
+  content: '';
+  position: absolute;
+  background-color: #06aedb;
+  width: 12px;
+  height: 12px;
+  left: 25px;
+  border-radius: 50%;
+}
+.designation > p{
+  color: #06aedb;
+  font-size: 0.9em;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1;
+}
+.company{
+  display: flex;
+  flex-direction: column;
+}
+.company > div:nth-child(1) > span{
+  font-size: 0.8em;
+  font-weight: 500;
+  color: #3a3a3c;
+}
+.company > div:nth-child(2){
+  position: relative;
+  font-size: 0.75em;
+  font-weight: 400;
+  left: 15px;
+}
+.project-desc{
+  margin: 0;
+  padding-top: 0;
+}
+.project-name > div{
+  display: flex;
+  align-items: center;
+}
+.project-name > div > a{
+  text-decoration: none;
+}
+.project-name > div > a > span{
+  margin: 0;
+  padding-right: 5px;
+  font-size: 0.8em;
+  font-weight: 600;
+  color: #3a3a3c;
+}
+.project-name > p{
+  font-size: 0.65em;
+  font-weight: 400;
+}
+.features {
+  display: flex;
+  flex-direction: column;
+}
+.features > div:last-child{
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.features > div:last-child > span{
+  font-size: 0.65em;
+  font-weight: 400;
+}
+.features > div > p{
+  font-size: 0.7em;
+  font-weight: 500;
+}
+.features > div > ul{
+  position: relative;
+  left: 15px;
+}
+.features > div > ul > li{
+  font-size: 0.65em;
+  font-weight: 400;
+}
+.roles {
+  display: flex;
+  flex-direction: column;
+}
+.roles > p:first-child{
+  font-size: 0.7em;
+  font-weight: 500;
+}
+.roles > ul{
+  position: relative;
+  left: 15px;
+}
+.roles > ul > li{
+  font-size: 0.65em;
+  font-weight: 400;
+}
+.roles > p:last-child{
+  font-size: 0.65em;
+  font-weight: 400;
+}
+.Contact{
+  position: absolute;
+  left: -35px;
+  bottom: 15px;
+  width:110%;
+  height: 15%;
+  padding: 10px;
+  background-color: #06aedb;
+  color: white;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+/* .Contact > div {
+  border: 1px solid blue;
+} */
+.Contact > div:nth-child(1){
+  display: flex;
+  align-items: center;
+  height: 25%;
+  font-weight: 500;
+  font-weight: 0.9em;
+  gap: 5px;
+}
+.Contact > div:nth-child(2){
+  width: 95%;
+  height: 75%;
+  display: flex;
+  margin: 0;
+  padding: 5px;
+  flex-direction: column;
+  border: 0.5px solid white;
+  border-bottom: none;
+}
+.Contact > div:nth-child(2) > div{
+  width: fit-content;
+  height: fit-content;
+  /* max-width: 50%; */
+  display: flex;
+  gap: 5px;
+  /* border: 1px solid black; */
+}
+.Contact > div:nth-child(2) > div > div{
+  /* border: 1px solid red; */
+}
+.Contact > div:nth-child(2) > div > p{
+  font-size: 0.75em;
+  font-weight: 500;
+  height: max-content;
+  overflow-wrap: break-word;
+}
+.Contact > div:nth-child(2) > div > p > a{
+  text-decoration: none;
+  color: white;
+}
+

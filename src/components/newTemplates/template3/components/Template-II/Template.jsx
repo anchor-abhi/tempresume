@@ -2,11 +2,8 @@ import { Left } from "./Left/Left";
 import { Right } from "./Right/Right";
 import "./Template.css";
 import { useEffect, useState } from "react";
-import axios from "axios";
-
+import axios from "axios"
 export const Template = ()=>{
-
-
     let [state,setState] = useState("white")
     let [color,setColor] = useState("black")
     const grayColor = ()=>{
