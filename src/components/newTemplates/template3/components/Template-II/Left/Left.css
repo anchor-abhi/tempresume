@@ -1,8 +1,17 @@
-.left-container,.universal,.profile-div,.contact-section,.education-section,.technical-section,.tech,.softskills-section,.interest-section,.achievements-section{
-  margin:0;
-  padding:0;
+.left-container,
+.universal,
+.profile-div,
+.contact-section,
+.education-section,
+.technical-section,
+.tech,
+.softskills-section,
+.interest-section,
+.achievements-section {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif !important;
+  font-family: "Roboto", sans-serif !important;
 }
 .left-container {
   display: flex;
@@ -28,7 +37,12 @@
   border-radius: 50%;
 }
 
-.contact-section > h4,.education-section > h4,.technical-section > h4,.softskills-section > h4, .interest-section > h4, .achievements-section > h4 {
+.contact-section > h4,
+.education-section > h4,
+.technical-section > h4,
+.softskills-section > h4,
+.interest-section > h4,
+.achievements-section > h4 {
   color: #3f6bad;
   font-weight: 600;
   letter-spacing: 3px;
@@ -37,7 +51,6 @@
 }
 
 .contact-section > div {
-  
   width: 100%;
   display: flex;
   align-items: center;
@@ -47,8 +60,8 @@
   font-weight: 400;
 }
 
-.contact-section{
-    margin-top: -5px;
+.contact-section {
+  margin-top: -5px;
 }
 
 .contact-section > div > a {
@@ -60,18 +73,18 @@
 .technical-section > div {
   display: flex;
   flex-direction: column;
-  
+
   font-size: 11px;
   gap: 4px;
   line-height: 20px;
 }
 
-.tech{
-    font-size: 11px;
+.tech {
+  font-size: 11px;
 }
 
-.technical-section{
-    margin-top: -15px;
+.technical-section {
+  margin-top: -15px;
 }
 
 .achievements-section > li {
@@ -82,15 +95,11 @@
   list-style: outside;
 }
 
-
-
-.achievements-section{
-    margin-top: -10px;
+.achievements-section {
+  margin-top: -10px;
 }
 
-
 .softskills-section > h4 {
-  
   margin-bottom: 0px;
 }
 
@@ -100,26 +109,24 @@
   margin-top: -14px;
 }
 
-
-.education-section>div{
-    display:flex;
-    font-size: 11px;
-    margin-bottom: 10px;
-    gap:10px;
+.education-section > div {
+  display: flex;
+  font-size: 11px;
+  margin-bottom: 10px;
+  gap: 10px;
 }
 
-.education-section{
-    margin-top: -10px;
-    font-size: 11px !important;
+.education-section {
+  margin-top: -10px;
+  font-size: 11px !important;
 }
 
-.interest-section{
-    margin-top: -10px;
-    font-size:11px;
+.interest-section {
+  margin-top: -10px;
+  font-size: 11px;
 }
 
-.tech-stack > p{
+.tech-stack > p {
   font-size: 11px !important;
   /* color:red; */
 }
-
