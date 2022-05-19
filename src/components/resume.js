@@ -1,8 +1,8 @@
-import "../styles/Resume.css";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Loader from "./loader";
-import BasicResume from "./newTemplates/basic"
+import BasicResume from "./newTemplates/template1/basic"
 
 const Resume = () => {
   const [details, adddetails] = useState([]);

@@ -14,21 +14,21 @@ import { useNavigate } from "react-router";
 import { useParams } from "react-router-dom";
 
 function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Masai
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
+	return (
+		<Typography
+			variant="body2"
+			color="text.secondary"
+			align="center"
+			{...props}
+		>
+			{"Copyright © "}
+			<Link color="inherit" href="https://mui.com/">
+				Masai
+			</Link>{" "}
+			{new Date().getFullYear()}
+			{"."}
+		</Typography>
+	);
 }
 
 const theme = createTheme();
@@ -56,7 +56,7 @@ export default function UpdatePass() {
             if (res.data.err) {
               alert(res.data.err);
             } else {
-              alert("passupdated");
+              alert("Password updated");
                 navigate("/signin");
             }
           });

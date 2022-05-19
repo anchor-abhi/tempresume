@@ -32,7 +32,7 @@ function Resume() {
 		fetch(`https://masairesumebuilder.herokuapp.com/resume/${userId}`)
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data)
+				console.log(data);
 				setData([data[data.length - 1]]);
 				const gitArr = data[data.length - 1].personal?.github.split("/");
 
@@ -45,7 +45,7 @@ function Resume() {
 				if (!linkedArr[linkedArr.length - 1]) linkedArr.pop();
 				setLinkedUserName(linkedArr[linkedArr.length - 1]);
 				setGitUserName(gitArr[gitArr.length - 1]);
-				if (data[data.length-1].workEx) {
+				if (data[data.length - 1].workEx) {
 					setHasWork(true);
 					setRightSlider(90);
 				}
@@ -59,7 +59,7 @@ function Resume() {
 					<div
 						style={{
 							backgroundColor: sColor,
-							width: "40vw",
+							width: "900px",
 							transformOrigin: "0%",
 							transform: `translateX(-100px) translateY(-30px) rotate(${leftTSlider}deg)`,
 						}}
@@ -70,19 +70,21 @@ function Resume() {
 					<div
 						style={{
 							backgroundColor: lColor,
-							width: "40vw",
+							width: "900px",
 							transformOrigin: "0% 100%",
-							transform: `translateX(165px) translateY(-300px) rotate(${
-								rightTSlider + 0.5
-							}deg)`,
+							transform: `translateX(305px) translateY(-100%)
+							rotate(${rightTSlider + 0.5}deg)`,
 						}}
 						id="orangeDiv"
 					></div>
 				)}
+
+				{/* rotate(${
+								rightTSlider + 0.5
+							}deg)`, */}
 				{data.map((one) => {
 					return (
 						<>
-						
 							<div key={uuid()} id="left" style={{ background: leftDivColor }}>
 								<div id="nameAndDesignation" style={{ marginTop: leftSlider }}>
 									<h2 style={{ color: headingColor }} id="nameH1">
@@ -96,6 +98,7 @@ function Resume() {
 									<h4 style={{ color: headingColor }}>About</h4>
 									<p style={{ color: textColor }}>{one?.summary}</p>
 								</div>
+								{console.log(hasWork)}
 								{hasWork && (
 									<Education
 										headingColor={headingColor}
