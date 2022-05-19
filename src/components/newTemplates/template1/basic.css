@@ -1,0 +1,185 @@
+#outerDiv {
+	width: 595px;
+	height: 842px;
+	border: 1px solid black;
+	margin-top: 100px;
+}
+
+hr.yellowHr {
+	color: orange;
+	border: 4px solid;
+	margin: 0;
+}
+
+/* TOP SECTION */
+#topSection {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	margin: 10px 15px;
+}
+
+#nameAndImage {
+	flex: 1.5;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+}
+
+#nameAndImage > img {
+	width: 100px;
+	height: 100px;
+}
+
+#nameAndImage > div > h1,
+#nameAndImage > div > h4 {
+	margin: 5px 0;
+}
+
+#contact {
+	flex: 1;
+}
+
+#contact > p {
+	display: inherit;
+	text-align: right;
+	margin: 2px 0;
+	line-height: 13px;
+}
+
+#contact > p,
+#contact > p > a,
+.single__project p {
+	font-size: 11px;
+}
+
+/* BOTTOM SECTION */
+#bottomSection {
+	margin: 0 15px;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	gap: 20px;
+	margin-top: 15px;
+}
+
+/* #leftDivSection,
+#rightDivSection {
+	border: 1px solid black;
+} */
+
+#leftDivSection {
+	flex: 1.6;
+}
+
+#leftDivSection h5,
+#rightDivSection h5 {
+	color: orange;
+}
+
+#professional__summary > h5,
+#professional__summary > p,
+.single__project p {
+	margin: 5px 0;
+}
+
+#projects__heading {
+	margin-bottom: 5px !important;
+}
+
+#professional__summary > p {
+	font-size: 11px;
+}
+
+.single__project a {
+	color: black;
+	font-style: none;
+	font-weight: 600;
+	font-size: 12px;
+}
+
+.project__headline + h6,
+.tech__stack + h6 {
+	font-size: 13px;
+	font-weight: 600;
+	margin: 5px 0;
+}
+
+.features__ul,
+.areas__res-ul {
+	margin: 0;
+	margin-bottom: 5px;
+	font-size: 10px;
+	line-height: 15px;
+}
+
+p.tech__stack {
+	font-weight: 600;
+	margin: 5px 0;
+}
+
+p.tech__stack > span {
+	font-weight: 500;
+}
+
+/* Right Div Section */
+#rightDivSection {
+	flex: 1;
+}
+
+#education__div > h5,
+.course__edu-heading {
+	margin: 5px 0;
+	/* margin-bottom: 5px; */
+	/* font-size: 12px; */
+}
+
+.single__edu-div > p {
+	margin: 3px 0;
+	font-size: 11px;
+}
+
+.course__edu-duration {
+	font-size: 8px !important;
+	color: rgb(64, 64, 64);
+}
+
+#work__ex > h5 {
+	margin: 20px 0 5px 0;
+}
+
+.single__workex h6 {
+	margin: 5px 0;
+}
+
+.single__workex-duration {
+	font-size: 11px;
+	margin: 0;
+	margin-bottom: 5px;
+}
+
+.single__workex-description {
+	font-size: 11px;
+	margin: 0;
+}
+
+#skills__and__framework-heading,
+#soft__skills-heading,
+#accomplishments__div > h5,
+#interests-heading {
+	margin: 20px 0 5px 0;
+}
+
+#skills__and__framework-main,
+#soft__skills-main,
+#interests-main {
+	font-size: 12px;
+	margin: 0;
+}
+
+#accomplishments__div > p {
+	margin: 0;
+	margin-bottom: 10px;
+	font-size: 11px;
+}
