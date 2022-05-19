@@ -19,11 +19,7 @@ export default function AddRoute() {
 				<Route path="/signin" element={<SignIn />} />
 				<Route path="/signup" element={<SignUp />} />
 				<Route path="/createform" element={<Form />} />
-				<Route path="/temp4" element={<Temp4 />} />
-				<Route path="/temp3" element={<Template />} />
 				<Route path="/image" element={<Demo />} />
-				<Route path="/temp2" element={<Temp2 />} />
-				<Route path="/temp5" element={<Temp5 />} />
 				<Route path="/selecttemplate" element={<TemplateSelector />} />
 				<Route path="/forgot-password/:token" element={<UpdatePass />} />
 			</Routes>
