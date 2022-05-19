@@ -1,7 +1,6 @@
-
 .container {
-  padding:0;
-  margin:0;
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
     rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
@@ -9,8 +8,7 @@
   height: 842px;
   margin: 70px auto;
   display: flex;
-  font-family: 'Roboto', sans-serif !important;
-
+  font-family: "Roboto", sans-serif !important;
 }
 .container > div {
   height: 100%;
@@ -56,6 +54,6 @@
 .maroon {
   background-color: maroon;
 }
-.workDetails{
+.workDetails {
   font-weight: bold;
 }
