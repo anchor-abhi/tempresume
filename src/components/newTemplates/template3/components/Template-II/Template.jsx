@@ -3,6 +3,7 @@ import { Right } from "./Right/Right";
 import "./Template.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Loader from "../../../../loader";
 
 export const Template = () => {
   let [state, setState] = useState("white");
@@ -28,6 +29,7 @@ export const Template = () => {
   };
 
   const [data, setData] = useState([]);
+  const [load, setLoad] = useState(false);
   useEffect(() => {
     const userId = JSON.parse(localStorage.getItem("loggedinUser"));
     axios
@@ -35,11 +37,12 @@ export const Template = () => {
       .then((res) => {
         console.log(res.data);
         setData(res.data);
+        setLoad(true);
       })
       .catch((e) => console.log(e.message));
   }, []);
   console.log("data=", data[data.length - 1]);
-  return (
+  return load ? (
     <div className="container">
       <Left data={data[data.length - 1]} state={state} color={color} />
       <Right data={data[data.length - 1]} />
@@ -53,5 +56,5 @@ export const Template = () => {
         <div onClick={maroonColor} className="maroon"></div>
       </div>
     </div>
-  );
+  ) : <Loader/>
 };

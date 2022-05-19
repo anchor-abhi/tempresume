@@ -7,9 +7,11 @@ import Title from './components/Title';
 import Projects from './components/Project';
 import WorkEx from './components/WorkEx';
 import axios from "axios";
+import Loader from "../../loader";
 import { useEffect , useState} from 'react';
 function Temp2() {
     const [data, setData] = useState({});
+    const [load, setLoad] = useState(false);
     useEffect(() => {
         const userId = JSON.parse(localStorage.getItem("loggedinUser"));
         axios
@@ -17,11 +19,12 @@ function Temp2() {
           .then((res) => {
             console.log(res.data);
             setData(res.data[res.data.length-1]);
+            setLoad(true);
           })
           .catch((e) => console.log(e.message));
       }, []);
       console.log("data=",data)
-  return (
+  return load ? (
     
     <div className="Temp2">
         <Header add={data?.personal?.address} name={data?.personal?.name} pic={data?.personal?.profilePic} tagLine={data?.personal?.tagLine} email={data?.personal?.email} mobile={data?.personal?.mob}  linkedin={data?.personal?.linkedin} address={data?.personal?.address} github={data?.personal?.github} summary={data?.summary}></Header>
@@ -64,7 +67,7 @@ function Temp2() {
             </div>
         </div>
     </div>
-  );
+  ) : <Loader/>
 }
 
 export default Temp2;

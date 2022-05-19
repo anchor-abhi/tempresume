@@ -6,7 +6,7 @@
     rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   width: 595px;
   height: 842px;
-  margin: 70px auto;
+  /* margin: 70px auto; */
   display: flex;
   font-family: "Roboto", sans-serif !important;
 }

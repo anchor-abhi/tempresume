@@ -7,8 +7,10 @@ import { SliderContext } from "../../../context/SliderContext";
 import Education from "../components/ResumeComponents/Education.jsx";
 import GithubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import Loader from "../../../loader";
 
 function Resume() {
+	const [load, setLoad] = useState(false);
 	const [data, setData] = useState([]);
 	const { sColor, lColor, headingColor, textColor, leftDivColor } =
 		useContext(ColorContext);
@@ -49,10 +51,11 @@ function Resume() {
 					setHasWork(true);
 					setRightSlider(90);
 				}
+				setLoad(true);
 			});
 	}, []);
 
-	return (
+	return load ? (
 		<div style={{ flex: 1.5 }}>
 			<div id="template">
 				{selectDiv && (
@@ -306,7 +309,7 @@ function Resume() {
 				})}
 			</div>
 		</div>
-	);
+	) : <Loader/>
 }
 
 export default Resume;

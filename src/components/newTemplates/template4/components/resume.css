@@ -9,7 +9,7 @@
 #template {
 	height: 842px;
 	width: 595px;
-	margin: 100px auto;
+	/* margin: 100px auto; */
 	position: relative;
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 	display: flex;

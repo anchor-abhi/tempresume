@@ -1,5 +1,4 @@
 .Temp2 *{
- 
   margin: 0px;
   padding: 0px;
 }
@@ -9,7 +8,7 @@
   row-gap: 10px;
 }
 .Temp2{
-  margin-top: 70px !important;
+  /* margin-top: 70px !important; */
   width: 595px;
   height: 842px;
   border: 2px solid black;

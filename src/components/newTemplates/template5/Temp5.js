@@ -9,9 +9,11 @@ import { Acheivements } from "./components/Achivements/Achivements";
 import { Contact } from "./components/Contact";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Loader from "../../loader"
 
 function Temp5() {
 	const [data, setData] = useState({});
+	const [load, setLoad] = useState(false);
 	useEffect(() => {
 		const userId = JSON.parse(localStorage.getItem("loggedinUser"));
 		axios
@@ -19,12 +21,13 @@ function Temp5() {
 			.then((res) => {
 				console.log(res.data);
 				setData(res.data[res.data.length - 1]);
+				setLoad(true);
 			})
 			.catch((e) => console.log(e.message));
 	}, []);
 	console.log("data=", data);
 
-	return (
+	return load ? (
 		<div className="Temp5">
 			<div className="template-container">
 				<div className="left-side">
@@ -52,7 +55,7 @@ function Temp5() {
 				</div>
 			</div>
 		</div>
-	);
+	) : <Loader/>
 }
 
 export default Temp5;

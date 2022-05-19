@@ -1,264 +1,140 @@
-import { useEffect, useState } from "react";
+import GitHubIcon from "@mui/icons-material/GitHub";
+
 import "./basic.css";
-export default function BasicResume() {
-	const [details, setDetails] = useState({});
-	useEffect(() => {
-		const userId = JSON.parse(localStorage.getItem("loggedinUser"));
-		fetch(`https://masairesumebuilder.herokuapp.com/resume/${userId}`)
-			.then((api) => api.json())
-			.then((data) => setDetails(data[data.length - 1]));
-	}, []);
+export default function BasicResume({ details }) {
 	return (
 		<div id="outerDiv">
-			<div id="mainDiv">
-				<div>
-					<img
-						id="img1"
-						alt=""
-						src="images/image1.png"
-						title="horizontal line"
-					/>
+			<hr className="yellowHr" />
+			<div id="topSection">
+				<div id="nameAndImage">
+					<img src={details?.personal?.profilePic} alt="profile image" />
+					<div>
+						<h1>{details?.personal?.name.toUpperCase()}</h1>
+						<h4>{details?.personal?.tagLine}</h4>
+					</div>
 				</div>
-				<a id="t.ad38166889113761e092799fa453e42f4838cb34"></a>
-				<a id="t.0"></a>
-				<table className="c33" id="mainTable">
-					<tbody>
-						<tr className="c32" >
-							<td className="c43" colSpan={1} rowSpan={1}>
-								<div style={{ display: "flex" }}>
-									<p className="c44  c46">
-										<span id="span2">
-											<img
-												id="img2"
-												alt=""
-												src={details?.personal?.profilePic}
-												title=""
-											/>
-										</span>
+				<div id="contact">
+					<p>{details?.personal?.email}</p>
+					<p>{details?.personal?.mob}</p>
+					<p>
+						LinkedIn:{" "}
+						<a target={"_blank"} href={details?.personal?.linkedin}>{details?.personal?.name}</a>
+					</p>
+					<p>
+						Github:{" "}
+						<a target={"_blank"} href={details?.personal?.github}>{details?.personal.name}</a>
+					</p>
+					<p>{details?.personal?.address}</p>
+					{details?.personal?.portfolio && (
+						<p>
+							Portfolio:{" "}
+							<a href={details?.personal?.portfolio} target="_blank">
+								{details?.personal?.name}
+							</a>
+						</p>
+					)}
+				</div>
+			</div>
+			<div id="bottomSection">
+				<div id="leftDivSection">
+					<div id="professional__summary">
+						<h5>PROFESSIONAL SUMMARY</h5>
+						<p>{details?.summary}</p>
+					</div>
+					<div id="personal__projects">
+						<h5 id="projects__heading">PROJECTS</h5>
+						{details?.projects?.map((onepj) => {
+							return (
+								<div className="single__project">
+									<span className="projectNameAndGit">
+										<a href={onepj?.liveLink} target="_blank">
+											{onepj?.name}
+										</a>{" "}
+										|{" "}
+										<a href={onepj?.gitLink} target="_blank">
+											<GitHubIcon />
+										</a>
+									</span>
+									<p className="project__headline">{onepj?.description}</p>
+									<h6>Features</h6>
+									<ul className="features__ul">
+										{onepj?.features?.map((onefeat) => {
+											return <li>{onefeat}</li>;
+										})}
+									</ul>
+									<p className="tech__stack">
+										Tech Stack: <span>{onepj?.techStack?.join(" | ")}</span>
 									</p>
-									<div>
-										<div className="c30 title" id="h.x8fm1uorkbaw">
-											{details?.personal?.name?.length >= 18 ? (
-												<p className="c40" style={{ fontSize: "0.6em" }}>
-													{details?.personal?.name?.toUpperCase()}
-												</p>
-											) : (
-												<p className="c40" style={{ fontSize: "0.8em" }}>
-													{details?.personal?.name?.toUpperCase()}
-												</p>
-											)}
-										</div>
-										<p className="c7 subtitle">
-											<span className="c31">{details?.personal?.tagLine}</span>
+									<h6>Areas of Responsibility:</h6>
+									<ul className="areas__res-ul">
+										{onepj?.areasOfResp?.map((oneresp) => {
+											return <li>{oneresp}</li>;
+										})}
+									</ul>
+									<p className="team__single-line">
+										{onepj?.solo
+											? "A solo project created executed in 1 week"
+											: `A collaborative project built by team of ${onepj?.team} executed in 1 week`}
+									</p>
+								</div>
+							);
+						})}
+					</div>
+				</div>
+				<div id="rightDivSection">
+					<div id="education__div">
+						<h5>EDUCATION</h5>
+						{details?.education?.map((oneedu) => {
+							return (
+								<div className="single__edu-div">
+									<h6 className="course__edu-heading">{oneedu?.course}</h6>
+									<p className="course__edu-institute">{oneedu?.institute}</p>
+									<p className="course__edu-duration">
+										{oneedu?.start} | {oneedu?.end}
+									</p>
+								</div>
+							);
+						})}
+					</div>
+					{details?.workEx && (
+						<div id="work__ex">
+							<h5>WORK EXPERIENCE</h5>
+							{details?.workEx?.map((onework) => {
+								return (
+									<div className="single__workex">
+										<h6 className="single__workex-instanddesig">
+											{onework?.organisation} | {onework?.position}
+										</h6>
+										<p className="single__workex-duration">
+											{onework?.start} - {onework?.end}
 										</p>
+										<ul className="single__workex-description">
+											{onework?.description?.map((onedesc) => {
+												return <li>{onedesc}</li>;
+											})}
+										</ul>
 									</div>
-								</div>
-							</td>
-							<td className="c23" colSpan={1} rowSpan={1}>
-								<div id="userDet">
-									<p className="c2">
-										<span className="c10">{details?.personal?.email}</span>
-									</p>
-									<p className="c2">
-										<span className="c10">
-											{details?.personal?.mob}
-											<br />
-											LinkedIn-{" "}
-										</span>
-										<span className="c8 c19 c26">
-											<a
-												className="c27"
-												target="_blank"
-												href={details?.personal?.linkedin}
-											>
-												{details?.personal?.name}
-											</a>
-										</span>
-										<span className="c12 c10">&nbsp;</span>
-									</p>
-									<p className="c2">
-										<span className="c10">{details?.personal?.address}</span>
-									</p>
-									<p className="c2">
-										<span className="c10">Github</span>
-										<span className="c10">- </span>
-										<span className="c8 c19 c26">
-											<a
-												className="c27"
-												target="_blank"
-												href={details?.personal?.github}
-											>
-												{details?.personal?.name}
-											</a>
-										</span>
-										<span className="c10">&nbsp;</span>
-									</p>
-								</div>
-							</td>
-						</tr>
-						<tr className="c29">
-							<td className="c41" colSpan={1} rowSpan={1}>
-								<div>
-									<p className="c5">
-										<span className="c17 c18">PROFESSIONAL </span>
-										<span className="c17 c18">SUMMARY</span>
-										<span className="c14">&nbsp;</span>
-									</p>
-									<p className="c5">
-										<span className="c1">
-											{details?.summary}
-											<br />
-										</span>
-									</p>
-									<p className="c5">
-										<span className="c14">PROJECTS </span>
-									</p>
-									{details?.projects?.map((element) => {
-										return (
-											<>
-												<p className="c5">
-													<span className="c8 c3 ">
-														<a
-															className="link"
-															target="_blank"
-															href={element.liveLink}
-														>
-															{element.name}
-														</a>
-													</span>
-													<span className="c3">&nbsp;</span>
-													<span className="c3">|</span>
-													<span className="c3">&nbsp;</span>
-													<span id="span3">
-														<a target="_blank" href={element.gitLink}>
-															<img
-																id="img3"
-																alt=""
-																src="images/image2.png"
-																href="www.youtube.com"
-															/>
-														</a>
-													</span>
-												</p>
-												<p className="c5">
-													<span>{element.description}</span>
-												</p>
-												<p className="c5">
-													<span className="c3">Features</span>
-													<span className="c1">:</span>
-												</p>
-												<ul className="c21">
-													{element.features.map((elem) => {
-														return (
-															<>
-																<li className="c0">
-																	<span className="c1">{elem}</span>
-																</li>
-															</>
-														);
-													})}
-												</ul>
-												<p className="c5">
-													<span className="c3">Tech Stack:</span>
+								);
+							})}
+						</div>
+					)}
+					<h5 id="skills__and__framework-heading">SKILLS AND FRAMEWORKS</h5>
+					<p id="skills__and__framework-main">
+						{details?.techSkills?.join(" | ")}
+					</p>
+					<h5 id="soft__skills-heading">SOFT SKILLS</h5>
+					<p id="soft__skills-main">{details?.softSkills?.join(" | ")}</p>
 
-													<span className="c1">
-														&nbsp;
-														{element.techStack
-															.map((c) => c.toUpperCase())
-															.join(" | ")}
-													</span>
-												</p>
-												<p className="c5">
-													<span className="c3 c6">
-														Areas of responsibility:
-													</span>
-												</p>
-												<ul className="c21">
-													{element.areasOfResp.map((resp) => {
-														return (
-															<li className="c0 ">
-																<span className="c1">{resp}</span>
-															</li>
-														);
-													})}
-												</ul>
-												<p className="c5">
-													<span className="c1">
-														{`A collaborative project built by a team of ${element.team} executed
-                            in 5 days.`}
-													</span>
-												</p>
-											</>
-										);
-									})}
-								</div>
-							</td>
-							<td className="c45" colSpan={1} rowSpan={1}>
-								<p className="c38">
-									<span className="c14">EDUCATION</span>
-								</p>
-								<p className="c20"></p>
-								{details?.education?.map((education) => {
-									return (
-										<>
-											<p className="c25">
-												<span className="c17">{education.course}</span>
-												<span>
-													<br />
-													{education.institute}
-													<br />
-												</span>
-												<span className="c12 c35">
-													{education.start} - {education.end}
-												</span>
-											</p>
-											<p className="c20"></p>
-										</>
-									);
-								})}
+					<div id="accomplishments__div">
+						<h5>ACCOMPLISHMENTS</h5>
+						{details?.accomplishments?.map((oneacc) => {
+							return <p id="one__acc">{oneacc}</p>;
+						})}
+					</div>
 
-								<p className="c22 c25">
-									<span className="c12 c35"></span>
-								</p>
-								<div className="c38" id="h.a9l5z4y9rnz4">
-									<span className="c14">SKILLS AND FRAMEWORKS</span>
-								</div>
-								<p className="c5">
-									<span className="c1">{details?.techSkills?.join(" | ")}</span>
-								</p>
-								<p className="c5 c22">
-									<span className="c1"></span>
-								</p>
-								<div className="c38" id="h.lmqf9yx68b7c">
-									<span className="c14">SOFT SKILLS</span>
-								</div>
-								<p className="c5">
-									<span className="c1">{details?.softSkills?.join(" | ")}</span>
-								</p>
-								<p className="c5 c22">
-									<span className="c1"></span>
-								</p>
-								<div className="c38" id="h.tuxh7mwdaxox">
-									<span className="c14">ACCOMPLISHMENTS </span>
-								</div>
-								{details?.accomplishments?.map((accomp) => {
-									return (
-										<p className="c20 c5">
-											<span>{accomp}</span>
-										</p>
-									);
-								})}
-
-								<div className="c38" id="h59kk2i3ikr6k">
-									<span className="c14">INTERESTS</span>
-								</div>
-								<p className="c28 c5">
-									<span>{details?.interests?.join(" | ")}</span>
-								</p>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+					<h5 id="interests-heading">INTERESTS</h5>
+					<p id="interests-main">{details?.interests?.join(" | ")}</p>
+				</div>
 			</div>
 		</div>
 	);
