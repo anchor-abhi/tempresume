@@ -3,12 +3,8 @@ import UserAuth from "../components/userAuth";
 import SignIn from "../components/signin";
 import SignUp from "../components/signup";
 import Form from "./Form/Form.jsx";
-import Temp4 from "./newTemplates/template4/temp4";
-import { Template } from "./newTemplates/template3/components/Template-II/Template";
 import TemplateSelector from "../Pages/TemplateSelector";
 import { Demo } from "./Form/Demo";
-import Temp2 from "./newTemplates/template2/Temp2";
-import Temp5 from "./newTemplates/template5/Temp5";
 import UpdatePass from "./updatePass";
 
 export default function AddRoute() {
