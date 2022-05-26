@@ -121,6 +121,8 @@ const Form = () => {
             setContact(res.data[dataLength].personal.mob)
             setAddress(res.data[dataLength].personal.address)
             setLinkedinLink(res.data[dataLength].personal.linkedin)
+            if(res.data[dataLength].personal.linkedin)
+              setPortfolioLink(res.data[dataLength].personal.linkedin);
             setGithubLink(res.data[dataLength].personal.github)
             setEmailID(res.data[dataLength].personal.email)
             setEducationData(res.data[dataLength].education)
@@ -679,18 +681,6 @@ const Form = () => {
         return
       }
     }
-
-    // setPageLoading(true);
-    // console.log(typeof(croppedImage))
-    // console.log(croppedImage);
-    // console.log(typeof(preview))
-    // console.log(preview);
-   
-  
-  // console.log(croppedImage);
-  // console.log(selectedFile);
-  // console.log(myFile);
-
   
 
   const getBase64FromUrl = async (url) => {
@@ -706,21 +696,7 @@ const Form = () => {
     });
   }
   const myImage = await getBase64FromUrl(croppedImage);
-  // console.log(myImage);
-//   var image = new Image();
-// image.src = myImage;
-// console.log(image);
 
-  // return;
-//   var reader = new FileReader();
-// reader.readAsDataURL(croppedImage); 
-// reader.onloadend = function() {
-//   var base64data = reader.result;                
-//   console.log(base64data);
-// }
-
-
-    // return;
 
     setPageLoading(true);
 
@@ -795,6 +771,7 @@ const Form = () => {
         "email": emailID,
         "mob": contact,
         "linkedin": linkedinLink,
+        "portfolio":portfolioLink,
         "address": address,
         "github": githubLink
       },
