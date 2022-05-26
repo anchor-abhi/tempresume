@@ -685,13 +685,31 @@ const Form = () => {
     // console.log(croppedImage);
     // console.log(typeof(preview))
     // console.log(preview);
-  //   const myFile = new File([croppedImage], 'image.jpg', {
-  //     type: selectedFile.type
-  // });
+   
   
   // console.log(croppedImage);
   // console.log(selectedFile);
   // console.log(myFile);
+
+  
+
+  const getBase64FromUrl = async (url) => {
+    const data = await fetch(url);
+    const blob = await data.blob();
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(blob);
+      reader.onloadend = () => {
+        const base64data = reader.result;
+        resolve(base64data)
+      };
+    });
+  }
+  const myImage = await getBase64FromUrl(croppedImage);
+  // console.log(myImage);
+//   var image = new Image();
+// image.src = myImage;
+// console.log(image);
 
   // return;
 //   var reader = new FileReader();
@@ -710,7 +728,7 @@ const Form = () => {
      {
         try{
           const data = new FormData();
-        data.append("file", selectedFile );
+        data.append("file", myImage );
         data.append("upload_preset", "resume-automation");
         data.append("cloud_name", "resume-automation");
        return fetch("https://api.cloudinary.com/v1_1/resume-automation/image/upload", {
@@ -736,7 +754,7 @@ const Form = () => {
     {
       ProfileImg = await postDetails();
     }
-
+// return;
  
     let educationArray = []
     educationData.forEach(el => {
