@@ -24,7 +24,6 @@ import Typography from '@mui/material/Typography'
 import getCroppedImg from './cropImage'
 import "./Form.css"
 
-const dog ='https://img.huffingtonpost.com/asset/5ab4d4ac2000007d06eb2c56.jpeg?cache=sih0jwle4e&ops=1910_1000';
 var isGithubUrl = require('is-github-url');
 
 const profileMaxSize = 4098;
