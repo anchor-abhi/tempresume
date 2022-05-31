@@ -120,10 +120,16 @@ const Form = () => {
             setAbout(res.data[dataLength].summary)
             setContact(res.data[dataLength].personal.mob)
             setAddress(res.data[dataLength].personal.address)
-            setLinkedinLink(res.data[dataLength].personal.linkedin)
+            // setLinkedinLink(res.data[dataLength].personal.linkedin)
+            var tempLinkedin = (res.data[dataLength].personal.linkedin).split("/")
+            // console.log(tempLinkedin)
+              setLinkedinLink(tempLinkedin[tempLinkedin.length-2])
             if(res.data[dataLength].personal.linkedin)
               setPortfolioLink(res.data[dataLength].personal.linkedin);
-            setGithubLink(res.data[dataLength].personal.github)
+            // setGithubLink(res.data[dataLength].personal.github)
+            var tempGithub = (res.data[dataLength].personal.github).split("/")
+            // console.log(tempGithub)
+              setGithubLink(tempGithub[tempGithub.length-2])
             setEmailID(res.data[dataLength].personal.email)
             setEducationData(res.data[dataLength].education)
             setProjectData(res.data[dataLength].projects)
@@ -625,12 +631,20 @@ const Form = () => {
       alert("Enter a valid portfolio link")
       return
     }
-    if (!validateUrl(linkedinLink)) {
-      alert("Enter a valid linkedin profile link")
+    // if (!validateUrl(linkedinLink)) {
+    //   alert("Enter a valid linkedin profile link")
+    //   return
+    // }
+    if (linkedinLink == "") {
+      alert("Enter valid linkedin username")
       return
     }
-    if (!isGithubUrl(githubLink)) {
-      alert("Enter a valid github profile link")
+    // if (!isGithubUrl(githubLink)) {
+    //   alert("Enter a valid github profile link")
+    //   return
+    // }
+    if (githubLink == "") {
+      alert("Enter valid github username")
       return
     }
 
@@ -761,6 +775,8 @@ const Form = () => {
 
     // // console.log(projectArray);
     ProfileImg = (typeof(ProfileImg)) == "string" ? ProfileImg : ProfileImg.url.toString()  
+    var linkdinUsernameURL = `https://www.linkedin.com/in/${linkedinLink}/`
+    var githubUsernameURL = `https://github.com/${githubLink}/`
     var userId = JSON.parse(localStorage.getItem("loggedinUser"))
     var sendingPacket = {
       "user": userId,
@@ -770,10 +786,10 @@ const Form = () => {
         "tagLine": tagline,
         "email": emailID,
         "mob": contact,
-        "linkedin": linkedinLink,
+        "linkedin": linkdinUsernameURL,
         "portfolio":portfolioLink,
         "address": address,
-        "github": githubLink
+        "github": githubUsernameURL
       },
       "summary": about,
       "projects": projectData,
@@ -923,13 +939,13 @@ const Form = () => {
               <input value={emailID} onInput={e => setEmailID(e.target.value)} id='email-id-input' type={"email"} placeholder={"Email ID *"} />
             </div>
             <div>
-              <input value={linkedinLink} onInput={e => setLinkedinLink(e.target.value)} id='linkedin-url-input' type={"url"} placeholder={"Linkedin Url *"} />
+              <input value={linkedinLink} onInput={e => setLinkedinLink(e.target.value)} id='linkedin-url-input' type={"url"} placeholder={"Linkedin Username *"} />
             </div>
             <div>
               <input value={address} onInput={e => setAddress(e.target.value)} id='address-input' type={"text"} placeholder={"Address *"} />
             </div>
             <div>
-              <input value={githubLink} onInput={e => setGithubLink(e.target.value)} id='github-url-input' type={"url"} placeholder={"Github Url *"} />
+              <input value={githubLink} onInput={e => setGithubLink(e.target.value)} id='github-url-input' type={"url"} placeholder={"Github Username *"} />
             </div>
           </div>
         </div>
