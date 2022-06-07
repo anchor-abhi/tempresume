@@ -93,9 +93,9 @@ export const Left = ({ data }) => {
       <p className="n-info">
         {ele.course + ", "}
         {ele.institute + " "}
-        {ele.start + "-"}
-        {ele.end}
       </p>
+      <p> {ele.start + "-"}
+        {ele.end}</p>
     </div>
   );
 })}
@@ -132,7 +132,7 @@ export const Left = ({ data }) => {
         <h3 className="heading03">Accomplishments</h3>
         {data?.accomplishments?.map((ele) => {
           return (
-            <li style={{fontSize:"12px"}}
+            <li
               className="n-list">
               {ele}
             </li>

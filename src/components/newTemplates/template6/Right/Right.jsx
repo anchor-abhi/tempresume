@@ -60,7 +60,7 @@ export const Right = ({ data }) => {
               {/* deplye link and github link */}
               <div className="icons-div">
                 <h4 
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer" ,marginBottom:"11px"}}
                   onClick={() => {
                     window.open(data?.projects[0].liveLink);
                   }}
