@@ -25,7 +25,7 @@ const imageArr = [
 const handleChange = () => {
 	var doc = new jspdf("p", "pt", "a4");
 
-	doc.html(document.querySelector("#outerDiv"), {
+	doc.html(document.querySelector(".container"), {
 		callback: function (pdf) {
 			var pageCount = doc.internal.getNumberOfPages();
 			doc.deletePage(pageCount);
