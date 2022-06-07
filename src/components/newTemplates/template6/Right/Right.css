@@ -65,7 +65,7 @@
   letter-spacing: 0.02em;
   margin-bottom: 0px;
   /* Primary/Red900 */
-
+  
   color: #0a0103;
 }
 
@@ -154,4 +154,8 @@ color: #4B4BDA;
 .n-universal{
   font-family: "Roboto", sans-serif !important;
   font-size: 12px;
+}
+
+.n-workDetails{
+  font-weight: 600;
 }

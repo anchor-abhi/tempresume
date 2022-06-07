@@ -19,7 +19,7 @@ export const Right = ({ data }) => {
       {/* optional work experience */}
       {data?.workEx?.length !== 0 ? (
         <section className="n-work-exp">
-          <h2>Work Experience</h2>
+          <h2 style={{marginTop:"7px"}}>Work Experience</h2>
           {data?.workEx?.map((ele) => {
             return (
               <div className="n-sub-work-div" >
@@ -53,7 +53,7 @@ export const Right = ({ data }) => {
       {/* project section */}
 
       <section className="n-project-section">
-        <h2 style={{marginBottom:"15px"}}>
+        <h2 style={{marginBottom:"15px",marginTop:"7px"}}>
           Projects
         </h2>
             <div>
