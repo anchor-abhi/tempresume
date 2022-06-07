@@ -92,10 +92,12 @@ export const Right = ({ data }) => {
                   );
                 })}
                 <div className="n-tech-stack">
-                  <h4 className="n-universal">Tech-Stack</h4>
+                  <h3 style={{fontSize:"13.5px",
+  color:"#4b4bda"}} className="n-universal">Tech-Stack</h3>
                   <p style={{fontSize:"12px"}} className="n-universal">{data?.projects[0].techStack.join(" | ")}</p>
                 </div>
-                <h4 className="n-area-of-response">Area of responsibility</h4>
+                <h3 style={{fontSize:"13.5px",
+  color:"#4b4bda"}}className="n-area-of-response">Area of responsibility</h3>
                 {data?.projects[0].areasOfResp.map((res) => {
                   return (
                     <li
