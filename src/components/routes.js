@@ -11,7 +11,7 @@ import { Demo } from "./Form/Demo";
 import Temp2 from "./newTemplates/template2/Temp2";
 import Temp5 from "./newTemplates/template5/Temp5";
 import UpdatePass from "./updatePass";
-
+import { Template6 } from "./newTemplates/template6/Template";
 export default function AddRoute() {
   return (
     <>
@@ -23,6 +23,7 @@ export default function AddRoute() {
         <Route path="/createform" element={<Form />} />
         <Route path="/temp4" element={<Temp4 />} />
         <Route path="/temp3" element={<Template />} />
+        <Route path="/temp6" element={<Template6 />} />
         <Route path="/image" element={<Demo />} />
         <Route path="/temp2" element={<Temp2 />} />
         <Route path="/temp5" element={<Temp5 />} />
