@@ -7,7 +7,7 @@
   width: 595px;
   height: 842px;
   margin: 70px auto;
-  position:relative;
+  position: relative;
   font-family: "Roboto", sans-serif !important;
 }
 
@@ -16,10 +16,9 @@
   position: absolute;
   box-sizing: border-box;
   width: 220px;
-height: 842px;
-left: 0px;
-top: 0px;
-
+  height: 842px;
+  left: 0px;
+  top: 0px;
 }
 /* 595-220 = 375 */
 
@@ -27,7 +26,7 @@ top: 0px;
   position: absolute;
   box-sizing: border-box;
   width: 375px;
-height: 842px;
-right: 0px;
-top: 0px;
+  height: 842px;
+  right: 0px;
+  top: 0px;
 }

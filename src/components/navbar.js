@@ -13,7 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+import { useLocation } from "react-router-dom";
 
 const pages = [];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -36,19 +36,20 @@ const ResponsiveAppBar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-const [image, setImage] = useState("")
-useEffect(() => {
-  const userId = JSON.parse(localStorage.getItem("loggedinUser"));
-  axios
-    .get(`https://masairesumebuilder.herokuapp.com/resume/${userId}`)
-    .then((res) => {
-      console.log(res.data);
-      setImage(res.data[res.data.length - 1]?.personal?.profilePic);
-      
-    })
-    .catch((e) => console.log(e.message));
-}, []);
-  return (
+  const [image, setImage] = useState("");
+  useEffect(() => {
+    const userId = JSON.parse(localStorage.getItem("loggedinUser"));
+    axios
+      .get(`https://masairesumebuilder.herokuapp.com/resume/${userId}`)
+      .then((res) => {
+        console.log(res.data);
+        setImage(res.data[res.data.length - 1]?.personal?.profilePic);
+      })
+      .catch((e) => console.log(e.message));
+  }, []);
+  const location = useLocation();
+  console.log(location.pathname);
+  return location.pathname == "/temp6" ? null : (
     <AppBar position="fixed" width="100%" zindex="5000">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -120,10 +121,7 @@ useEffect(() => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar
-                  alt="Remy Sharp"
-                  src={image ? image : null}
-                />
+                <Avatar alt="Remy Sharp" src={image ? image : null} />
               </IconButton>
             </Tooltip>
             <Menu
