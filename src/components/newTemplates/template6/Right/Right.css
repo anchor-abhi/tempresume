@@ -9,7 +9,11 @@
 .n-project-description,
 .n-tech-stack,
 .n-area-of-response,
-.n-team-line {
+.n-team-line,
+.m-icons-div,
+.m-project-description,
+.m-tech-stack,
+.m-area-of-response {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -56,7 +60,7 @@
 }
 
 .n-profile-desc > h2,
-.n-work-exp > h2,.n-project-section>h2 {
+.n-work-exp > h2,.n-project-section>h2,.m-project-section>h2 {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;
   font-style: normal;
   font-weight: 500 !important;
@@ -83,13 +87,13 @@ line-height: 20px;
 color: #3B3435;
 }
 
-.n-project-section {
+.n-project-section,.m-project-section {
   display: grid;
   /* gap: 10px; */
 
 }
 
-.n-project-section >div{
+.n-project-section >div,.n-project-section>div{
   margin-top: -15px;
 }
 
@@ -108,7 +112,7 @@ margin-bottom: 0px;
 /* display: flex; */
 }
 
-.n-proj-div{
+.n-proj-div,.m-proj-div{
   /* border:1px solid black;  */
   /* width: 343px; */
 /* height: 120px; */
@@ -121,14 +125,14 @@ margin-top: -10px;
 /* or 167% */
 }
 
-.n-project-description{
+.n-project-description,.m-project-description{
   font-size: 12px;
   margin-bottom: -20px;
   line-height: 20px;
   /* margin-top: -5px; */
 }
 
-.n-icons-div{
+.n-icons-div,.m-icons-div{
 display: flex;
 gap:5px;
 font-family: 'Open Sans';
@@ -147,15 +151,30 @@ color: #4B4BDA;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.n-tech-stack>h4,.n-area-of-response{
+.n-tech-stack>h4,.n-area-of-response,.m-tech-stack>h4,.m-area-of-response{
   color:#4b4bda;
 }
 
-.n-universal{
+
+.n-universal,.m-universal{
   font-family: "Roboto", sans-serif !important;
   font-size: 12px;
 }
 
-.n-workDetails{
+.n-workDetails,.m-workDetails{
   font-weight: 600;
+}
+
+.m-area-of-response{
+  color:red;
+}
+
+.m-project-section >h2{
+  margin-bottom: 0 !important;
+  margin-top: -1px !important;
+}
+
+.n-area{
+  /* border:1px solid black; */
+  margin-bottom: 25px;
 }

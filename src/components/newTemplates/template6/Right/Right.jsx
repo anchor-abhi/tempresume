@@ -8,22 +8,18 @@ export const Right = ({ data }) => {
       <hr className="n-hr" />
       {/*  */}
       <div className="n-profile-desc">
-        <h2 >
-          Personal Profile
-        </h2>
-        <p className="n-summary">
-          {data?.summary}
-        </p>
+        <h2>Personal Profile</h2>
+        <p className="n-summary">{data?.summary}</p>
       </div>
 
       {/* optional work experience */}
       {data?.workEx?.length !== 0 ? (
         <section className="n-work-exp">
-          <h2 style={{marginTop:"7px"}}>Work Experience</h2>
+          <h2 style={{ marginTop: "7px" }}>Work Experience</h2>
           {data?.workEx?.map((ele) => {
             return (
-              <div className="n-sub-work-div" >
-                <p >
+              <div className="n-sub-work-div">
+                <p>
                   <span className="n-workDetails">Organisation: </span>
                   {ele.organisation}
                 </p>
@@ -52,52 +48,62 @@ export const Right = ({ data }) => {
 
       {/* project section */}
 
-      <section className="n-project-section">
-        <h2 style={{marginBottom:"15px",marginTop:"7px"}}>
-          Projects
-        </h2>
-            <div>
+      {data?.workEx.length == 0 ? <section className="n-project-section">
+        <h2 style={{ marginBottom: "15px", marginTop: "7px" }}>Projects</h2>
+        {data?.projects?.map((ele) => {
+          return (
+            <div className="n-project-div">
               {/* deplye link and github link */}
               <div className="n-icons-div">
-                <h4 
-                  style={{ cursor: "pointer" ,marginBottom:"11px"}}
+                <h4
+                  style={{ cursor: "pointer", marginBottom: "11px" }}
                   onClick={() => {
-                    window.open(data?.projects[0].liveLink);
+                    window.open(ele.liveLink);
                   }}
                 >
-                  {data?.projects[0].name}
+                  {ele.name}
                 </h4>
                 <GitHubIcon
                   style={{ cursor: "pointer" }}
                   onClick={() => {
-                    window.open(data?.projects[0].gitLink);
+                    window.open(ele.gitLink);
                   }}
                 />
               </div>
               {/* aboutproject */}
               <div className="n-proj-div">
-                <p className="n-project-description">{data?.projects[0].description}</p>
-                <h4  className="sub-title-02">
-                  Features
-                </h4>
-                {data?.projects[0].features.map((list) => {
+                <p className="n-project-description">{ele.description}</p>
+                <h4 className="sub-title-02">Features</h4>
+                {ele.features.map((list) => {
                   return (
-                    <li id="n-li"
+                    <li
+                      id="n-li"
                       style={{
                         lineHeight: data?.workEx?.length == 0 ? "20px" : "20px",
-}}
+                      }}
                     >
                       {list}
                     </li>
                   );
                 })}
                 <div className="n-tech-stack">
-                  <h3 style={{fontSize:"13.5px",
-  color:"#4b4bda"}} className="n-universal">Tech-Stack</h3>
-                  <p style={{fontSize:"12px"}} className="n-universal">{data?.projects[0].techStack.join(" | ")}</p>
+                  <h3
+                    style={{ fontSize: "13.5px", color: "#4b4bda" }}
+                    className="n-universal"
+                  >
+                    Tech-Stack
+                  </h3>
+                  <p style={{ fontSize: "12px" }} className="n-universal">
+                    {ele.techStack.join(" | ")}
+                  </p>
                 </div>
-                <h3 style={{fontSize:"13.5px",
-  color:"#4b4bda"}}className="n-area-of-response">Area of responsibility</h3>
+                <h3
+                  style={{ fontSize: "13.5px", color: "#4b4bda" }}
+                  className="n-area-of-response"
+                >
+                  Area of responsibility
+                </h3>
+                <div className="n-area">
                 {data?.projects[0].areasOfResp.map((res) => {
                   return (
                     <li
@@ -109,14 +115,70 @@ export const Right = ({ data }) => {
                     >
                       {res}
                     </li>
+                    
                   );
                 })}
+                </div>
               </div>
             </div>
-
-
-        
-      </section>
+          );
+        })}
+      </section>:
+      <section className="m-project-section">
+      <h2 style={{ marginBottom: "15px", marginTop: "7px" }}>Projects</h2>
+      {data?.projects?.map((ele) => {
+        return (
+          <div>
+            {/* deplye link and github link */}
+            <div className="m-icons-div">
+              <h4
+                style={{ cursor: "pointer", marginBottom: "11px" }}
+                onClick={() => {
+                  window.open(ele.liveLink);
+                }}
+              >
+                {ele.name}
+              </h4>
+              <GitHubIcon
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  window.open(ele.gitLink);
+                }}
+              />
+            </div>
+            {/* aboutproject */}
+            <div className="m-proj-div">
+              <p className="m-project-description">{ele.description}</p>
+              <h4 className="sub-title-02">Features</h4>
+              {ele.features.map((list) => {
+                return (
+                  <li
+                    id="n-li"
+                    style={{
+                      lineHeight: data?.workEx?.length == 0 ? "20px" : "20px",
+                    }}
+                  >
+                    {list}
+                  </li>
+                );
+              })}
+              <div className="m-tech-stack">
+                <h3
+                  style={{ fontSize: "13.5px", color: "#4b4bda" }}
+                  className="m-universal"
+                >
+                  Tech-Stack
+                </h3>
+                <p style={{ fontSize: "12px" }} className="m-universal">
+                  {ele.techStack.join(" | ")}
+                </p>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </section>
+      }
     </div>
   );
 };
