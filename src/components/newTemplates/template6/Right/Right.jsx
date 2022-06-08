@@ -3,9 +3,9 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 export const Right = ({ data }) => {
   return (
     <div className="n-right-container">
-      <h1 className="universal">{data?.personal?.name}</h1>
-      <h3 className="universal">Full Stack Web Developer</h3>
-      <hr className="hr" />
+      <h1 className="n-universal">{data?.personal?.name}</h1>
+      <h3 className="n-universal">Full Stack Web Developer</h3>
+      <hr className="n-hr" />
       {/*  */}
       <div className="n-profile-desc">
         <h2 >
@@ -19,27 +19,27 @@ export const Right = ({ data }) => {
       {/* optional work experience */}
       {data?.workEx?.length !== 0 ? (
         <section className="n-work-exp">
-          <h2>Work Experience</h2>
+          <h2 style={{marginTop:"7px"}}>Work Experience</h2>
           {data?.workEx?.map((ele) => {
             return (
               <div className="n-sub-work-div" >
                 <p >
-                  <span className="workDetails">Organisation: </span>
+                  <span className="n-workDetails">Organisation: </span>
                   {ele.organisation}
                 </p>
-                <p className="universal">
+                <p className="n-universal">
                   {" "}
-                  <span className="workDetails">Position: </span>
+                  <span className="n-workDetails">Position: </span>
                   {ele.position}
                 </p>
-                <p className="universal">
+                <p className="n-universal">
                   {" "}
-                  <span className="workDetails">Duration: </span>{" "}
+                  <span className="n-workDetails">Duration: </span>{" "}
                   {ele.start + " to " + ele.end}
                 </p>
-                <div style={{ marginBottom: "3px" }} className="job-profile">
+                <div style={{ marginBottom: "3px" }} className="n-job-profile">
                   {" "}
-                  <span className="workDetails">ROLES: </span>{" "}
+                  <span className="n-workDetails">ROLES: </span>{" "}
                   {ele.description.join(" | ")}
                 </div>
               </div>
@@ -53,12 +53,12 @@ export const Right = ({ data }) => {
       {/* project section */}
 
       <section className="n-project-section">
-        <h2>
+        <h2 style={{marginBottom:"15px",marginTop:"7px"}}>
           Projects
         </h2>
             <div>
               {/* deplye link and github link */}
-              <div className="icons-div">
+              <div className="n-icons-div">
                 <h4 
                   style={{ cursor: "pointer" ,marginBottom:"11px"}}
                   onClick={() => {
@@ -76,7 +76,7 @@ export const Right = ({ data }) => {
               </div>
               {/* aboutproject */}
               <div className="n-proj-div">
-                <p className="project-description">{data?.projects[0].description}</p>
+                <p className="n-project-description">{data?.projects[0].description}</p>
                 <h4  className="sub-title-02">
                   Features
                 </h4>
@@ -91,15 +91,17 @@ export const Right = ({ data }) => {
                     </li>
                   );
                 })}
-                <div className="tech-stack">
-                  <h4 className="universal">Tech-Stack</h4>
-                  <p style={{fontSize:"12px"}} className="universal">{data?.projects[0].techStack.join(" | ")}</p>
+                <div className="n-tech-stack">
+                  <h3 style={{fontSize:"13.5px",
+  color:"#4b4bda"}} className="n-universal">Tech-Stack</h3>
+                  <p style={{fontSize:"12px"}} className="n-universal">{data?.projects[0].techStack.join(" | ")}</p>
                 </div>
-                <h4 className="area-of-response">Area of responsibility</h4>
+                <h3 style={{fontSize:"13.5px",
+  color:"#4b4bda"}}className="n-area-of-response">Area of responsibility</h3>
                 {data?.projects[0].areasOfResp.map((res) => {
                   return (
                     <li
-                      className="universal"
+                      className="n-universal"
                       style={{
                         lineHeight: data?.workEx?.length == 0 ? "20px" : "20px",
                         fontSize: "12px",

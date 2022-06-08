@@ -18,13 +18,13 @@ export const Left = ({ data }) => {
       <section className="n-total-details-div">
         {/* contact-section */}
         <section className="n-contact-section">
-          <h3 className="heading03">Contact me at</h3>
+          <h3  className="heading03">Contact me at</h3>
           <div>
           <div >
           <div className=".n-icons-div">
-           <LocationOnOutlinedIcon/>
+           <LocationOnOutlinedIcon/> 
           </div>
-            <span className="n-info" >{data?.personal?.address}</span>
+            <span className="n-info" >vill. joll, po balh jolly, teh joginder nagar distt mandi Himachal Pradesh</span>
           </div>
 
           <div >
@@ -94,7 +94,7 @@ export const Left = ({ data }) => {
         {ele.course + ", "}
         {ele.institute + " "}
       </p>
-      <p> {ele.start + "-"}
+      <p className="n-info"> {ele.start + "-"}
         {ele.end}</p>
     </div>
   );
