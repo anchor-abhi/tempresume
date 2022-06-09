@@ -1,5 +1,6 @@
 import "./Right.css";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import { Link } from "@mui/material";
 export const Right = ({ data }) => {
   return (
     <div className="n-right-container">
@@ -59,19 +60,19 @@ export const Right = ({ data }) => {
             <div>
               {/* deplye link and github link */}
               <div className="n-icons-div">
-                <h4 
-                  style={{ cursor: "pointer" ,marginBottom:"11px"}}
-                  onClick={() => {
-                    window.open(data?.projects[0].liveLink);
-                  }}
+                <a
+                  style={{textDecoration:"none", cursor: "pointer" ,marginBottom:"11px"}}
+                  href={data?.projects[0].liveLink}
+                  target="_blank"
                 >
                   {data?.projects[0].name}
-                </h4>
-                <GitHubIcon
+                </a>
+                <GitHubIcon 
                   style={{ cursor: "pointer" }}
                   onClick={() => {
                     window.open(data?.projects[0].gitLink);
                   }}
+                  
                 />
               </div>
               {/* aboutproject */}

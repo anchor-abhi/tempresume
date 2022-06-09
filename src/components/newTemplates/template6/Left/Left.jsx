@@ -5,6 +5,7 @@ import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import DraftsOutlinedIcon from '@mui/icons-material/DraftsOutlined';
 import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
+import { Link } from "@mui/material";
 
 export const Left = ({ data }) => {
   return (
