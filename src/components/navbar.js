@@ -49,7 +49,7 @@ const ResponsiveAppBar = () => {
   }, []);
   const location = useLocation();
   console.log(location.pathname);
-  return location.pathname == "/temp6" ? null : (
+  return location.pathname == "/temp6" || location.pathname == "/download" ? null : (
     <AppBar position="fixed" width="100%" zindex="5000">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
