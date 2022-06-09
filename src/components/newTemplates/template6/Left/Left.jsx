@@ -24,7 +24,7 @@ export const Left = ({ data }) => {
           <div className=".n-icons-div">
            <LocationOnOutlinedIcon/> 
           </div>
-            <span className="n-info" >vill. joll, po balh jolly, teh joginder nagar distt mandi Himachal Pradesh</span>
+            <span className="n-info" >{data?.personal?.address}</span>
           </div>
 
           <div >

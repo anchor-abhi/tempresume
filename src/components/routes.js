@@ -8,6 +8,8 @@ import { Demo } from "./Form/Demo";
 import UpdatePass from "./updatePass";
 import { Template6 } from "./newTemplates/template6/Template";
 import ResponsiveAppBar from "./navbar";
+import Download  from "../Pages/download";
+
 export default function AddRoute() {
   return (
     <>
@@ -21,6 +23,7 @@ export default function AddRoute() {
         <Route path="/temp6" element={<Template6 />} />
         <Route path="/selecttemplate" element={<TemplateSelector />} />
         <Route path="/forgot-password/:token" element={<UpdatePass />} />
+        <Route path="/download" element={<Download />} />
       </Routes>
     </>
   );

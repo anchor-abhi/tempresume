@@ -1,3 +1,7 @@
-export const Download = () => {
-  return <h2>Download</h2>;
-};
+
+function Download(){
+
+    return <button >save</button>
+  }
+
+  export default Download
