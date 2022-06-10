@@ -4,8 +4,8 @@
   box-sizing: border-box;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
     rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-  width: 595px;
-  height: 842px;
+  width: 795px;
+  height: 1100px;
   margin: 70px auto;
   position:relative;
   font-family: "Roboto", sans-serif !important;
@@ -15,10 +15,9 @@
   border-right: 1px solid gray;
   position: absolute;
   box-sizing: border-box;
-  width: 220px;
-height: 842px;
+  width: 32%;
+height: 100%;
 left: 0px;
-top: 0px;
 
 }
 /* 595-220 = 375 */
@@ -26,8 +25,9 @@ top: 0px;
 .n-container > div:nth-child(2) {
   position: absolute;
   box-sizing: border-box;
-  width: 375px;
-height: 842px;
+  width: 68%;
+height: 100%;
 right: 0px;
 top: 0px;
+
 }

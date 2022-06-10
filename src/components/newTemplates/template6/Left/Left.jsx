@@ -35,7 +35,7 @@ export const Left = ({ data }) => {
               className="n-info"
               href={"mailto:" + data?.personal?.email}
             >
-              {data?.personal?.email}
+              {"alksdfjladkfjlkdsfj@gmail.com"}
             </a>
           </div>
 
