@@ -9,22 +9,18 @@ export const Right = ({ data }) => {
       <hr className="n-hr" />
       {/*  */}
       <div className="n-profile-desc">
-        <h2 >
-          Personal Profile
-        </h2>
-        <p className="n-summary">
-          {data?.summary}
-        </p>
+        <h2>Personal Profile</h2>
+        <p className="n-summary">{data?.summary}</p>
       </div>
 
       {/* optional work experience */}
+      {data?.workEx?.length !== 0 ?<h2 className="h2" style={{ marginTop: "7px" }}>Work Experience</h2>:""}
       {data?.workEx?.length !== 0 ? (
         <section className="n-work-exp">
-          <h2 style={{marginTop:"7px"}}>Work Experience</h2>
           {data?.workEx?.map((ele) => {
             return (
-              <div className="n-sub-work-div" >
-                <p >
+              <div className="n-sub-work-div">
+                <p>
                   <span className="n-workDetails">Organisation: </span>
                   {ele.organisation}
                 </p>
@@ -54,69 +50,83 @@ export const Right = ({ data }) => {
       {/* project section */}
 
       <section className="n-project-section">
-        <h2 style={{marginBottom:"15px",marginTop:"7px"}}>
-          Projects
-        </h2>
-            <div>
+        <h2 style={{ marginBottom: "25px", marginTop: data?.workExp?.length == 0 ?  "15px" : "9px" }}>Projects</h2>
+        {data?.projects?.map((ele) => {
+          return (
+            <div className="n-project-div">
               {/* deplye link and github link */}
               <div className="n-icons-div">
                 <a
-                  style={{textDecoration:"none", cursor: "pointer" ,marginBottom:"11px"}}
-                  href={data?.projects[0].liveLink}
-                  target="_blank"
+                  style={{textDecoration:"none",color:"#4b4bda", cursor: "pointer", marginBottom: "11px" }}
+                  href={ele.liveLink}
                 >
-                  {data?.projects[0].name}
+                  {ele.name}
                 </a>
-                <GitHubIcon 
+                <a href={ele.gitLink} style={{textDecoration:"none",color:"#4b4bda"}}>
+                <GitHubIcon
                   style={{ cursor: "pointer" }}
-                  onClick={() => {
-                    window.open(data?.projects[0].gitLink);
-                  }}
                   
                 />
+                </a>
               </div>
               {/* aboutproject */}
               <div className="n-proj-div">
-                <p className="n-project-description">{data?.projects[0].description}</p>
-                <h4  className="sub-title-02">
-                  Features
-                </h4>
-                {data?.projects[0].features.map((list) => {
+                <p className="n-project-description">{ele.description}</p>
+                <h4 className="n-sub-title-02">Features</h4>
+                <ul className="ul">
+                {ele.features.map((list) => {
                   return (
-                    <li id="n-li"
+                    <li
+                      id="n-li"
                       style={{
-                        lineHeight: data?.workEx?.length == 0 ? "20px" : "20px",
-}}
+                        lineHeight: data?.workEx?.length == 0 ? "22px" : "22px",
+                        marginLeft:"15px"
+                      }}
                     >
                       {list}
                     </li>
                   );
                 })}
+                </ul>
                 <div className="n-tech-stack">
-                  <h3 style={{fontSize:"13.5px",
-  color:"#4b4bda"}} className="n-universal">Tech-Stack</h3>
-                  <p style={{fontSize:"12px"}} className="n-universal">{data?.projects[0].techStack.join(" | ")}</p>
+                  <h3
+                    style={{ fontSize: "12px", color: "black" }}
+                    className="n-universal"
+                  >
+                    Tech-Stack
+                  </h3>
+                  <p style={{ fontSize: "14px" }} className="n-universal">
+                    {ele.techStack.join(" | ")}
+                  </p>
                 </div>
-                <h3 style={{fontSize:"13.5px",
-  color:"#4b4bda"}}className="n-area-of-response">Area of responsibility</h3>
+                <h3
+                  style={{ fontSize: "12px", color: "black" }}
+                  className="n-area-of-response"
+                >
+                  Area of responsibility
+                </h3>
+                <ul className="n-area">
                 {data?.projects[0].areasOfResp.map((res) => {
                   return (
+
                     <li
                       className="n-universal"
                       style={{
-                        lineHeight: data?.workEx?.length == 0 ? "20px" : "20px",
-                        fontSize: "12px",
+                        lineHeight: data?.workEx?.length == 0 ? "22px" : "22px",
+                        fontSize: "14px",
+                        marginLeft:"15px"
                       }}
                     >
                       {res}
                     </li>
+                    
                   );
                 })}
+                </ul>
               </div>
             </div>
-
-
-        
+          );
+        })}
       </section>
     </div>
   );
