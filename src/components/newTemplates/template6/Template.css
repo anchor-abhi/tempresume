@@ -1,0 +1,45 @@
+.n-container {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  width: 790px;
+  height: 1105px;
+  margin: 70px auto;
+  position: relative;
+  font-family: "Roboto", sans-serif !important;
+}
+
+.n-container > div:nth-child(1) {
+  border-right: 1px solid gray;
+  position: absolute;
+  box-sizing: border-box;
+  width: 220px;
+  height: 1105px;
+  left: 0px;
+  top: 0px;
+}
+/* 595-220 = 375 */
+
+.n-container > div:nth-child(2) {
+  position: absolute;
+  box-sizing: border-box;
+  width: 375px;
+  height: 1105px;
+  right: 0px;
+  top: 0px;
+}
+
+@page {
+  size: A4;
+}
+
+@media print {
+  
+  .n-container{
+    margin:0
+  }
+  /* .n-container > div:nth-child(1) {
+    height:1100px
+  } */
+}

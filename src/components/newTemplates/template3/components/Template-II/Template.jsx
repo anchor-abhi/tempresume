@@ -56,5 +56,7 @@ export const Template = () => {
         <div onClick={maroonColor} className="maroon"></div>
       </div>
     </div>
-  ) : <Loader/>
+  ) : (
+    <Loader /> 
+  );
 };
