@@ -77,8 +77,9 @@
   font-family: 'Open Sans';
 font-style: normal;
 font-weight: 400;
-font-size: 12px;
-line-height: 20px;
+font-size: 14px;
+line-height: 22px;
+text-align: justify;
 /* or 167% */
 
 
@@ -97,18 +98,18 @@ color: #3B3435;
   margin-top: -15px;
 }
 
-.sub-title-02{
+.n-sub-title-02,.m-sub-title-02{
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 font-style: normal;
 font-weight: 600;
-font-size: 14px;
+font-size: 12px;
 line-height: 19px;
 /* identical to box height */
 letter-spacing: 0.02em;
-color: #4B4BDA;
+color: black;
 text-transform: capitalize;
-margin-top: 25px;
-margin-bottom: 0px;
+margin-top: 20px;
+
 /* display: flex; */
 }
 
@@ -125,10 +126,15 @@ margin-top: -10px;
 /* or 167% */
 }
 
+.n-proj-div{
+  margin-bottom: 45px;
+}
+
 .n-project-description,.m-project-description{
-  font-size: 12px;
+  font-size: 14px;
   margin-bottom: -20px;
-  line-height: 20px;
+  line-height: 22px;
+  text-align: justify;
   /* margin-top: -5px; */
 }
 
@@ -138,16 +144,17 @@ gap:5px;
 font-family: 'Open Sans';
 font-style: normal;
 font-weight: 600;
-font-size: 14px;
+font-size: 16px;
 line-height: 19px;
 /* identical to box height */
 letter-spacing: 0.02em;
 color: #4B4BDA;
+padding-bottom: 5px;
 }
 
 #n-li{
   line-height: 0.02em;
-  font-size: 12px !important;
+  font-size: 14px !important;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
@@ -158,16 +165,15 @@ color: #4B4BDA;
 
 .n-universal,.m-universal{
   font-family: "Roboto", sans-serif !important;
-  font-size: 12px;
+  font-size: 14px;
+  list-style-position: outside;
+
 }
 
 .n-workDetails,.m-workDetails{
   font-weight: 600;
 }
 
-.m-area-of-response{
-  color:red;
-}
 
 .m-project-section >h2{
   margin-bottom: 0 !important;
@@ -175,6 +181,25 @@ color: #4B4BDA;
 }
 
 .n-area{
+  list-style-position: outside;
+  padding: 10px 0 10px 0;
   /* border:1px solid black; */
-  margin-bottom: 25px;
+}
+
+.n-project-section > h2{
+  margin-bottom: 22px !important;
+}
+
+.n-project-description{
+  margin-bottom: -13px;
+}
+.n-tech-stack {
+  padding: 6px 0 10px 0;
+  display:grid;
+  gap:5px;
+}
+
+.ul{
+  /* border:1px solid black; */
+  padding:10px 0 10px 0;
 }

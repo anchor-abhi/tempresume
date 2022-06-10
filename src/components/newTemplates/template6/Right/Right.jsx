@@ -73,44 +73,48 @@ export const Right = ({ data }) => {
               {/* aboutproject */}
               <div className="n-proj-div">
                 <p className="n-project-description">{ele.description}</p>
-                <h4 className="sub-title-02">Features</h4>
+                <h4 className="n-sub-title-02">Features</h4>
+                <ul className="ul">
                 {ele.features.map((list) => {
                   return (
                     <li
                       id="n-li"
                       style={{
-                        lineHeight: data?.workEx?.length == 0 ? "20px" : "20px",
+                        lineHeight: data?.workEx?.length == 0 ? "22px" : "22px",
+                        listStylePosition: "outside"
                       }}
                     >
                       {list}
                     </li>
                   );
                 })}
+                </ul>
                 <div className="n-tech-stack">
                   <h3
-                    style={{ fontSize: "13.5px", color: "#4b4bda" }}
+                    style={{ fontSize: "12px", color: "black" }}
                     className="n-universal"
                   >
                     Tech-Stack
                   </h3>
-                  <p style={{ fontSize: "12px" }} className="n-universal">
+                  <p style={{ fontSize: "14px" }} className="n-universal">
                     {ele.techStack.join(" | ")}
                   </p>
                 </div>
                 <h3
-                  style={{ fontSize: "13.5px", color: "#4b4bda" }}
+                  style={{ fontSize: "12px", color: "black" }}
                   className="n-area-of-response"
                 >
                   Area of responsibility
                 </h3>
-                <div className="n-area">
+                <ul className="n-area">
                 {data?.projects[0].areasOfResp.map((res) => {
                   return (
+
                     <li
                       className="n-universal"
                       style={{
-                        lineHeight: data?.workEx?.length == 0 ? "20px" : "20px",
-                        fontSize: "12px",
+                        lineHeight: data?.workEx?.length == 0 ? "22px" : "22px",
+                        fontSize: "14px",
                       }}
                     >
                       {res}
@@ -118,7 +122,7 @@ export const Right = ({ data }) => {
                     
                   );
                 })}
-                </div>
+                </ul>
               </div>
             </div>
           );
@@ -149,13 +153,14 @@ export const Right = ({ data }) => {
             {/* aboutproject */}
             <div className="m-proj-div">
               <p className="m-project-description">{ele.description}</p>
-              <h4 className="sub-title-02">Features</h4>
+              <h4 className="m-sub-title-02">Features</h4>
               {ele.features.map((list) => {
                 return (
                   <li
                     id="n-li"
                     style={{
                       lineHeight: data?.workEx?.length == 0 ? "20px" : "20px",
+                      marginLeft:"10px"
                     }}
                   >
                     {list}
