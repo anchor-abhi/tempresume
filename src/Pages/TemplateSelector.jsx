@@ -13,7 +13,7 @@ import Alert from "./alert";
 import "./templatess.css";
 import Resume from "../components/newTemplates/template1/resume";
 import { Template6 } from "../components/newTemplates/template6/Template";
-import html2canvas from "html2canvas";
+
 
 
 const imageArr = [
@@ -49,7 +49,7 @@ function TemplateSelector() {
 
   return userId ? (
     <>
-      <MyButton click={handleChange} />
+      {/* <MyButton click={handleChange} /> */}
       <Box style={{ marginTop: 0 }}>
         {currentTemplate === 1 ? (
           <Resume />
