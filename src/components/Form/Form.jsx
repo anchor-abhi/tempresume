@@ -591,7 +591,7 @@ const Form = () => {
     setStartDate(educationData[index].start);
     setEndDate(educationData[index].end);
 
-    setEditEducationDataIndex(-1);
+    setEditEducationDataIndex(index);
   }
 
 
