@@ -144,7 +144,7 @@
   line-height: 16px;
   letter-spacing: 0.02em;
   text-decoration: none ;
-  text-align: justify;
+  /* text-align: justify; */
   padding: 5px 0 5px 0;
   /* Neutral/Grey800 */
   /* border:1px solid black; */

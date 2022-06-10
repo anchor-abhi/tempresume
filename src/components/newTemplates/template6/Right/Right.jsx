@@ -55,20 +55,18 @@ export const Right = ({ data }) => {
             <div className="n-project-div">
               {/* deplye link and github link */}
               <div className="n-icons-div">
-                <h4
-                  style={{ cursor: "pointer", marginBottom: "11px" }}
-                  onClick={() => {
-                    window.open(ele.liveLink);
-                  }}
+                <a
+                  style={{textDecoration:"none",color:"#4b4bda", cursor: "pointer", marginBottom: "11px" }}
+                  href={ele.liveLink}
                 >
                   {ele.name}
-                </h4>
+                </a>
+                <a href={ele.gitLink} style={{textDecoration:"none",color:"#4b4bda"}}>
                 <GitHubIcon
                   style={{ cursor: "pointer" }}
-                  onClick={() => {
-                    window.open(ele.gitLink);
-                  }}
+                  
                 />
+                </a>
               </div>
               {/* aboutproject */}
               <div className="n-proj-div">
