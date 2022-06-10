@@ -13,9 +13,9 @@ export const Right = ({ data }) => {
       </div>
 
       {/* optional work experience */}
+      {data?.workEx?.length !== 0 ?<h2 className="h2" style={{ marginTop: "7px" }}>Work Experience</h2>:""}
       {data?.workEx?.length !== 0 ? (
         <section className="n-work-exp">
-          <h2 style={{ marginTop: "7px" }}>Work Experience</h2>
           {data?.workEx?.map((ele) => {
             return (
               <div className="n-sub-work-div">
@@ -48,8 +48,8 @@ export const Right = ({ data }) => {
 
       {/* project section */}
 
-      {data?.workEx.length == 0 ? <section className="n-project-section">
-        <h2 style={{ marginBottom: "15px", marginTop: "7px" }}>Projects</h2>
+      <section className="n-project-section">
+        <h2 style={{ marginBottom: "25px", marginTop: data?.workExp?.length == 0 ?  "15px" : "9px" }}>Projects</h2>
         {data?.projects?.map((ele) => {
           return (
             <div className="n-project-div">
@@ -81,7 +81,7 @@ export const Right = ({ data }) => {
                       id="n-li"
                       style={{
                         lineHeight: data?.workEx?.length == 0 ? "22px" : "22px",
-                        listStylePosition: "outside"
+                        marginLeft:"15px"
                       }}
                     >
                       {list}
@@ -115,6 +115,7 @@ export const Right = ({ data }) => {
                       style={{
                         lineHeight: data?.workEx?.length == 0 ? "22px" : "22px",
                         fontSize: "14px",
+                        marginLeft:"15px"
                       }}
                     >
                       {res}
@@ -127,63 +128,7 @@ export const Right = ({ data }) => {
             </div>
           );
         })}
-      </section>:
-      <section className="m-project-section">
-      <h2 style={{ marginBottom: "15px", marginTop: "7px" }}>Projects</h2>
-      {data?.projects?.map((ele) => {
-        return (
-          <div>
-            {/* deplye link and github link */}
-            <div className="m-icons-div">
-              <h4
-                style={{ cursor: "pointer", marginBottom: "11px" }}
-                onClick={() => {
-                  window.open(ele.liveLink);
-                }}
-              >
-                {ele.name}
-              </h4>
-              <GitHubIcon
-                style={{ cursor: "pointer" }}
-                onClick={() => {
-                  window.open(ele.gitLink);
-                }}
-              />
-            </div>
-            {/* aboutproject */}
-            <div className="m-proj-div">
-              <p className="m-project-description">{ele.description}</p>
-              <h4 className="m-sub-title-02">Features</h4>
-              {ele.features.map((list) => {
-                return (
-                  <li
-                    id="n-li"
-                    style={{
-                      lineHeight: data?.workEx?.length == 0 ? "20px" : "20px",
-                      marginLeft:"10px"
-                    }}
-                  >
-                    {list}
-                  </li>
-                );
-              })}
-              <div className="m-tech-stack">
-                <h3
-                  style={{ fontSize: "13.5px", color: "#4b4bda" }}
-                  className="m-universal"
-                >
-                  Tech-Stack
-                </h3>
-                <p style={{ fontSize: "12px" }} className="m-universal">
-                  {ele.techStack.join(" | ")}
-                </p>
-              </div>
-            </div>
-          </div>
-        );
-      })}
-    </section>
-      }
+      </section>
     </div>
   );
 };

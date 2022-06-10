@@ -21,26 +21,26 @@ export const Left = ({ data }) => {
           <h3  className="heading03">Contact me at</h3>
           <div>
           <div >
-          <div className=".n-icons-div">
+          <div className="n-icons-div">
            <LocationOnOutlinedIcon/> 
           </div>
             <span className="n-info" >vill. joll, po balh jolly, teh joginder nagar distt mandi Himachal Pradesh</span>
           </div>
 
           <div >
-        <div className=".n-icons-div">
+        <div className="n-icons-div">
                 <DraftsOutlinedIcon/>
         </div>
             <a
               className="n-info"
               href={"mailto:" + data?.personal?.email}
             >
-              {"alksdfjladkfjlkdsfj@gmail.com"}
+              {data?.personal?.email}
             </a>
           </div>
 
           <div >
-          <div className=".n-icons-div">
+          <div className="n-icons-div">
           
             <GitHubIcon />
           </div>
@@ -54,7 +54,7 @@ export const Left = ({ data }) => {
           </div>
 
           <div >
-          <div className=".n-icons-div">
+          <div className="n-icons-div">
           
             <LinkedInIcon />
           </div>
@@ -68,7 +68,7 @@ export const Left = ({ data }) => {
           </div>
 
           <div  >
-          <div className=".n-icons-div">
+          <div className="n-icons-div">
           
             <CallOutlinedIcon />
           </div>
@@ -90,12 +90,16 @@ export const Left = ({ data }) => {
   return (
     <div>
       <SchoolOutlinedIcon />
-      <p className="n-info">
+      <div>
+      <p className="s-n-info">
         {ele.course + ", "}
-        {ele.institute + " "}
-      </p>
-      <p className="n-info"> {ele.start + "-"}
-        {ele.end}</p>
+        {ele.institute + ", "}
+        </p>
+        <p className="s-n-info" >
+        {ele.start + "-"}
+        {ele.end}
+        </p>
+        </div>
     </div>
   );
 })}
@@ -103,7 +107,7 @@ export const Left = ({ data }) => {
       </section>
 
       {/* technical skills */}
-
+      <div className="techi" >
       <section className="n-technical-section">
         <h3 className="heading03" >Technical Skills</h3>
         <p className="n-info" >
@@ -115,7 +119,7 @@ export const Left = ({ data }) => {
       <section className="n-softskills-section">
         <h3 className="heading03">Soft Skills</h3>
         <div>
-          <p className="n-info" >{data?.softSkills?.join(" | ")}</p>
+          <p className="n-info" >{data?.softSkills.join(" | ")}</p>
         </div>
       </section>
 
@@ -126,10 +130,12 @@ export const Left = ({ data }) => {
           {data?.interests?.join(" | ")}
         </p>
       </section>
+      </div>
 
 {/* achievements section */}
 <section className="n-achievements-section">
         <h3 className="heading03">Accomplishments</h3>
+        <ul className="ul-n">
         {data?.accomplishments?.map((ele) => {
           return (
             <li
@@ -138,6 +144,7 @@ export const Left = ({ data }) => {
             </li>
           );
         })}
+        </ul>
       </section>
 
 
