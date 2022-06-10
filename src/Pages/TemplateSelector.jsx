@@ -7,13 +7,12 @@ import Temp4 from "../components/newTemplates/template4/temp4";
 import Temp2 from "../components/newTemplates/template2/Temp2";
 import { Template } from "../components/newTemplates/template3/components/Template-II/Template";
 import Temp5 from "../components/newTemplates/template5/Temp5";
-import MyButton from "../components/Button";
 import jspdf from "jspdf";
 import Alert from "./alert";
 import "./templatess.css";
 import Resume from "../components/newTemplates/template1/resume";
 import { Template6 } from "../components/newTemplates/template6/Template";
-import html2canvas from "html2canvas";
+
 
 
 const imageArr = [
@@ -49,7 +48,6 @@ function TemplateSelector() {
 
   return userId ? (
     <>
-      <MyButton click={handleChange} />
       <Box style={{ marginTop: 0 }}>
         {currentTemplate === 1 ? (
           <Resume />
