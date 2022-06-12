@@ -125,7 +125,7 @@ const Form = () => {
             // console.log(tempLinkedin)
               setLinkedinLink(tempLinkedin[tempLinkedin.length-2])
             if(res.data[dataLength].personal.linkedin)
-              setPortfolioLink(res.data[dataLength].personal.linkedin);
+              setPortfolioLink(res.data[dataLength].personal.portfolio);
             // setGithubLink(res.data[dataLength].personal.github)
             var tempGithub = (res.data[dataLength].personal.github).split("/")
             // console.log(tempGithub)
