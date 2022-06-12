@@ -79,9 +79,8 @@ export default function SignIn() {
     if (!email) {
       return alert("Please enter the email");
     }
-    // https://masairesumebuilder.herokuapp.com/user/forgot-password
     axios
-      .post(`http://localhost:4444/user/forgot-password`, {
+      .post(`https://masairesumebuilder.herokuapp.com/user/forgot-password`, {
         email,
       })
       .then((res) => {
@@ -170,7 +169,7 @@ export default function SignIn() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" /*onClick={handleModelOpen}*/ variant="body2">
+                  <Link href="#" onClick={handleModelOpen} variant="body2">
                     Forgot password?
                   </Link>
                 </Grid>
