@@ -19,12 +19,20 @@ export const Template6 = () => {
         console.log(res.data);
         setData(res.data);
         setLoad(true);
+
+        if(res.data.length==0){
+          alert("Please fill the form");
+          navigate("/createform");
+        }
       })
       .catch((e) => console.log(e.message));
   }, []);
   const save = () => {
     navigate("/download");
   };
+
+  
+
 
   return load ? (
     <>

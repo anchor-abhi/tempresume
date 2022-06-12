@@ -3,8 +3,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -24,7 +22,7 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" target="_blank" href="https://masaischool.com/">
         Masai
       </Link>{" "}
       {new Date().getFullYear()}
@@ -40,6 +38,10 @@ export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     var data = new FormData(event.currentTarget);
+    if(!data.get("firstName") || !data.get("lastName") || !data.get("email") || !data.get("password")){
+      alert("Please fill all the required values");
+      return;
+    }
     axios.post("https://masairesumebuilder.herokuapp.com/user/register", {
       firstName:data.get("firstName"),
       lastName:data.get("lastName"),

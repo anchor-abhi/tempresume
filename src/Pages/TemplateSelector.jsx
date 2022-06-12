@@ -12,14 +12,13 @@ import "./templatess.css";
 import Resume from "../components/newTemplates/template1/resume";
 import { Template6 } from "../components/newTemplates/template6/Template";
 
-
-
 const imageArr = [
-  { img: "downloadresume", component: 1 },
-  { img: "temp2", component: 2 },
-  { img: "temp3", component: 3 },
-  { img: "temp4", component: 4 },
-  { img: "temp5", component: 5 },
+  { img: "temp6", component: 1 },
+  { img: "downloadresume", component: 2 },
+  { img: "temp2", component: 3 },
+  { img: "temp3", component: 4 },
+  { img: "temp4", component: 5 },
+  { img: "temp5", component: 6 },
 ];
 
 
@@ -36,15 +35,18 @@ function TemplateSelector() {
   return userId ? (
     <>
       <Box style={{ marginTop: 0 }}>
-        {currentTemplate === 1 ? (
+        {
+        currentTemplate === 1 ? (
+          <Template6 />
+        ):currentTemplate === 2 ? (
           <Resume />
-        ) : currentTemplate === 2 ? (
-          <Temp2 />
         ) : currentTemplate === 3 ? (
-          <Template />
+          <Temp2 />
         ) : currentTemplate === 4 ? (
-          <Temp4 />
+          <Template />
         ) : currentTemplate === 5 ? (
+          <Temp4 />
+        ) : currentTemplate === 6 ? (
           <Temp5 />
         ) : (
           <></>

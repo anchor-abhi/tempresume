@@ -31,11 +31,20 @@
   right: 0px;
   top: 0px;
 }
+#stackId{
+  margin-top:70px;
+}
 
 @media print {
   .n-container {
     margin: 0;
     border: none;
     box-shadow: none;
+  }
+  #stackId{
+    margin-top:0px;
+  }
+  #btn1, #btn2, #myNavbar{
+    display: none;
   }
 }
