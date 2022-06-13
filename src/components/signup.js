@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
-import {useNavigate} from "react-router"
+import { useNavigate } from "react-router";
 
 function Copyright(props) {
   return (
@@ -34,33 +34,42 @@ const theme = createTheme();
 
 export default function SignUp() {
   const navigate = useNavigate();
-  localStorage.setItem("loggedinUser",JSON.stringify(null));
+  localStorage.setItem("loggedinUser", JSON.stringify(null));
   const handleSubmit = (event) => {
     event.preventDefault();
     var data = new FormData(event.currentTarget);
-    if(!data.get("firstName") || !data.get("lastName") || !data.get("email") || !data.get("password")){
+    if (
+      !data.get("firstName") ||
+      !data.get("lastName") ||
+      !data.get("email") ||
+      !data.get("password")
+    ) {
       alert("Please fill all the required values");
       return;
     }
-    axios.post("https://masairesumebuilder.herokuapp.com/user/register", {
-      firstName:data.get("firstName"),
-      lastName:data.get("lastName"),
-      email: data.get("email"),
-      password: data.get("password"),
-    })
-    .then((res)=>{
-      
-      if(res.data.errors){
-        res.data.errors.map((error)=>{
-          alert(error.param + " : "+ error.msg);
-        })
-      }
-      else{
-        alert("Signup Successful");
-        navigate("/signin");
-      }
-    })
-    .catch((e)=>console.log(e.message));
+    axios
+      .post("https://masairesumebuilder.herokuapp.com/user/register", {
+        firstName: data.get("firstName"),
+        lastName: data.get("lastName"),
+        email: data.get("email"),
+        password: data.get("password"),
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.message) {
+          alert(res.data.message);
+          return;
+        }
+        if (res.data.errors) {
+          res.data.errors.map((error) => {
+            alert(error.param + " : " + error.msg);
+          });
+        } else {
+          alert("Signup Successful");
+          navigate("/signin");
+        }
+      })
+      .catch((e) => console.log("Error", e.message));
   };
 
   return (
