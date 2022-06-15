@@ -7,34 +7,20 @@ import Temp4 from "../components/newTemplates/template4/temp4";
 import Temp2 from "../components/newTemplates/template2/Temp2";
 import { Template } from "../components/newTemplates/template3/components/Template-II/Template";
 import Temp5 from "../components/newTemplates/template5/Temp5";
-import jspdf from "jspdf";
 import Alert from "./alert";
 import "./templatess.css";
 import Resume from "../components/newTemplates/template1/resume";
 import { Template6 } from "../components/newTemplates/template6/Template";
 
-
-
 const imageArr = [
-  { img: "downloadresume", component: 1 },
-  { img: "temp2", component: 2 },
-  { img: "temp3", component: 3 },
-  { img: "temp4", component: 4 },
-  { img: "temp5", component: 5 },
+  { img: "temp6", component: 1 },
+  { img: "downloadresume", component: 2 },
+  { img: "temp2", component: 3 },
+  { img: "temp3", component: 4 },
+  { img: "temp4", component: 5 },
+  { img: "temp5", component: 6 },
 ];
 
-const handleChange = () => {
-  var doc = new jspdf("p", "pt", "a4");
-
-  doc.html(document.querySelector(".container"), {
-  	callback: function (pdf) {
-  		var pageCount = doc.internal.getNumberOfPages();
-  		doc.deletePage(pageCount);
-  		pdf.save("Resume.pdf");
-  	},
-  });
-
-};
 
 function TemplateSelector() {
   let userId = JSON.parse(localStorage.getItem("loggedinUser"));
@@ -49,15 +35,18 @@ function TemplateSelector() {
   return userId ? (
     <>
       <Box style={{ marginTop: 0 }}>
-        {currentTemplate === 1 ? (
+        {
+        currentTemplate === 1 ? (
+          <Template6 />
+        ):currentTemplate === 2 ? (
           <Resume />
-        ) : currentTemplate === 2 ? (
-          <Temp2 />
         ) : currentTemplate === 3 ? (
-          <Template />
+          <Temp2 />
         ) : currentTemplate === 4 ? (
-          <Temp4 />
+          <Template />
         ) : currentTemplate === 5 ? (
+          <Temp4 />
+        ) : currentTemplate === 6 ? (
           <Temp5 />
         ) : (
           <></>
