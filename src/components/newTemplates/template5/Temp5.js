@@ -9,7 +9,7 @@ import { Acheivements } from "./components/Achivements/Achivements";
 import { Contact } from "./components/Contact";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Loader from "../../loader"
+import Loader from "../../loader";
 
 function Temp5() {
 	const [data, setData] = useState({});
@@ -17,7 +17,7 @@ function Temp5() {
 	useEffect(() => {
 		const userId = JSON.parse(localStorage.getItem("loggedinUser"));
 		axios
-			.get(`https://resume-api.masaischool.com/resume/${userId}`)
+			.get(`https://masairesumebuilder.herokuapp.com/resume/${userId}`)
 			.then((res) => {
 				console.log(res.data);
 				setData(res.data[res.data.length - 1]);
@@ -55,7 +55,9 @@ function Temp5() {
 				</div>
 			</div>
 		</div>
-	) : <Loader/>
+	) : (
+		<Loader />
+	);
 }
 
 export default Temp5;
