@@ -115,9 +115,9 @@
   padding: 0px;
   gap: 4px;
   width: 188px;
-  height: 100%;
   /* border: 1px solid black; */
 }
+
 
 .n-contact-section>div>div>div{
   /* border:1px solid black; */
@@ -126,6 +126,11 @@
   width:16px;
   /* height: 16px; */
 }
+
+/* .n-contact-section>div>div>span,a{
+  border:1px solid red;
+  width:180px;
+} */
 
 .n-contact-section > div > div>div>.css-i4bv87-MuiSvgIcon-root{
   /* position: absolute; */
@@ -148,8 +153,8 @@
   padding: 5px 0 5px 0;
   /* Neutral/Grey800 */
   /* border:1px solid black; */
-
   color: #3b3435;
+  height: auto;
 }
 
 .s-n-info{
@@ -257,4 +262,4 @@ margin-top: -15px;
 
   .n-technical-section>p ,.n-softskills-section>div>p,.n-interest-section>p{
     line-height: 19px;
-  }
+  };

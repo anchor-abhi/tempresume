@@ -28,12 +28,12 @@ export const Left = ({ data }) => {
             <span className="n-info" >{data?.personal?.address}</span>
           </div>
 
-          <div >
+          <div className="email-div" >
         <div className="n-icons-div">
                 <DraftsOutlinedIcon/>
         </div>
-            <a
-              className="n-info"
+            <a style={{overflowWrap:"break-word"}}
+             className="n-info"
               href={"mailto:" + data?.personal?.email}
             >
               {data?.personal?.email}
