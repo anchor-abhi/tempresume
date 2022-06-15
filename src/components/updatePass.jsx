@@ -34,94 +34,94 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function UpdatePass() {
-  const { token } = useParams();
-  const navigate = useNavigate();
+	const { token } = useParams();
+	const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    if (data.get("pass") != data.get("conf-pass")) {
-      alert("Passwords does not match");
-    } else {
-      if (data.get("pass").length > 6) {
-        axios
-          .post(
-            `https://resume-api.masaischool.com/user/update-password/${token}`,
-            {
-              password: data.get("pass"),
-            }
-          )
-          .then((res) => {
-            console.log(res);
-            if (res.data.err) {
-              alert(res.data.err);
-            } else {
-              alert("Password updated");
-                navigate("/signin");
-            }
-          });
-      } else {
-          alert("Password too short")
-      }
-    }
-  };
-  localStorage.setItem("loggedinUser",JSON.stringify(null));
-  return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Update Password
-          </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="pass"
-              label="New Password"
-              name="pass"
-              type="password"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="conf-pass"
-              label="Confirm Password"
-              name="conf-pass"
-              autoFocus
-            />
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		const data = new FormData(event.currentTarget);
+		if (data.get("pass") != data.get("conf-pass")) {
+			alert("Passwords does not match");
+		} else {
+			if (data.get("pass").length > 6) {
+				axios
+					.post(
+						`https://masairesumebuilder.herokuapp.com/user/update-password/${token}`,
+						{
+							password: data.get("pass"),
+						}
+					)
+					.then((res) => {
+						console.log(res);
+						if (res.data.err) {
+							alert(res.data.err);
+						} else {
+							alert("Password updated");
+							navigate("/signin");
+						}
+					});
+			} else {
+				alert("Password too short");
+			}
+		}
+	};
+	localStorage.setItem("loggedinUser", JSON.stringify(null));
+	return (
+		<ThemeProvider theme={theme}>
+			<Container component="main" maxWidth="xs">
+				<CssBaseline />
+				<Box
+					sx={{
+						marginTop: 8,
+						display: "flex",
+						flexDirection: "column",
+						alignItems: "center",
+					}}
+				>
+					<Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+						<LockOutlinedIcon />
+					</Avatar>
+					<Typography component="h1" variant="h5">
+						Update Password
+					</Typography>
+					<Box
+						component="form"
+						onSubmit={handleSubmit}
+						noValidate
+						sx={{ mt: 1 }}
+					>
+						<TextField
+							margin="normal"
+							required
+							fullWidth
+							id="pass"
+							label="New Password"
+							name="pass"
+							type="password"
+							autoFocus
+						/>
+						<TextField
+							margin="normal"
+							required
+							fullWidth
+							id="conf-pass"
+							label="Confirm Password"
+							name="conf-pass"
+							autoFocus
+						/>
 
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Update
-            </Button>
-          </Box>
-        </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
-      </Container>
-    </ThemeProvider>
-  );
+						<Button
+							type="submit"
+							fullWidth
+							variant="contained"
+							sx={{ mt: 3, mb: 2 }}
+						>
+							Update
+						</Button>
+					</Box>
+				</Box>
+				<Copyright sx={{ mt: 8, mb: 4 }} />
+			</Container>
+		</ThemeProvider>
+	);
 }

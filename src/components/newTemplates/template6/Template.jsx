@@ -8,41 +8,38 @@ import Loader from "../../loader";
 import { useNavigate } from "react-router";
 
 export const Template6 = () => {
-  const [data, setData] = useState([]);
-  const [load, setLoad] = useState(false);
-  const navigate = useNavigate();
-  useEffect(() => {
-    const userId = JSON.parse(localStorage.getItem("loggedinUser"));
-    axios
-      .get(`https://resume-api.masaischool.com/resume/${userId}`)
-      .then((res) => {
-        console.log(res.data);
-        setData(res.data);
-        setLoad(true);
+	const [data, setData] = useState([]);
+	const [load, setLoad] = useState(false);
+	const navigate = useNavigate();
+	useEffect(() => {
+		const userId = JSON.parse(localStorage.getItem("loggedinUser"));
+		axios
+			.get(`https://masairesumebuilder.herokuapp.com/resume/${userId}`)
+			.then((res) => {
+				console.log(res.data);
+				setData(res.data);
+				setLoad(true);
 
-        if(res.data.length==0){
-          alert("Please fill the form");
-          navigate("/createform");
-        }
-      })
-      .catch((e) => console.log(e.message));
-  }, []);
-  const save = () => {
-    navigate("/download");
-  };
+				if (res.data.length == 0) {
+					alert("Please fill the form");
+					navigate("/createform");
+				}
+			})
+			.catch((e) => console.log(e.message));
+	}, []);
+	const save = () => {
+		navigate("/download");
+	};
 
-  
-
-
-  return load ? (
-    <>
-      <MyButton click={save}></MyButton>
-      <div className="n-container">
-        <Left data={data[data.length - 1]} />
-        <Right data={data[data.length - 1]} />
-      </div>
-    </>
-  ) : (
-    <Loader />
-  );
+	return load ? (
+		<>
+			<MyButton click={save}></MyButton>
+			<div className="n-container">
+				<Left data={data[data.length - 1]} />
+				<Right data={data[data.length - 1]} />
+			</div>
+		</>
+	) : (
+		<Loader />
+	);
 };
