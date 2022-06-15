@@ -14,7 +14,7 @@ export const Template6 = () => {
   useEffect(() => {
     const userId = JSON.parse(localStorage.getItem("loggedinUser"));
     axios
-      .get(`https://masairesumebuilder.herokuapp.com/resume/${userId}`)
+      .get(`https://resume-api.masaischool.com/resume/${userId}`)
       .then((res) => {
         console.log(res.data);
         setData(res.data);

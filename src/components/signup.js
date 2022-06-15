@@ -48,7 +48,7 @@ export default function SignUp() {
       return;
     }
     axios
-      .post("https://masairesumebuilder.herokuapp.com/user/register", {
+      .post("https://resume-api.masaischool.com/user/register", {
         firstName: data.get("firstName"),
         lastName: data.get("lastName"),
         email: data.get("email"),

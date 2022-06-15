@@ -46,7 +46,7 @@ export default function UpdatePass() {
       if (data.get("pass").length > 6) {
         axios
           .post(
-            `https://masairesumebuilder.herokuapp.com/user/update-password/${token}`,
+            `https://resume-api.masaischool.com/user/update-password/${token}`,
             {
               password: data.get("pass"),
             }

@@ -102,7 +102,7 @@ const Form = () => {
   if(userId != null)
     {
         axios
-          .get(`https://masairesumebuilder.herokuapp.com/resume/${userId}`)
+          .get(`https://resume-api.masaischool.com/resume/${userId}`)
           .then((res) => {
             setUserPreviousData(res.data);
             console.log(res.data)
@@ -861,7 +861,7 @@ const Form = () => {
     // return
 
     axios
-      .post("https://masairesumebuilder.herokuapp.com/resume", sendingPacket)
+      .post("https://resume-api.masaischool.com/resume", sendingPacket)
       .then(
         (response) => {
           console.log("response=", response);
@@ -870,8 +870,10 @@ const Form = () => {
             handleWrongLinkData(response.data);
             return;
           }
+          else{
 
-          navigate("/selecttemplate");
+            navigate("/selecttemplate");
+          }
         },
         (error) => {
           alert(error);

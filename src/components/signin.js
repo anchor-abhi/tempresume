@@ -44,7 +44,7 @@ export default function SignIn() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     axios
-      .post("https://masairesumebuilder.herokuapp.com/user/login", {
+      .post("https://resume-api.masaischool.com/user/login", {
         email: data.get("email"),
         password: data.get("password"),
       })
@@ -80,7 +80,7 @@ export default function SignIn() {
       return alert("Please enter the email");
     }
     axios
-      .post(`https://masairesumebuilder.herokuapp.com/user/forgot-password`, {
+      .post(`https://resume-api.masaischool.com/user/forgot-password`, {
         email,
       })
       .then((res) => {
