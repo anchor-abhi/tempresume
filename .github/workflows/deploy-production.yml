@@ -1,0 +1,27 @@
+name: Deploy resume builder on production
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      - run: npm install --frozen-lockfile
+      - uses: zcong1993/setup-timezone@master
+        with:
+          timezone: Asia/Kolkata
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_PRODUCTION }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_PRODUCTION }}
+          aws-region: ap-south-1
+
+      - run: ls
+      - run: ./shell-scripts/build-production-on-github.sh
+      - run: ./shell-scripts/deploy-production-on-github.sh
